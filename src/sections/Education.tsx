@@ -8,90 +8,81 @@ export const Education: React.FC = () => {
   return (
     <section
       id="education"
-      className="py-20 sm:py-28 bg-[#F5F5F0] text-[#111111] bg-grid-light border-b border-[#DADAD3]"
+      className="py-20 sm:py-28 bg-[#080A0D] text-[#F4F6F8] bg-grid-cyber border-b border-white/10"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-[#DADAD3] gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-white/10 gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="font-mono text-xs text-[#111111] bg-[#EBEBE6] border border-[#DADAD3] px-2 py-0.5">
+              <span className="font-mono text-xs text-[#C6FF00] bg-[#11151A] border border-[#C6FF00]/30 px-2 py-0.5">
                 05 // ACADEMICS
               </span>
-              <span className="font-mono text-xs text-[#777777] uppercase tracking-wider">
-                FORMAL STUDY
+              <span className="font-mono text-xs text-[#929BA6] uppercase tracking-wider">
+                FORMAL ENGINEERING
               </span>
             </div>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#111111] uppercase">
+            <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F4F6F8] uppercase">
               GROUNDED IN FUNDAMENTALS.
             </h2>
           </div>
-          <p className="font-mono text-xs text-[#777777] max-w-sm leading-relaxed uppercase">
+          <p className="font-mono text-xs text-[#929BA6] max-w-sm leading-relaxed uppercase">
             Rigorous undergraduate studies focused on computer science and core artificial intelligence principles.
           </p>
         </div>
 
         {/* Academic Card */}
-        <div className="mt-12 bg-[#FFFFFF] border border-[#DADAD3] p-8 sm:p-12 shadow-sm relative overflow-hidden">
+        <div className="mt-12 bg-[#11151A] border border-white/10 p-8 sm:p-12 shadow-2xl relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Degree & College Info */}
             <div className="lg:col-span-5 space-y-4">
-              <div className="w-12 h-12 bg-[#111111] text-[#D1FF00] flex items-center justify-center">
+              <div className="w-12 h-12 bg-[#171D24] text-[#C6FF00] border border-white/10 flex items-center justify-center">
                 <GraduationCap className="w-6 h-6" />
               </div>
 
               <div>
-                <span className="font-mono text-xs text-[#777777] uppercase tracking-wider block">
+                <span className="font-mono text-xs text-[#929BA6] uppercase tracking-wider block">
                   DEGREE PROGRAM
                 </span>
-                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#111111] tracking-tight mt-1">
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#F4F6F8] tracking-tight mt-1">
                   {education.degree}
                 </h3>
               </div>
 
-              <div className="pt-3 border-t border-[#EAEAE5] space-y-2 font-mono text-xs text-[#555555]">
+              <div className="pt-3 border-t border-white/10 space-y-2 font-mono text-xs text-[#929BA6]">
                 <div className="flex items-center gap-2">
-                  <Building2 className="w-4 h-4 text-[#111111]" />
-                  <span className="font-semibold text-[#111111]">{education.institution}</span>
+                  <Building2 className="w-4 h-4 text-[#C6FF00]" />
+                  <span className="font-semibold text-[#F4F6F8]">{education.institution}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[#777777]" />
+                  <MapPin className="w-4 h-4 text-[#929BA6]" />
                   <span>{education.location}</span>
                 </div>
-              </div>
-
-              <div className="pt-2">
-                <span className="inline-block font-mono text-[11px] uppercase tracking-wider px-3 py-1 bg-[#111111] text-[#D1FF00]">
-                  {education.status}
-                </span>
+                <div className="flex items-center gap-2 text-[#C6FF00]">
+                  <span className="w-1.5 h-1.5 bg-[#C6FF00] rounded-none animate-pulse" />
+                  <span>{education.status}</span>
+                </div>
               </div>
             </div>
 
-            {/* Coursework & Focus Areas */}
-            <div className="lg:col-span-7 space-y-4 lg:border-l lg:border-[#EAEAE5] lg:pl-10">
-              <span className="font-mono text-xs text-[#777777] uppercase tracking-wider block">
-                ACADEMIC FOCUS & PRINCIPLES
+            {/* Coursework & Campus Highlights */}
+            <div className="lg:col-span-7 space-y-4">
+              <span className="font-mono text-xs uppercase tracking-wider text-[#929BA6] block">
+                ACADEMIC FOUNDATIONS & COURSEWORK
               </span>
 
               <div className="space-y-3">
-                {education.highlights.map((item, idx) => (
+                {education.highlights.map((highlight) => (
                   <div
-                    key={idx}
-                    className="p-3.5 bg-[#FBFBFA] border border-[#EEEEEC] flex items-start gap-3"
+                    key={highlight}
+                    className="flex items-start gap-3 p-3 bg-[#171D24] border border-white/5"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-[#111111] shrink-0 mt-0.5" />
-                    <p className="text-xs sm:text-sm text-[#444444] leading-relaxed font-sans">
-                      {item}
-                    </p>
+                    <CheckCircle2 className="w-4 h-4 text-[#C6FF00] shrink-0 mt-0.5" />
+                    <span className="text-sm text-[#F4F6F8] leading-relaxed">
+                      {highlight}
+                    </span>
                   </div>
                 ))}
-              </div>
-
-              <div className="pt-3 font-mono text-[11px] text-[#777777]">
-                <span>CORE FOUNDATIONS: </span>
-                <span className="text-[#111111]">
-                  ALGORITHMS · MACHINE LEARNING · OBJECT-ORIENTED SYSTEMS · DATA STRUCTURES
-                </span>
               </div>
             </div>
           </div>

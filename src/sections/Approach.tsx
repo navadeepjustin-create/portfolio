@@ -11,26 +11,26 @@ export const Approach: React.FC = () => {
   return (
     <section
       id="approach"
-      className="py-20 sm:py-28 bg-[#FFFFFF] text-[#111111] border-b border-[#DADAD3] relative overflow-hidden"
+      className="py-20 sm:py-28 bg-[#080A0D] text-[#F4F6F8] border-b border-white/10 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-[#DADAD3] gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-white/10 gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="font-mono text-xs text-[#111111] bg-[#EBEBE6] border border-[#DADAD3] px-2 py-0.5">
+              <span className="font-mono text-xs text-[#C6FF00] bg-[#11151A] border border-[#C6FF00]/30 px-2 py-0.5">
                 03 // WORKFLOW
               </span>
-              <span className="font-mono text-xs text-[#777777] uppercase tracking-wider">
-                FROM IDEA TO PRODUCT
+              <span className="font-mono text-xs text-[#929BA6] uppercase tracking-wider">
+                FROM CONCEPT TO CODE
               </span>
             </div>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#111111] uppercase">
+            <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F4F6F8] uppercase">
               HOW I APPROACH BUILDING.
             </h2>
           </div>
-          <p className="font-mono text-xs text-[#777777] max-w-sm leading-relaxed uppercase">
-            A practical, four-step engineering process focused on eliminating guesswork and delivering functional solutions.
+          <p className="font-mono text-xs text-[#929BA6] max-w-sm leading-relaxed uppercase">
+            A practical four-phase engineering methodology focused on eliminating guesswork and delivering functional systems.
           </p>
         </div>
 
@@ -44,97 +44,87 @@ export const Approach: React.FC = () => {
               <div
                 key={step.number}
                 onClick={() => setActiveStep(idx)}
+                data-cursor-label="PHASE"
                 className={`cursor-pointer p-6 sm:p-7 border transition-all duration-300 relative flex flex-col justify-between ${
                   isActive
-                    ? 'bg-[#111111] text-[#F5F5F0] border-[#111111] shadow-2xl -translate-y-1'
-                    : 'bg-[#F9F9F8] text-[#111111] border-[#DADAD3] hover:border-[#111111]'
+                    ? 'bg-[#171D24] text-[#F4F6F8] border-[#C6FF00]/60 shadow-[0_0_25px_rgba(198,255,0,0.1)] -translate-y-1'
+                    : 'bg-[#11151A] text-[#929BA6] border-white/10 hover:border-white/25 hover:text-[#F4F6F8]'
                 }`}
               >
                 {/* Active Indicator Top Stripe */}
                 {isActive && (
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-[#D1FF00]" />
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-[#C6FF00] shadow-[0_0_8px_#C6FF00]" />
                 )}
 
                 <div>
                   {/* Step Header */}
-                  <div className="flex items-center justify-between pb-4 border-b border-inherit/20 mb-6">
+                  <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+                    <span className="font-mono text-xs tracking-widest uppercase text-[#929BA6]">
+                      {step.phase}
+                    </span>
                     <span
-                      className={`font-mono text-2xl font-bold ${
-                        isActive ? 'text-[#D1FF00]' : 'text-[#777777]'
+                      className={`font-display text-2xl font-bold ${
+                        isActive ? 'text-[#C6FF00]' : 'text-white/40'
                       }`}
                     >
                       {step.number}
                     </span>
-                    <div
-                      className={`w-8 h-8 flex items-center justify-center border ${
-                        isActive
-                          ? 'border-[#333333] bg-[#1E1E1E] text-[#D1FF00]'
-                          : 'border-[#DADAD3] bg-[#FFFFFF] text-[#111111]'
-                      }`}
-                    >
-                      <Icon className="w-4 h-4" />
-                    </div>
                   </div>
 
-                  <span
-                    className={`font-mono text-[10px] tracking-widest uppercase block mb-1 ${
-                      isActive ? 'text-[#AAAAAA]' : 'text-[#777777]'
-                    }`}
-                  >
-                    {step.phase}
-                  </span>
-                  <h3
-                    className={`font-display text-2xl font-bold tracking-tight mb-3 ${
-                      isActive ? 'text-[#F5F5F0]' : 'text-[#111111]'
-                    }`}
-                  >
-                    {step.title}
-                  </h3>
-                  <p
-                    className={`text-xs leading-relaxed font-sans mb-6 ${
-                      isActive ? 'text-[#CCCCCC]' : 'text-[#555555]'
-                    }`}
-                  >
+                  {/* Icon & Title */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <div
+                      className={`p-2 border ${
+                        isActive
+                          ? 'bg-[#080A0D] border-[#C6FF00] text-[#C6FF00]'
+                          : 'bg-[#171D24] border-white/10 text-[#929BA6]'
+                      }`}
+                    >
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <h3 className="font-display text-xl font-bold tracking-tight text-[#F4F6F8]">
+                      {step.title}
+                    </h3>
+                  </div>
+
+                  {/* Summary */}
+                  <p className="text-xs sm:text-sm text-[#929BA6] leading-relaxed mb-6">
                     {step.summary}
                   </p>
                 </div>
 
                 {/* Deliverables List */}
-                <div
-                  className={`pt-4 border-t ${
-                    isActive ? 'border-[#262626]' : 'border-[#E5E5DE]'
-                  } space-y-2`}
-                >
-                  <span
-                    className={`font-mono text-[10px] tracking-wider uppercase block ${
-                      isActive ? 'text-[#D1FF00]' : 'text-[#777777]'
-                    }`}
-                  >
-                    Key Focus
+                <div className="pt-4 border-t border-white/10 space-y-2">
+                  <span className="font-mono text-[10px] tracking-wider uppercase text-[#929BA6] block">
+                    Core Deliverables
                   </span>
-                  {step.deliverables.map((item, dIdx) => (
-                    <div
-                      key={dIdx}
-                      className="flex items-center gap-2 text-xs font-mono"
-                    >
-                      <span
-                        className={`w-1 h-1 ${
-                          isActive ? 'bg-[#D1FF00]' : 'bg-[#111111]'
-                        }`}
-                      />
-                      <span
-                        className={
-                          isActive ? 'text-[#BBBBBB]' : 'text-[#444444]'
-                        }
-                      >
-                        {item}
-                      </span>
-                    </div>
-                  ))}
+                  <ul className="space-y-1.5 font-mono text-xs">
+                    {step.deliverables.map((item) => (
+                      <li key={item} className="flex items-center gap-2 text-[#F4F6F8]">
+                        <span className="w-1 h-1 bg-[#C6FF00] rounded-none shrink-0" />
+                        <span className="truncate">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             );
           })}
+        </div>
+
+        {/* Philosophy Callout Strip */}
+        <div className="mt-14 p-6 sm:p-8 bg-[#11151A] border border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="space-y-1">
+            <span className="font-mono text-[10px] text-[#C6FF00] uppercase tracking-widest">
+              GUIDING PRINCIPLE
+            </span>
+            <p className="font-display text-lg sm:text-xl font-bold text-[#F4F6F8]">
+              "Solve the immediate physical friction first, then refine performance and aesthetics."
+            </p>
+          </div>
+          <div className="font-mono text-xs text-[#929BA6] shrink-0 border-l border-white/10 pl-6 hidden md:block">
+            AIML ENGINEERING // MLRIT
+          </div>
         </div>
       </div>
     </section>

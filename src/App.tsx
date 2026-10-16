@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Hero } from './sections/Hero';
 import { About } from './sections/About';
@@ -11,7 +11,11 @@ import { Contact } from './sections/Contact';
 import { Footer } from './components/Footer';
 import { CustomCursor } from './components/CustomCursor';
 import { ScrollProgressBar } from './components/ScrollProgressBar';
+import { CommandPalette } from './components/CommandPalette';
+import { ProjectsPage } from './pages/ProjectsPage';
 import { ProjectCaseStudyPage } from './pages/ProjectCaseStudyPage';
+import { AboutPage } from './pages/AboutPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 /**
  * Ensures cross-route and anchor navigations scroll to target smoothly
@@ -21,7 +25,6 @@ function ScrollToHashElement() {
 
   useEffect(() => {
     if (hash) {
-      // Allow slight tick for component rendering
       const timer = setTimeout(() => {
         const element = document.querySelector(hash);
         if (element) {
@@ -38,11 +41,15 @@ function ScrollToHashElement() {
 }
 
 /**
- * Main Editorial Portfolio View
+ * Main Futuristic Portfolio Home View
  */
-function HomePage() {
+interface HomePageProps {
+  onOpenCommandPalette: () => void;
+}
+
+function HomePage({ onOpenCommandPalette }: HomePageProps) {
   return (
-    <div className="min-h-screen bg-[#F5F5F0] text-[#111111] selection:bg-[#D1FF00] selection:text-[#111111] relative">
+    <div className="min-h-screen bg-[#080A0D] text-[#F4F6F8] selection:bg-[#C6FF00] selection:text-[#080A0D] relative">
       {/* Top Thin Scroll Progress Bar */}
       <ScrollProgressBar />
 
@@ -52,52 +59,76 @@ function HomePage() {
       {/* Keyboard Accessibility Skip Link */}
       <a
         href="#projects"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#111111] focus:text-[#D1FF00] font-mono text-xs uppercase"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#080A0D] focus:text-[#C6FF00] font-mono text-xs uppercase border border-[#C6FF00]"
       >
         Skip to Featured Projects
       </a>
 
       {/* Main Navigation */}
-      <Navbar />
+      <Navbar onOpenCommandPalette={onOpenCommandPalette} />
 
-      {/* Main Sections with Editorial Alternating Rhythm */}
+      {/* Main Sections */}
       <main>
-        {/* 00: Hero (Light Editorial Canvas) */}
-        <Hero />
+        {/* 00: Hero (Futuristic 3D Cinematic Canvas) */}
+        <Hero onOpenCommandPalette={onOpenCommandPalette} />
 
-        {/* 01: About (Deep Charcoal Immersive) */}
+        {/* 01: About (Technical Philosophy & Foundations) */}
         <About />
 
-        {/* 02: Featured Projects: Statio-MLR & Fast Bite (Light Editorial Canvas) */}
+        {/* 02: Featured Projects: Statio-MLR & Fast Bite (Interactive Prototypes) */}
         <FeaturedProjects />
 
-        {/* 03: Approach (Clean Studio Canvas) */}
+        {/* 03: Approach (4-Phase Engineering Methodology) */}
         <Approach />
 
-        {/* 04: Skills (Deep Charcoal Technical Matrix) */}
+        {/* 04: Skills (Categorized Technical Matrix) */}
         <Skills />
 
-        {/* 05: Education: MLRIT AIML (Light Editorial Canvas) */}
+        {/* 05: Education: MLRIT AIML (Undergraduate Rigor) */}
         <Education />
 
-        {/* 06: Contact Section (Near-Black High-Impact Finish) */}
+        {/* 06: Contact Section (High-Impact Transmission) */}
         <Contact />
       </main>
 
-      {/* Editorial Footer */}
+      {/* Editorial Tech Footer */}
       <Footer />
     </div>
   );
 }
 
 export default function App() {
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+
+  // Global keyboard shortcut: Cmd+K (Mac) or Ctrl+K (Windows/Linux)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setCommandPaletteOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <BrowserRouter>
       <ScrollToHashElement />
+      <CommandPalette
+        isOpen={commandPaletteOpen}
+        onClose={() => setCommandPaletteOpen(false)}
+      />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/"
+          element={<HomePage onOpenCommandPalette={() => setCommandPaletteOpen(true)} />}
+        />
+        <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/projects/:projectId" element={<ProjectCaseStudyPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

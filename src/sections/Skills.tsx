@@ -16,25 +16,25 @@ export const Skills: React.FC = () => {
   return (
     <section
       id="skills"
-      className="py-20 sm:py-28 bg-[#111111] text-[#F5F5F0] bg-grid-dark border-b border-[#333333] relative overflow-hidden"
+      className="py-20 sm:py-28 bg-[#080A0D] text-[#F4F6F8] bg-grid-cyber border-b border-white/10 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-[#2A2A2A] gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-white/10 gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="font-mono text-xs text-[#D1FF00] bg-[#D1FF00]/10 border border-[#D1FF00]/30 px-2 py-0.5">
+              <span className="font-mono text-xs text-[#C6FF00] bg-[#11151A] border border-[#C6FF00]/30 px-2 py-0.5">
                 04 // CAPABILITIES
               </span>
-              <span className="font-mono text-xs text-[#777777] uppercase tracking-wider">
-                TECHNICAL FOUNDATIONS
+              <span className="font-mono text-xs text-[#929BA6] uppercase tracking-wider">
+                TECHNICAL MATRIX
               </span>
             </div>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F5F5F0] uppercase">
+            <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F4F6F8] uppercase">
               TOOLS ARE JUST THE START.
             </h2>
           </div>
-          <p className="font-mono text-xs text-[#888888] max-w-sm leading-relaxed uppercase">
+          <p className="font-mono text-xs text-[#929BA6] max-w-sm leading-relaxed uppercase">
             Working technologies and active technical interests according to verified experience. Zero artificial progress bars.
           </p>
         </div>
@@ -46,8 +46,8 @@ export const Skills: React.FC = () => {
             onClick={() => setSelectedCategory('all')}
             className={`font-mono text-xs uppercase px-3.5 py-1.5 border transition-all ${
               selectedCategory === 'all'
-                ? 'bg-[#D1FF00] text-[#111111] border-[#D1FF00] font-bold'
-                : 'bg-[#181818] text-[#888888] border-[#333333] hover:text-[#FFFFFF]'
+                ? 'bg-[#C6FF00] text-[#080A0D] border-[#C6FF00] font-bold shadow-[0_0_15px_rgba(198,255,0,0.2)]'
+                : 'bg-[#11151A] text-[#929BA6] border-white/10 hover:text-[#F4F6F8] hover:border-white/20'
             }`}
           >
             All Disciplines ({skills.length})
@@ -59,8 +59,8 @@ export const Skills: React.FC = () => {
               onClick={() => setSelectedCategory(idx)}
               className={`font-mono text-xs uppercase px-3.5 py-1.5 border transition-all ${
                 selectedCategory === idx
-                  ? 'bg-[#D1FF00] text-[#111111] border-[#D1FF00] font-bold'
-                  : 'bg-[#181818] text-[#888888] border-[#333333] hover:text-[#FFFFFF]'
+                  ? 'bg-[#C6FF00] text-[#080A0D] border-[#C6FF00] font-bold shadow-[0_0_15px_rgba(198,255,0,0.2)]'
+                  : 'bg-[#11151A] text-[#929BA6] border-white/10 hover:text-[#F4F6F8] hover:border-white/20'
               }`}
             >
               {cat.title}
@@ -76,36 +76,36 @@ export const Skills: React.FC = () => {
             return (
               <div
                 key={category.title}
-                className="p-6 bg-[#171717] border border-[#2B2B2B] hover:border-[#D1FF00] transition-all duration-300 flex flex-col justify-between group"
+                className="p-6 bg-[#11151A] border border-white/10 hover:border-[#C6FF00]/50 transition-all duration-300 flex flex-col justify-between group shadow-lg"
               >
                 <div>
-                  <div className="flex items-center justify-between pb-4 border-b border-[#262626] mb-5">
-                    <span className="font-mono text-[11px] text-[#D1FF00]">
+                  <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+                    <span className="font-mono text-[11px] text-[#C6FF00] font-semibold">
                       {category.tag}
                     </span>
-                    <div className="w-8 h-8 bg-[#202020] border border-[#333333] group-hover:border-[#D1FF00] flex items-center justify-center transition-colors">
-                      <Icon className="w-4 h-4 text-[#D1FF00]" />
+                    <div className="w-8 h-8 bg-[#171D24] border border-white/10 group-hover:border-[#C6FF00] flex items-center justify-center transition-colors">
+                      <Icon className="w-4 h-4 text-[#C6FF00]" />
                     </div>
                   </div>
 
-                  <h3 className="font-display text-xl font-bold text-[#F5F5F0] mb-2 group-hover:text-[#D1FF00] transition-colors">
+                  <h3 className="font-display text-xl font-bold text-[#F4F6F8] mb-2 group-hover:text-[#C6FF00] transition-colors">
                     {category.title}
                   </h3>
-                  <p className="text-xs text-[#888888] leading-relaxed font-sans mb-6">
+                  <p className="text-xs text-[#929BA6] leading-relaxed font-sans mb-6">
                     {category.description}
                   </p>
                 </div>
 
                 {/* Tech Pills */}
-                <div className="space-y-2 pt-4 border-t border-[#222222]">
-                  <span className="font-mono text-[10px] text-[#777777] uppercase tracking-wider block">
+                <div className="space-y-2 pt-4 border-t border-white/10">
+                  <span className="font-mono text-[10px] text-[#929BA6] uppercase tracking-wider block">
                     Verified Competencies
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {category.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="font-mono text-xs px-2.5 py-1 bg-[#202020] border border-[#303030] text-[#E0E0E0] group-hover:border-[#404040] transition-colors"
+                        className="font-mono text-xs px-2.5 py-1 bg-[#171D24] border border-white/10 text-[#F4F6F8] group-hover:border-white/20 transition-colors"
                       >
                         {skill}
                       </span>
@@ -115,6 +115,20 @@ export const Skills: React.FC = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* Current Learning Focus Banner */}
+        <div className="mt-10 p-5 bg-[#11151A] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-mono text-xs">
+          <div className="flex items-center gap-3">
+            <span className="w-2 h-2 bg-[#C6FF00] animate-lime-pulse" />
+            <span className="text-[#929BA6] uppercase">CURRENT LEARNING FOCUS:</span>
+            <span className="text-[#F4F6F8] font-semibold">
+              Deep Learning Foundations, Transformer Attention Architectures & Distributed Systems
+            </span>
+          </div>
+          <span className="text-[10px] text-[#C6FF00] uppercase tracking-widest shrink-0">
+            MLRIT // CSE (AIML)
+          </span>
         </div>
       </div>
     </section>

@@ -154,32 +154,32 @@ export const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="py-24 sm:py-32 bg-[#111111] text-[#F5F5F0] bg-grid-dark relative overflow-hidden"
+      className="py-24 sm:py-32 bg-[#080A0D] text-[#F4F6F8] bg-grid-cyber border-t border-white/10 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header Tag */}
-        <div className="flex items-center justify-between pb-6 border-b border-[#2B2B2B]">
+        <div className="flex items-center justify-between pb-6 border-b border-white/10">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-xs text-[#D1FF00] bg-[#D1FF00]/10 border border-[#D1FF00]/30 px-2 py-0.5">
+            <span className="font-mono text-xs text-[#C6FF00] bg-[#11151A] border border-[#C6FF00]/30 px-2 py-0.5">
               06 // CONTACT
             </span>
-            <span className="font-mono text-xs text-[#777777] uppercase tracking-wider">
-              LET'S TALK
+            <span className="font-mono text-xs text-[#929BA6] uppercase tracking-wider">
+              INITIATE TRANSMISSION
             </span>
           </div>
-          <span className="font-mono text-xs text-[#777777] flex items-center gap-1.5">
-            <MapPin className="w-3.5 h-3.5 text-[#D1FF00]" /> {contact.location}
+          <span className="font-mono text-xs text-[#929BA6] flex items-center gap-1.5">
+            <MapPin className="w-3.5 h-3.5 text-[#C6FF00]" /> {contact.location}
           </span>
         </div>
 
         {/* Oversized Headline */}
         <div className="mt-12 space-y-4 max-w-4xl">
-          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black tracking-[-0.03em] uppercase leading-[0.95] text-[#F5F5F0]">
-            HAVE AN IDEA? <br />
-            <span className="text-[#D1FF00]">LET'S BUILD IT.</span>
+          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black tracking-[-0.03em] uppercase leading-[0.95] text-[#F4F6F8]">
+            LET'S BUILD <br />
+            <span className="text-[#C6FF00]">SOMETHING USEFUL.</span>
           </h2>
-          <p className="text-base sm:text-lg text-[#AAAAAA] max-w-2xl leading-relaxed font-sans">
-            Have a project in mind, want to collaborate, or just want to talk technology? Send me a message.
+          <p className="text-base sm:text-lg text-[#929BA6] max-w-2xl leading-relaxed font-sans">
+            {contact.subtext}
           </p>
         </div>
 
@@ -188,30 +188,25 @@ export const Contact: React.FC = () => {
           {/* Left Column: Direct Channels & Verified Social Media */}
           <div className="lg:col-span-5 space-y-6">
             <div>
-              <span className="font-mono text-xs text-[#777777] uppercase tracking-widest block mb-2">
-                DIRECT CONTACT & NETWORKS
+              <span className="font-mono text-xs text-[#929BA6] uppercase tracking-widest block mb-2">
+                DIRECT CHANNELS & PROFILES
               </span>
-              <p className="text-xs text-[#888888] font-mono leading-relaxed">
+              <p className="text-xs text-[#929BA6] font-mono leading-relaxed">
                 Connect directly through verified profiles or initiate a project conversation.
               </p>
             </div>
 
             {/* Direct Email Card */}
-            <div className="p-6 bg-[#171717] border border-[#2B2B2B] hover:border-[#D1FF00] transition-colors space-y-4">
+            <div className="p-6 bg-[#11151A] border border-white/10 hover:border-[#C6FF00]/50 transition-colors space-y-4 shadow-xl">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs text-[#777777] uppercase">EMAIL ADDRESS</span>
-                <span className="w-2 h-2 bg-[#D1FF00] rounded-none animate-pulse" />
+                <span className="font-mono text-xs text-[#929BA6] uppercase">EMAIL ADDRESS</span>
+                <span className="w-2 h-2 bg-[#C6FF00] rounded-none animate-lime-pulse" />
               </div>
 
               <div>
-                <p className="font-mono text-sm sm:text-base text-[#F5F5F0] font-semibold break-all">
+                <p className="font-mono text-sm sm:text-base text-[#F4F6F8] font-semibold break-all">
                   {hasRealEmail ? activeEmail : 'Add in src/data/socials.ts'}
                 </p>
-                {!hasRealEmail && (
-                  <p className="text-[11px] font-mono text-[#D1FF00] mt-1">
-                    Set EMAIL_ADDRESS in src/data/socials.ts
-                  </p>
-                )}
               </div>
 
               <div className="flex flex-wrap gap-2 pt-1">
@@ -221,10 +216,10 @@ export const Contact: React.FC = () => {
                       type="button"
                       onClick={handleCopyEmail}
                       data-cursor-label="COPY"
-                      className="px-3.5 py-2 bg-[#222222] border border-[#333333] hover:border-[#D1FF00] hover:text-[#D1FF00] text-xs font-mono uppercase tracking-wider transition-colors flex items-center gap-1.5"
+                      className="px-3.5 py-2 bg-[#171D24] border border-white/10 hover:border-[#C6FF00] hover:text-[#C6FF00] text-xs font-mono uppercase tracking-wider transition-colors flex items-center gap-1.5"
                     >
                       {copied ? (
-                        <Check className="w-3.5 h-3.5 text-[#D1FF00]" />
+                        <Check className="w-3.5 h-3.5 text-[#C6FF00]" />
                       ) : (
                         <Copy className="w-3.5 h-3.5" />
                       )}
@@ -234,14 +229,14 @@ export const Contact: React.FC = () => {
                     <a
                       href={`mailto:${activeEmail}`}
                       data-cursor-label="EMAIL ↗"
-                      className="px-3.5 py-2 bg-[#D1FF00] text-[#111111] hover:bg-[#bce600] text-xs font-mono font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5"
+                      className="px-3.5 py-2 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b2e600] text-xs font-mono font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-[0_0_15px_rgba(198,255,0,0.2)]"
                     >
                       <Mail className="w-3.5 h-3.5" />
                       <span>Open Mail Client</span>
                     </a>
                   </>
                 ) : (
-                  <span className="font-mono text-xs text-[#777777] px-3 py-1.5 bg-[#202020] border border-[#333333]">
+                  <span className="font-mono text-xs text-[#929BA6] px-3 py-1.5 bg-[#171D24] border border-white/10">
                     EMAIL PENDING CONFIGURATION
                   </span>
                 )}
@@ -315,10 +310,10 @@ export const Contact: React.FC = () => {
                       }}
                       placeholder="Alex Mercer"
                       aria-invalid={Boolean(touched.name && errors.name)}
-                      className={`w-full px-3.5 py-3 bg-[#111111] border text-[#F5F5F0] text-xs font-mono outline-none transition-colors ${
+                      className={`w-full px-3.5 py-3 bg-[#080A0D] border text-[#F4F6F8] text-xs font-mono outline-none transition-colors ${
                         touched.name && errors.name
                           ? 'border-[#FF5555] focus:border-[#FF5555]'
-                          : 'border-[#333333] focus:border-[#D1FF00]'
+                          : 'border-white/10 focus:border-[#C6FF00]'
                       }`}
                     />
                     {touched.name && errors.name && (
@@ -329,7 +324,7 @@ export const Contact: React.FC = () => {
                   <div className="space-y-1.5">
                     <label
                       htmlFor="contact-email"
-                      className="font-mono text-xs text-[#AAAAAA] uppercase flex items-center justify-between"
+                      className="font-mono text-xs text-[#929BA6] uppercase flex items-center justify-between"
                     >
                       <span>Email Address *</span>
                       {touched.email && errors.email && (
@@ -350,10 +345,10 @@ export const Contact: React.FC = () => {
                       }}
                       placeholder="alex@domain.com"
                       aria-invalid={Boolean(touched.email && errors.email)}
-                      className={`w-full px-3.5 py-3 bg-[#111111] border text-[#F5F5F0] text-xs font-mono outline-none transition-colors ${
+                      className={`w-full px-3.5 py-3 bg-[#080A0D] border text-[#F4F6F8] text-xs font-mono outline-none transition-colors ${
                         touched.email && errors.email
                           ? 'border-[#FF5555] focus:border-[#FF5555]'
-                          : 'border-[#333333] focus:border-[#D1FF00]'
+                          : 'border-white/10 focus:border-[#C6FF00]'
                       }`}
                     />
                     {touched.email && errors.email && (
@@ -366,7 +361,7 @@ export const Contact: React.FC = () => {
                 <div className="space-y-1.5">
                   <label
                     htmlFor="contact-subject"
-                    className="font-mono text-xs text-[#AAAAAA] uppercase flex items-center justify-between"
+                    className="font-mono text-xs text-[#929BA6] uppercase flex items-center justify-between"
                   >
                     <span>Subject *</span>
                     {touched.subject && errors.subject && (
@@ -387,10 +382,10 @@ export const Contact: React.FC = () => {
                     }}
                     placeholder="AI/ML Project Collaboration or Inquiry"
                     aria-invalid={Boolean(touched.subject && errors.subject)}
-                    className={`w-full px-3.5 py-3 bg-[#111111] border text-[#F5F5F0] text-xs font-mono outline-none transition-colors ${
+                    className={`w-full px-3.5 py-3 bg-[#080A0D] border text-[#F4F6F8] text-xs font-mono outline-none transition-colors ${
                       touched.subject && errors.subject
                         ? 'border-[#FF5555] focus:border-[#FF5555]'
-                        : 'border-[#333333] focus:border-[#D1FF00]'
+                        : 'border-white/10 focus:border-[#C6FF00]'
                     }`}
                   />
                   {touched.subject && errors.subject && (
@@ -402,7 +397,7 @@ export const Contact: React.FC = () => {
                 <div className="space-y-1.5">
                   <label
                     htmlFor="contact-message"
-                    className="font-mono text-xs text-[#AAAAAA] uppercase flex items-center justify-between"
+                    className="font-mono text-xs text-[#929BA6] uppercase flex items-center justify-between"
                   >
                     <span>Message *</span>
                     {touched.message && errors.message && (
@@ -423,10 +418,10 @@ export const Contact: React.FC = () => {
                     }}
                     placeholder="Describe your project, question, or technology discussion topic..."
                     aria-invalid={Boolean(touched.message && errors.message)}
-                    className={`w-full px-3.5 py-3 bg-[#111111] border text-[#F5F5F0] text-xs font-mono outline-none transition-colors resize-none ${
+                    className={`w-full px-3.5 py-3 bg-[#080A0D] border text-[#F4F6F8] text-xs font-mono outline-none transition-colors resize-none ${
                       touched.message && errors.message
                         ? 'border-[#FF5555] focus:border-[#FF5555]'
-                        : 'border-[#333333] focus:border-[#D1FF00]'
+                        : 'border-white/10 focus:border-[#C6FF00]'
                     }`}
                   />
                   {touched.message && errors.message && (
@@ -435,16 +430,16 @@ export const Contact: React.FC = () => {
                 </div>
 
                 {/* Delivery Notice / Transparency Box */}
-                <div className="p-3.5 bg-[#121212] border border-[#262626] flex items-start gap-2.5 text-[11px] text-[#888888] font-mono leading-relaxed">
-                  <AlertCircle className="w-4 h-4 text-[#D1FF00] shrink-0 mt-0.5" />
+                <div className="p-3.5 bg-[#080A0D] border border-white/10 flex items-start gap-2.5 text-[11px] text-[#929BA6] font-mono leading-relaxed">
+                  <AlertCircle className="w-4 h-4 text-[#C6FF00] shrink-0 mt-0.5" />
                   <div>
                     {contactEndpoint ? (
                       <span>
-                        <strong className="text-[#F5F5F0]">Serverless Delivery:</strong> Your message will be securely transmitted directly to Navadeep’s inbox via the configured delivery service.
+                        <strong className="text-[#F4F6F8]">Serverless Delivery:</strong> Your message will be securely transmitted directly to Navadeep’s inbox via the configured delivery service.
                       </span>
                     ) : (
                       <span>
-                        <strong className="text-[#F5F5F0]">Direct Client Dispatch:</strong> Clicking Send opens your email client prefilled with your message. (To configure direct serverless delivery, see <code className="text-[#D1FF00]">.env.example</code>).
+                        <strong className="text-[#F4F6F8]">Direct Client Dispatch:</strong> Clicking Send opens your email client prefilled with your message. (To configure direct serverless delivery, see <code className="text-[#C6FF00]">.env.example</code>).
                       </span>
                     )}
                   </div>
@@ -461,7 +456,7 @@ export const Contact: React.FC = () => {
                   type="submit"
                   disabled={isSubmitting}
                   data-cursor-label="SEND"
-                  className="w-full py-4 bg-[#D1FF00] text-[#111111] hover:bg-[#bce600] disabled:bg-[#444444] disabled:text-[#888888] font-mono text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2 transition-colors shadow-lg cursor-pointer"
+                  className="w-full py-4 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b2e600] disabled:bg-[#333333] disabled:text-[#888888] font-mono text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2 transition-colors shadow-[0_0_20px_rgba(198,255,0,0.25)] cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>
@@ -477,10 +472,10 @@ export const Contact: React.FC = () => {
                 </button>
 
                 {mailtoTriggered && (
-                  <div className="p-3 bg-[#1A1A1A] border border-[#333333] text-center font-mono text-xs text-[#D1FF00] space-y-1">
+                  <div className="p-3 bg-[#11151A] border border-white/15 text-center font-mono text-xs text-[#C6FF00] space-y-1">
                     <p className="font-semibold">✓ Mail client opened with your message prefilled.</p>
-                    <p className="text-[10px] text-[#888888]">
-                      If your mail client did not open automatically, copy your message text and send to {activeEmail || 'Navadeep'}.
+                    <p className="text-[10px] text-[#929BA6]">
+                      If your mail client did not open automatically, send directly to {activeEmail || 'navadeepjustin@gmail.com'}.
                     </p>
                   </div>
                 )}

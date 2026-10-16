@@ -39,18 +39,18 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Accent Line */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-[#D1FF00]" />
+        <div className="absolute top-0 left-0 right-0 h-1 bg-[#C6FF00]" />
 
         {/* Header bar */}
-        <div className="flex items-start justify-between pb-6 border-b border-[#262626]">
+        <div className="flex items-start justify-between pb-6 border-b border-[#1E2630]">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="font-mono text-xs text-[#D1FF00] bg-[#D1FF00]/10 border border-[#D1FF00]/30 px-2 py-0.5">
+              <span className="font-mono text-xs text-[#C6FF00] bg-[#C6FF00]/10 border border-[#C6FF00]/30 px-2 py-0.5">
                 PROJECT {project.number}
               </span>
-              <span className="font-mono text-xs text-[#888888]">{project.category}</span>
+              <span className="font-mono text-xs text-[#929BA6]">{project.category}</span>
             </div>
-            <h2 id="modal-title" className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-[#F5F5F0]">
+            <h2 id="modal-title" className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-[#F4F6F8]">
               {project.title}
             </h2>
           </div>
@@ -59,7 +59,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
             type="button"
             onClick={onClose}
             aria-label="Close case study"
-            className="p-2 border border-[#333333] hover:border-[#D1FF00] hover:text-[#D1FF00] transition-colors text-[#888888]"
+            className="p-2 border border-[#232B35] hover:border-[#C6FF00] hover:text-[#C6FF00] transition-colors text-[#929BA6]"
           >
             <X className="w-5 h-5" />
           </button>
@@ -69,21 +69,21 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
         <div className="py-6 space-y-8">
           {/* Headline & Overview */}
           <div className="space-y-3">
-            <h3 className="font-display text-lg sm:text-xl font-semibold text-[#D1FF00]">
+            <h3 className="font-display text-lg sm:text-xl font-semibold text-[#C6FF00]">
               {project.headline}
             </h3>
-            <p className="text-sm sm:text-base text-[#CCCCCC] leading-relaxed">
+            <p className="text-sm sm:text-base text-[#929BA6] leading-relaxed">
               {project.description}
             </p>
           </div>
 
           {/* Verification Protocol Distinction Callout */}
           {project.verificationNote && (
-            <div className="p-4 bg-[#181818] border-l-4 border-[#D1FF00] space-y-1">
-              <div className="flex items-center gap-2 text-[#D1FF00] font-mono text-xs uppercase tracking-wider">
+            <div className="p-4 bg-[#11151A] border-l-4 border-[#C6FF00] space-y-1">
+              <div className="flex items-center gap-2 text-[#C6FF00] font-mono text-xs uppercase tracking-wider">
                 <ShieldCheck className="w-4 h-4" /> Verification Architecture Note
               </div>
-              <p className="text-xs sm:text-sm text-[#AAAAAA] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#929BA6] leading-relaxed">
                 {project.verificationNote}
               </p>
             </div>
@@ -92,29 +92,29 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
           {/* Live Interactive UI Simulation */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs uppercase tracking-widest text-[#777777] flex items-center gap-1.5">
-                <Cpu className="w-3.5 h-3.5 text-[#D1FF00]" /> Interactive Interface Simulation
+              <span className="font-mono text-xs uppercase tracking-widest text-[#929BA6] flex items-center gap-1.5">
+                <Cpu className="w-3.5 h-3.5 text-[#C6FF00]" /> Interactive Interface Simulation
               </span>
-              <span className="font-mono text-[11px] text-[#D1FF00]">CLICKABLE CONTROLS</span>
+              <span className="font-mono text-[11px] text-[#C6FF00]">CLICKABLE CONTROLS</span>
             </div>
-            <div className="border border-[#262626]">
+            <div className="border border-[#1E2630]">
               {project.mockupType === 'statio' ? <StatioMockup /> : <FastBiteMockup />}
             </div>
           </div>
 
           {/* Key Features Breakdown */}
           <div className="space-y-3">
-            <span className="font-mono text-xs uppercase tracking-widest text-[#777777] flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5 text-[#D1FF00]" /> Core Platform Capabilities
+            <span className="font-mono text-xs uppercase tracking-widest text-[#929BA6] flex items-center gap-1.5">
+              <Layers className="w-3.5 h-3.5 text-[#C6FF00]" /> Core Platform Capabilities
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {project.features.map((feature, idx) => (
                 <div
                   key={idx}
-                  className="p-3 bg-[#171717] border border-[#2B2B2B] flex items-start gap-2.5"
+                  className="p-3 bg-[#11151A] border border-[#1E2630] flex items-start gap-2.5"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-[#D1FF00] shrink-0 mt-0.5" />
-                  <span className="text-xs text-[#CCCCCC] leading-normal">{feature}</span>
+                  <CheckCircle2 className="w-4 h-4 text-[#C6FF00] shrink-0 mt-0.5" />
+                  <span className="text-xs text-[#F4F6F8] leading-normal">{feature}</span>
                 </div>
               ))}
             </div>
@@ -122,14 +122,14 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
 
           {/* Tech Stack */}
           <div className="space-y-2">
-            <span className="font-mono text-xs uppercase tracking-widest text-[#777777] block">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#929BA6] block">
               Architectural Technologies
             </span>
             <div className="flex flex-wrap gap-2">
               {project.techStack.map((tech) => (
                 <span
                   key={tech}
-                  className="font-mono text-xs px-2.5 py-1 bg-[#1A1A1A] border border-[#333333] text-[#F5F5F0]"
+                  className="font-mono text-xs px-2.5 py-1 bg-[#171D24] border border-[#232B35] text-[#F4F6F8]"
                 >
                   {tech}
                 </span>
@@ -139,18 +139,18 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
         </div>
 
         {/* Footer */}
-        <div className="pt-6 border-t border-[#262626] flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
-          <div className="flex items-center gap-2 text-[#777777]">
+        <div className="pt-6 border-t border-[#1E2630] flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+          <div className="flex items-center gap-2 text-[#929BA6]">
             <span>STATUS:</span>
-            <span className="text-[#D1FF00] font-semibold">{project.status}</span>
+            <span className="text-[#C6FF00] font-semibold">{project.status}</span>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-[#777777]">CAMPUS PRODUCT CONCEPT</span>
+            <span className="text-[#929BA6]">CAMPUS PRODUCT CONCEPT</span>
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-[#D1FF00] text-[#111111] font-bold uppercase tracking-wider hover:bg-[#bfe600] transition-colors"
+              className="px-4 py-2 bg-[#C6FF00] text-[#080A0D] font-bold uppercase tracking-wider hover:bg-[#b0e600] transition-colors"
             >
               Done Reading
             </button>

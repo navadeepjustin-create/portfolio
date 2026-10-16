@@ -12,16 +12,16 @@ export const StatioMockup: React.FC = () => {
   const totalCost = pageCount * pageRate + bindingCost;
 
   return (
-    <div className="w-full bg-[#111111] text-[#F5F5F0] border border-[#333333] p-5 sm:p-6 rounded-none font-sans text-xs sm:text-sm shadow-2xl relative overflow-hidden">
+    <div className="w-full bg-[#080A0D] text-[#F4F6F8] border border-white/10 p-5 sm:p-6 rounded-none font-sans text-xs sm:text-sm shadow-2xl relative overflow-hidden">
       {/* Top Header bar */}
-      <div className="flex items-center justify-between pb-4 border-b border-[#262626]">
+      <div className="flex items-center justify-between pb-4 border-b border-white/10">
         <div className="flex items-center gap-2">
-          <div className="w-2.5 h-2.5 bg-[#D1FF00] rounded-none animate-pulse" />
-          <span className="font-mono text-xs uppercase tracking-widest text-[#F5F5F0]">
+          <div className="w-2.5 h-2.5 bg-[#C6FF00] rounded-none animate-pulse" />
+          <span className="font-mono text-xs uppercase tracking-widest text-[#F4F6F8]">
             STATIO-MLR // WORKFLOW DEMO
           </span>
         </div>
-        <span className="font-mono text-[11px] px-2 py-0.5 bg-[#1F1F1F] border border-[#333333] text-[#D1FF00]">
+        <span className="font-mono text-[11px] px-2 py-0.5 bg-[#11151A] border border-[#C6FF00]/40 text-[#C6FF00]">
           PICKUP VERIFIED
         </span>
       </div>
@@ -30,17 +30,17 @@ export const StatioMockup: React.FC = () => {
         {/* Left Column: Upload & Configuration */}
         <div className="md:col-span-7 space-y-4">
           {/* File Card */}
-          <div className="p-3 bg-[#171717] border border-[#2B2B2B] flex items-center justify-between">
+          <div className="p-3 bg-[#11151A] border border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-3 min-w-0">
-              <div className="w-8 h-8 bg-[#222222] border border-[#333333] flex items-center justify-center shrink-0">
-                <FileText className="w-4 h-4 text-[#D1FF00]" />
+              <div className="w-8 h-8 bg-[#171D24] border border-white/10 flex items-center justify-center shrink-0">
+                <FileText className="w-4 h-4 text-[#C6FF00]" />
               </div>
               <div className="min-w-0">
-                <p className="font-mono text-xs text-[#F5F5F0] truncate">ML_Lab_Manual_Final.pdf</p>
-                <p className="text-[11px] text-[#777777]">{pageCount} pages · 4.2 MB · Verified format</p>
+                <p className="font-mono text-xs text-[#F4F6F8] truncate">ML_Lab_Manual_Final.pdf</p>
+                <p className="text-[11px] text-[#929BA6]">{pageCount} pages · 4.2 MB · Verified format</p>
               </div>
             </div>
-            <span className="font-mono text-[10px] text-[#D1FF00] bg-[#D1FF00]/10 px-2 py-0.5 border border-[#D1FF00]/30 shrink-0">
+            <span className="font-mono text-[10px] text-[#C6FF00] bg-[#C6FF00]/10 px-2 py-0.5 border border-[#C6FF00]/30 shrink-0">
               UPLOADED
             </span>
           </div>
@@ -48,8 +48,8 @@ export const StatioMockup: React.FC = () => {
           {/* Configuration Options */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-mono uppercase text-[#777777] flex items-center gap-1.5">
-                <Sliders className="w-3.5 h-3.5" /> Output Color
+              <span className="text-[11px] font-mono uppercase text-[#929BA6] flex items-center gap-1.5">
+                <Sliders className="w-3.5 h-3.5 text-[#C6FF00]" /> Output Color
               </span>
               <div className="flex gap-1.5">
                 <button
@@ -57,110 +57,109 @@ export const StatioMockup: React.FC = () => {
                   onClick={() => setPrintType('bw')}
                   className={`px-3 py-1 font-mono text-xs border transition-all ${
                     printType === 'bw'
-                      ? 'bg-[#D1FF00] text-[#111111] border-[#D1FF00] font-semibold'
-                      : 'bg-transparent text-[#999999] border-[#333333] hover:border-[#666666]'
+                      ? 'bg-[#C6FF00] text-[#080A0D] border-[#C6FF00] font-semibold shadow-[0_0_10px_rgba(198,255,0,0.2)]'
+                      : 'bg-[#11151A] text-[#929BA6] border-white/10 hover:text-[#F4F6F8]'
                   }`}
                 >
-                  B&W (₹1.5/p)
+                  B&W (₹1.50)
                 </button>
                 <button
                   type="button"
                   onClick={() => setPrintType('color')}
                   className={`px-3 py-1 font-mono text-xs border transition-all ${
                     printType === 'color'
-                      ? 'bg-[#D1FF00] text-[#111111] border-[#D1FF00] font-semibold'
-                      : 'bg-transparent text-[#999999] border-[#333333] hover:border-[#666666]'
+                      ? 'bg-[#C6FF00] text-[#080A0D] border-[#C6FF00] font-semibold shadow-[0_0_10px_rgba(198,255,0,0.2)]'
+                      : 'bg-[#11151A] text-[#929BA6] border-white/10 hover:text-[#F4F6F8]'
                   }`}
                 >
-                  Color (₹5/p)
+                  Color (₹5.00)
                 </button>
               </div>
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-mono uppercase text-[#777777] flex items-center gap-1.5">
-                <Layers className="w-3.5 h-3.5" /> Spiral Binding
+              <span className="text-[11px] font-mono uppercase text-[#929BA6] flex items-center gap-1.5">
+                <Layers className="w-3.5 h-3.5 text-[#C6FF00]" /> Spiral Binding
               </span>
               <button
                 type="button"
                 onClick={() => setBinding(!binding)}
                 className={`px-3 py-1 font-mono text-xs border transition-all ${
                   binding
-                    ? 'bg-[#222222] text-[#D1FF00] border-[#D1FF00]'
-                    : 'bg-transparent text-[#777777] border-[#333333]'
+                    ? 'bg-[#C6FF00] text-[#080A0D] border-[#C6FF00] font-semibold'
+                    : 'bg-[#11151A] text-[#929BA6] border-white/10'
                 }`}
               >
-                {binding ? 'Included (+₹30)' : 'None'}
+                {binding ? 'Yes (+₹30)' : 'No (Loose)'}
               </button>
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-mono uppercase text-[#777777] flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5" /> Pickup Slot
+              <span className="text-[11px] font-mono uppercase text-[#929BA6] flex items-center gap-1.5">
+                <Clock className="w-3.5 h-3.5 text-[#C6FF00]" /> Pickup Slot
               </span>
-              <div className="flex gap-1">
-                {['11:30 AM', '1:15 PM', '3:45 PM'].map((s) => (
-                  <button
-                    key={s}
-                    type="button"
-                    onClick={() => setSlot(s)}
-                    className={`px-2 py-0.5 font-mono text-[11px] border ${
-                      slot === s
-                        ? 'border-[#D1FF00] text-[#D1FF00] bg-[#D1FF00]/10'
-                        : 'border-[#2B2B2B] text-[#777777]'
-                    }`}
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
+              <select
+                value={slot}
+                onChange={(e) => setSlot(e.target.value)}
+                className="bg-[#11151A] border border-white/10 text-xs font-mono px-2.5 py-1 text-[#F4F6F8] focus:border-[#C6FF00] outline-none"
+              >
+                <option value="11:30 AM">11:30 AM (Morning Break)</option>
+                <option value="1:15 PM">1:15 PM (Lunch Break)</option>
+                <option value="3:45 PM">3:45 PM (Post-Lab)</option>
+              </select>
             </div>
           </div>
 
-          {/* Price Calculation Pill */}
-          <div className="p-3 bg-[#0A0A0A] border border-[#2B2B2B] flex items-center justify-between">
-            <span className="font-mono text-xs text-[#999999]">Auto Cost Breakdown</span>
-            <div className="text-right">
-              <span className="font-mono text-lg font-bold text-[#D1FF00]">₹{totalCost.toFixed(2)}</span>
-              <span className="text-[10px] text-[#777777] block font-mono">
-                {pageCount}p × ₹{pageRate} {binding && '+ ₹30 binding'}
+          {/* Pricing Calculation Breakdown */}
+          <div className="p-3 bg-[#11151A] border border-white/10 space-y-1.5 font-mono text-xs">
+            <div className="flex justify-between text-[#929BA6]">
+              <span>
+                Printing ({pageCount} pages × ₹{pageRate.toFixed(2)})
               </span>
+              <span>₹{(pageCount * pageRate).toFixed(2)}</span>
+            </div>
+            {binding && (
+              <div className="flex justify-between text-[#929BA6]">
+                <span>Spiral Binding & Protective Cover</span>
+                <span>₹30.00</span>
+              </div>
+            )}
+            <div className="pt-2 border-t border-white/10 flex justify-between font-bold text-sm text-[#F4F6F8]">
+              <span>ESTIMATED TOTAL:</span>
+              <span className="text-[#C6FF00]">₹{totalCost.toFixed(2)}</span>
             </div>
           </div>
         </div>
 
         {/* Right Column: Order QR & Verification Flow */}
-        <div className="md:col-span-5 bg-[#0E0E0E] border border-[#2B2B2B] p-4 flex flex-col justify-between">
+        <div className="md:col-span-5 bg-[#11151A] border border-white/10 p-4 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-3">
-              <span className="font-mono text-[11px] text-[#777777] uppercase tracking-wider">
+              <span className="font-mono text-[11px] text-[#929BA6] uppercase tracking-wider">
                 Pickup Token
               </span>
-              <span className="font-mono text-xs font-semibold text-[#F5F5F0]">#ST-094</span>
+              <span className="font-mono text-xs font-semibold text-[#F4F6F8]">#ST-094</span>
             </div>
 
-            {/* Visual QR Code Display */}
-            <div className="bg-[#FFFFFF] p-3 text-center rounded-none my-2 flex flex-col items-center justify-center">
-              <QrCode className="w-20 h-20 text-[#111111]" strokeWidth={1.75} />
-              <p className="font-mono text-[10px] text-[#111111] mt-1 font-bold tracking-widest">
-                VERIFY-MLRIT-ST094
-              </p>
-            </div>
-
-            <div className="mt-3 space-y-1 text-center">
-              <p className="font-mono text-[11px] text-[#D1FF00] flex items-center justify-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5" /> Staff Pickup Scanner Ready
-              </p>
-              <p className="text-[10px] text-[#777777] leading-relaxed">
-                QR is presented to shop operator solely for order identification & batch collection.
+            {/* Visual Token Representation */}
+            <div className="bg-[#080A0D] border border-white/10 p-4 flex flex-col items-center justify-center space-y-2">
+              <div className="w-24 h-24 bg-[#171D24] border border-[#C6FF00]/40 flex items-center justify-center p-2 relative group/qr">
+                <QrCode className="w-20 h-20 text-[#C6FF00]" />
+              </div>
+              <p className="font-mono text-[10px] text-[#929BA6] text-center">
+                Scan at College Stationary Counter
               </p>
             </div>
           </div>
 
-          <div className="pt-3 border-t border-[#222222] mt-3">
-            <div className="flex justify-between text-[11px] font-mono text-[#888888]">
-              <span>Slot: {slot}</span>
-              <span className="text-[#D1FF00]">Ready in Queue</span>
+          <div className="mt-4 pt-3 border-t border-white/10 space-y-2 font-mono text-[11px]">
+            <div className="flex items-center gap-1.5 text-[#C6FF00]">
+              <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+              <span>Token Authenticated</span>
+            </div>
+            <div className="flex items-center justify-between text-[#929BA6] text-[10px]">
+              <span>SLOT: {slot}</span>
+              <span className="text-[#F4F6F8]">READY IN ~12 MIN</span>
             </div>
           </div>
         </div>

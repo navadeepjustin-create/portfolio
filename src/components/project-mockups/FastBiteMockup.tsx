@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Utensils, QrCode, CheckCircle, Clock, Sparkles, AlertCircle } from 'lucide-react';
+import { Utensils, QrCode, CheckCircle, Clock, Sparkles } from 'lucide-react';
 
 interface MenuItem {
   id: string;
@@ -28,17 +28,17 @@ export const FastBiteMockup: React.FC = () => {
   const rewardPoints = Math.round(subtotal * 0.5);
 
   return (
-    <div className="w-full bg-[#111111] text-[#F5F5F0] border border-[#333333] p-5 sm:p-6 rounded-none font-sans text-xs sm:text-sm shadow-2xl relative overflow-hidden">
+    <div className="w-full bg-[#080A0D] text-[#F4F6F8] border border-white/10 p-5 sm:p-6 rounded-none font-sans text-xs sm:text-sm shadow-2xl relative overflow-hidden">
       {/* Top Header bar */}
-      <div className="flex items-center justify-between pb-4 border-b border-[#262626]">
+      <div className="flex items-center justify-between pb-4 border-b border-white/10">
         <div className="flex items-center gap-2">
-          <Utensils className="w-3.5 h-3.5 text-[#D1FF00]" />
-          <span className="font-mono text-xs uppercase tracking-widest text-[#F5F5F0]">
+          <Utensils className="w-3.5 h-3.5 text-[#C6FF00]" />
+          <span className="font-mono text-xs uppercase tracking-widest text-[#F4F6F8]">
             FAST BITE // CAMPUS CANTEEN HUB
           </span>
         </div>
-        <span className="font-mono text-[11px] px-2 py-0.5 bg-[#D1FF00]/10 border border-[#D1FF00]/30 text-[#D1FF00] flex items-center gap-1">
-          <Sparkles className="w-3 h-3" /> +{rewardPoints} PTS EARNED
+        <span className="font-mono text-[11px] px-2 py-0.5 bg-[#C6FF00]/10 border border-[#C6FF00]/30 text-[#C6FF00] flex items-center gap-1">
+          <Sparkles className="w-3 h-3" /> +{rewardPoints} PTS REWARD
         </span>
       </div>
 
@@ -46,7 +46,7 @@ export const FastBiteMockup: React.FC = () => {
         {/* Left Column: Meal Selection */}
         <div className="md:col-span-7 space-y-4">
           <div className="space-y-2">
-            <span className="text-[11px] font-mono uppercase text-[#777777] block">
+            <span className="text-[11px] font-mono uppercase text-[#929BA6] block">
               Quick Menu Customizer (Tap to toggle)
             </span>
             {items.map((item) => (
@@ -56,108 +56,89 @@ export const FastBiteMockup: React.FC = () => {
                 onClick={() => toggleItem(item.id)}
                 className={`w-full p-2.5 border text-left flex items-center justify-between transition-all ${
                   item.selected
-                    ? 'bg-[#1C1C1C] border-[#D1FF00] text-[#F5F5F0]'
-                    : 'bg-[#141414] border-[#2A2A2A] text-[#666666]'
+                    ? 'bg-[#171D24] border-[#C6FF00] text-[#F4F6F8]'
+                    : 'bg-[#11151A] border-white/10 text-[#929BA6]'
                 }`}
               >
                 <div className="flex items-center gap-2.5">
                   <div
-                    className={`w-4 h-4 border flex items-center justify-center ${
+                    className={`w-3.5 h-3.5 rounded-none border flex items-center justify-center ${
                       item.selected
-                        ? 'border-[#D1FF00] bg-[#D1FF00] text-[#111111]'
-                        : 'border-[#444444] bg-transparent'
+                        ? 'border-[#C6FF00] bg-[#C6FF00]'
+                        : 'border-white/20 bg-transparent'
                     }`}
                   >
-                    {item.selected && <CheckCircle className="w-3.5 h-3.5" />}
+                    {item.selected && <CheckCircle className="w-3 h-3 text-[#080A0D]" />}
                   </div>
-                  <span className="font-mono text-xs">{item.name}</span>
+                  <span className="font-mono text-xs font-medium">{item.name}</span>
                 </div>
-                <span className="font-mono text-xs">₹{item.price}</span>
+                <span className="font-mono text-xs font-semibold">₹{item.price}.00</span>
               </button>
             ))}
           </div>
 
-          {/* Time Slot Picker */}
-          <div className="p-3 bg-[#171717] border border-[#2B2B2B] space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] font-mono text-[#888888] flex items-center gap-1.5 uppercase">
-                <Clock className="w-3.5 h-3.5 text-[#D1FF00]" /> Scheduled Pickup Window
-              </span>
-              <span className="font-mono text-[11px] text-[#D1FF00]">Counter #02</span>
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              {['1:00 PM - 1:15 PM', '1:20 PM - 1:35 PM'].map((slot) => (
-                <button
-                  key={slot}
-                  type="button"
-                  onClick={() => setPickupSlot(slot)}
-                  className={`py-1 px-2 font-mono text-[10px] sm:text-[11px] border text-center transition-all ${
-                    pickupSlot === slot
-                      ? 'bg-[#D1FF00] text-[#111111] border-[#D1FF00] font-semibold'
-                      : 'bg-transparent text-[#777777] border-[#333333]'
-                  }`}
-                >
-                  {slot}
-                </button>
-              ))}
-            </div>
+          {/* Pickup Window Selection */}
+          <div className="space-y-1.5 pt-1">
+            <label className="text-[11px] font-mono uppercase text-[#929BA6] flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-[#C6FF00]" /> Scheduled Collection Window
+            </label>
+            <select
+              value={pickupSlot}
+              onChange={(e) => setPickupSlot(e.target.value)}
+              className="w-full bg-[#11151A] border border-white/10 text-xs font-mono px-3 py-1.5 text-[#F4F6F8] focus:border-[#C6FF00] outline-none"
+            >
+              <option value="1:00 PM - 1:15 PM">1:00 PM - 1:15 PM (Early Break)</option>
+              <option value="1:20 PM - 1:35 PM">1:20 PM - 1:35 PM (Peak Lunch)</option>
+              <option value="1:40 PM - 1:55 PM">1:40 PM - 1:55 PM (Late Break)</option>
+            </select>
           </div>
 
-          {/* Order Summary & Anti-Queue Guarantee */}
-          <div className="flex items-center justify-between p-3 bg-[#0A0A0A] border border-[#2B2B2B]">
-            <div>
-              <p className="text-[11px] text-[#777777] font-mono">Total Meal Value</p>
-              <p className="font-mono text-lg font-bold text-[#D1FF00]">₹{subtotal}</p>
+          {/* Pricing Summary */}
+          <div className="p-3 bg-[#11151A] border border-white/10 space-y-1 font-mono text-xs">
+            <div className="flex justify-between text-[#929BA6]">
+              <span>Items Selected ({selectedItems.length})</span>
+              <span>₹{subtotal}.00</span>
             </div>
-            <div className="text-right">
-              <span className="font-mono text-[10px] text-[#00E5FF] bg-[#00E5FF]/10 px-2 py-0.5 border border-[#00E5FF]/30 inline-flex items-center gap-1">
-                QUEUE SKIPPED
-              </span>
-              <p className="text-[10px] text-[#777777] mt-0.5">Collect directly at counter</p>
+            <div className="flex justify-between text-[#929BA6]">
+              <span>Campus Digital Convenience Fee</span>
+              <span className="text-[#C6FF00]">₹0.00 (WAIVED)</span>
+            </div>
+            <div className="pt-2 border-t border-white/10 flex justify-between font-bold text-sm text-[#F4F6F8]">
+              <span>TOTAL ORDER:</span>
+              <span className="text-[#C6FF00]">₹{subtotal}.00</span>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Counter Verification Token & Kitchen Tracker */}
-        <div className="md:col-span-5 bg-[#0E0E0E] border border-[#2B2B2B] p-4 flex flex-col justify-between">
+        {/* Right Column: Counter Verification Token */}
+        <div className="md:col-span-5 bg-[#11151A] border border-white/10 p-4 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-mono text-[11px] text-[#777777] uppercase tracking-wider">
-                Counter Order Token
+            <div className="flex items-center justify-between mb-3">
+              <span className="font-mono text-[11px] text-[#929BA6] uppercase tracking-wider">
+                Order Verification
               </span>
-              <span className="font-mono text-xs font-bold text-[#F5F5F0]">#FB-240</span>
+              <span className="font-mono text-xs font-semibold text-[#F4F6F8]">#FB-204</span>
             </div>
 
-            {/* QR Card */}
-            <div className="bg-[#FFFFFF] p-3 text-center rounded-none my-2 flex flex-col items-center justify-center">
-              <QrCode className="w-20 h-20 text-[#111111]" strokeWidth={1.75} />
-              <p className="font-mono text-[10px] text-[#111111] mt-1 font-bold tracking-widest">
-                FASTBITE-VERIFY-240
+            <div className="bg-[#080A0D] border border-white/10 p-4 flex flex-col items-center justify-center space-y-2">
+              <div className="w-24 h-24 bg-[#171D24] border border-[#C6FF00]/40 flex items-center justify-center p-2 relative">
+                <QrCode className="w-20 h-20 text-[#C6FF00]" />
+              </div>
+              <p className="font-mono text-[10px] text-[#929BA6] text-center">
+                Scan at Canteen Express Lane
               </p>
-            </div>
-
-            {/* Order Progression */}
-            <div className="mt-3 space-y-1.5 border-t border-[#222222] pt-3">
-              <div className="flex items-center justify-between text-[11px] font-mono">
-                <span className="text-[#666666]">1. Order Placed</span>
-                <span className="text-[#D1FF00]">✓</span>
-              </div>
-              <div className="flex items-center justify-between text-[11px] font-mono">
-                <span className="text-[#F5F5F0]">2. Kitchen Prepping</span>
-                <span className="text-[#D1FF00] animate-pulse">● In Progress</span>
-              </div>
-              <div className="flex items-center justify-between text-[11px] font-mono">
-                <span className="text-[#555555]">3. Counter Ready</span>
-                <span className="text-[#555555]">Pending Scan</span>
-              </div>
             </div>
           </div>
 
-          <div className="pt-3 border-t border-[#222222] mt-3">
-            <p className="text-[10px] text-[#777777] flex items-center gap-1 leading-relaxed">
-              <AlertCircle className="w-3 h-3 text-[#D1FF00] shrink-0" />
-              Canteen staff scans QR at pickup window to authenticate food token.
-            </p>
+          <div className="mt-4 pt-3 border-t border-white/10 space-y-2 font-mono text-[11px]">
+            <div className="flex items-center gap-1.5 text-[#C6FF00]">
+              <span className="w-2 h-2 bg-[#C6FF00] rounded-none animate-pulse" />
+              <span>Kitchen Prepping (Queue #03)</span>
+            </div>
+            <div className="flex items-center justify-between text-[#929BA6] text-[10px]">
+              <span>SLOT: {pickupSlot.split(' ')[0]}</span>
+              <span className="text-[#F4F6F8]">EST: ~8 MIN</span>
+            </div>
           </div>
         </div>
       </div>

@@ -113,7 +113,7 @@ export const CustomCursor: React.FC = () => {
       {/* Central precise cursor dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 -ml-1 -mt-1 w-2 h-2 rounded-full bg-[#111111] dark:bg-[#D1FF00] border border-[#D1FF00] pointer-events-none transition-transform duration-75"
+        className="fixed top-0 left-0 -ml-1 -mt-1 w-2 h-2 rounded-full bg-[#C6FF00] pointer-events-none transition-transform duration-75 shadow-[0_0_8px_#C6FF00]"
         style={{ willChange: 'transform' }}
       />
 
@@ -125,7 +125,7 @@ export const CustomCursor: React.FC = () => {
       >
         {cursorLabel ? (
           // Contextual Label Pill (e.g., "VIEW PROJECT ↗")
-          <div className="relative -top-4 -left-1/2 translate-x-3 -translate-y-6 whitespace-nowrap px-2.5 py-1 bg-[#D1FF00] text-[#111111] font-mono text-[10px] font-bold tracking-widest uppercase border border-[#111111] shadow-xl animate-in fade-in zoom-in-95 duration-150 flex items-center gap-1">
+          <div className="relative -top-4 -left-1/2 translate-x-3 -translate-y-6 whitespace-nowrap px-2.5 py-1 bg-[#C6FF00] text-[#080A0D] font-mono text-[10px] font-bold tracking-widest uppercase border border-[#080A0D] shadow-2xl animate-in fade-in zoom-in-95 duration-150 flex items-center gap-1">
             <span>{cursorLabel}</span>
           </div>
         ) : (
@@ -133,8 +133,8 @@ export const CustomCursor: React.FC = () => {
           <div
             className={`-ml-4 -mt-4 rounded-full border transition-all duration-200 pointer-events-none flex items-center justify-center ${
               isHovered
-                ? 'w-10 h-10 -ml-5 -mt-5 border-[#D1FF00] bg-[#D1FF00]/15 scale-110 shadow-[0_0_15px_rgba(209,255,0,0.3)]'
-                : 'w-8 h-8 border-[#111111]/40 bg-transparent'
+                ? 'w-10 h-10 -ml-5 -mt-5 border-[#C6FF00] bg-[#C6FF00]/15 scale-110 shadow-[0_0_20px_rgba(198,255,0,0.35)]'
+                : 'w-8 h-8 border-white/30 bg-transparent'
             }`}
           />
         )}

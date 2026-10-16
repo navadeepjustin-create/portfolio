@@ -47,15 +47,15 @@ export const portfolioData = {
     institution: 'MLR Institute of Technology (MLRIT)',
     location: 'Hyderabad, Telangana, India',
     statusTag: 'AIML STUDENT · DEVELOPER · BUILDER',
-    headline: "BUILDING WHAT'S NEXT.",
+    headline: 'BUILDING AT THE INTERSECTION OF AI & SOFTWARE.',
     subHeadline: 'AI MINDED. PRODUCT FOCUSED. ALWAYS BUILDING.',
     heroBio:
-      "I'm Navadeep, an AIML engineering student who enjoys turning ideas into practical digital products through code, experimentation, and thoughtful design.",
-    aboutHeadline: 'CURIOUS BY DEFAULT.',
+      'B.Tech AIML student at MLRIT, exploring intelligent systems and building practical software projects.',
+    aboutHeadline: 'BUILDING PRACTICAL SYSTEMS AT MLRIT.',
     aboutParagraphs: [
-      "I'm Navadeep, an AIML engineering student at MLR Institute of Technology in Hyderabad. I explore both the engineering side of systems and the human experience people have when using them.",
-      "Rather than treating code as abstract syntax, I look at how technology can solve tangible friction around me. My focus centers on building student-oriented digital platforms, understanding the mechanics of intelligent systems, and continuously leveling up through hackathons and real-world experiments.",
-      "Whether designing clean interfaces or structuring data workflows, I believe software should be fast, intuitive, and genuinely practical.",
+      "I'm Navadeep, a B.Tech student studying Artificial Intelligence and Machine Learning at MLRIT, interested in building practical software projects and exploring intelligent systems.",
+      'Rather than treating code as abstract syntax, I focus on how technology solves tangible friction around campus life. My work centers on creating efficient digital platforms, understanding intelligent algorithms, and applying engineering fundamentals to real problems.',
+      'Whether optimizing user interactions or architecting scalable workflows, I build software that is fast, resilient, and purposeful.',
     ],
     focusAreas: [
       {
@@ -275,9 +275,9 @@ export const portfolioData = {
   },
 
   contact: {
-    headline: "HAVE AN IDEA? LET'S BUILD IT.",
+    headline: "LET'S BUILD SOMETHING USEFUL.",
     subtext:
-      "I'm interested in technology, ambitious ideas, and projects that solve real problems. If something here caught your attention, let's connect.",
+      'Have a project idea, want to collaborate, or want to discuss technology? Get in touch.',
     /**
      * Social profile links. If left empty, the UI displays clear, non-clickable
      * configuration indicators rather than fabricating URLs.
