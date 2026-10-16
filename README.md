@@ -44,7 +44,7 @@ Inspired by modern high-end editorial portfolios, combining the sensibilities of
 All personal information, social links, project definitions, and technical skills live in a single central configuration file:
 
 ```typescript
-// Edit src/data/portfolioData.ts to update personal details:
+// Edit src/data/portfolioData.ts or src/data/socials.ts to update details:
 export const portfolioData = {
   personal: {
     name: 'NAVADEEP',
@@ -54,11 +54,33 @@ export const portfolioData = {
     ...
   },
   contact: {
-    email: '',    // Paste your real email here
-    github: '',   // Paste your GitHub profile URL here
-    linkedin: '', // Paste your LinkedIn profile URL here
+    email: 'navadeepjustin@gmail.com',
+    github: 'https://github.com/navadeepjustin-create',
+    linkedin: '', // Add LinkedIn URL when ready
   }
 };
+```
+
+---
+
+## 📤 Pushing to GitHub
+
+Your local git repository is already initialized and committed on the `main` branch with the remote pointing to:
+`https://github.com/navadeepjustin-create/portfolio.git`
+
+To push your latest commits to GitHub:
+
+### Option A — Automated Node script (recommended, requires no Xcode tools):
+```bash
+# Push directly using your GitHub Personal Access Token (PAT):
+npm run push <YOUR_GITHUB_TOKEN>
+# Or run without argument to be prompted securely:
+npm run push
+```
+
+### Option B — Standard Git (if Xcode tools are installed):
+```bash
+git push -u origin main
 ```
 
 ---
