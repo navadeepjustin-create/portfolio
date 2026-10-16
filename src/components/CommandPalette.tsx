@@ -13,7 +13,7 @@ import {
   CornerDownLeft,
   Terminal,
 } from 'lucide-react';
-import { GithubIcon } from './BrandIcons';
+import { GithubIcon, InstagramIcon } from './BrandIcons';
 
 interface CommandItem {
   id: string;
@@ -107,6 +107,17 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       icon: GithubIcon,
       action: () => {
         window.open('https://github.com/navadeepjustin-create', '_blank', 'noopener,noreferrer');
+        onClose();
+      },
+    },
+    {
+      id: 'instagram',
+      title: 'Instagram Profile',
+      subtitle: '@navdeep_.07 (instagram.com/navdeep_.07)',
+      category: 'Social & Direct',
+      icon: InstagramIcon,
+      action: () => {
+        window.open('https://instagram.com/navdeep_.07', '_blank', 'noopener,noreferrer');
         onClose();
       },
     },

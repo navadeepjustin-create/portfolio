@@ -6,7 +6,7 @@
  */
 
 export const GITHUB_URL = 'https://github.com/navadeepjustin-create';
-export const INSTAGRAM_URL = '';
+export const INSTAGRAM_URL = 'https://instagram.com/navdeep_.07';
 export const FACEBOOK_URL = '';
 export const LINKEDIN_URL = '';
 export const EMAIL_ADDRESS = 'navadeepjustin@gmail.com';
@@ -28,18 +28,11 @@ export const getSocialLinks = (): SocialLinkItem[] => [
     actionText: 'Visit GitHub',
   },
   {
-    id: 'linkedin',
-    label: 'LinkedIn',
-    url: LINKEDIN_URL.trim(),
-    configured: LINKEDIN_URL.trim().length > 0,
-    actionText: 'Connect on LinkedIn',
-  },
-  {
     id: 'instagram',
     label: 'Instagram',
     url: INSTAGRAM_URL.trim(),
     configured: INSTAGRAM_URL.trim().length > 0,
-    actionText: 'Follow on Instagram',
+    actionText: '@navdeep_.07',
   },
   {
     id: 'facebook',

@@ -284,6 +284,8 @@ export const portfolioData = {
      */
     email: 'navadeepjustin@gmail.com', // Active contact email
     github: 'https://github.com/navadeepjustin-create', // Active GitHub profile
+    instagram: 'https://instagram.com/navdeep_.07', // Active Instagram profile
+    instagramHandle: 'navdeep_.07',
     linkedin: '', // Add real LinkedIn profile URL
     location: 'Hyderabad, Telangana, India',
     institution: 'MLR Institute of Technology',

@@ -46,7 +46,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
                 rel="noopener noreferrer"
                 aria-label={link.actionText}
                 data-cursor-label={link.actionText.toUpperCase()}
-                className="p-1.5 text-[#333333] hover:text-[#111111] hover:bg-[#D1FF00] border border-transparent hover:border-[#111111] transition-all duration-200"
+                className="p-1.5 text-[#929BA6] hover:text-[#080A0D] hover:bg-[#C6FF00] border border-transparent hover:border-[#C6FF00] transition-all duration-200"
               >
                 <Icon className="w-4 h-4" />
               </a>
@@ -57,7 +57,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
             <span
               key={link.id}
               title={`${link.label} URL can be added in src/data/socials.ts`}
-              className="p-1.5 text-[#AAAAAA] opacity-50 cursor-not-allowed border border-transparent"
+              className="p-1.5 text-[#929BA6]/40 opacity-40 cursor-not-allowed border border-transparent"
               aria-label={`${link.label} (Not configured)`}
             >
               <Icon className="w-4 h-4" />
@@ -79,25 +79,25 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
               key={link.id}
               className={`p-3 sm:p-3.5 border transition-all duration-200 flex items-center justify-between group ${
                 link.configured
-                  ? 'bg-[#151515] border-[#2A2A2A] hover:border-[#D1FF00] hover:bg-[#1A1A1A]'
-                  : 'bg-[#121212] border-[#222222]'
+                  ? 'bg-[#11151A] border-[#232B35] hover:border-[#C6FF00]/60 hover:bg-[#171D24]'
+                  : 'bg-[#080A0D] border-white/5 opacity-50'
               }`}
             >
               <div className="flex items-center gap-3 min-w-0">
                 <div
                   className={`w-8 h-8 flex items-center justify-center border shrink-0 transition-colors ${
                     link.configured
-                      ? 'bg-[#202020] border-[#333333] group-hover:border-[#D1FF00] text-[#D1FF00]'
-                      : 'bg-[#181818] border-[#282828] text-[#666666]'
+                      ? 'bg-[#171D24] border-[#232B35] group-hover:border-[#C6FF00] text-[#C6FF00]'
+                      : 'bg-[#11151A] border-white/10 text-[#929BA6]'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
-                  <span className="font-mono text-xs font-semibold text-[#F5F5F0] block">
+                  <span className="font-mono text-xs font-semibold text-[#F4F6F8] block">
                     {link.label}
                   </span>
-                  <span className="font-mono text-[11px] text-[#777777] truncate block">
+                  <span className="font-mono text-[11px] text-[#929BA6] truncate block">
                     {link.configured ? link.actionText : 'Profile link pending configuration'}
                   </span>
                 </div>
@@ -110,12 +110,12 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
                   rel="noopener noreferrer"
                   aria-label={`${link.actionText} (opens in a new tab)`}
                   data-cursor-label="OPEN ↗"
-                  className="p-2 bg-[#222222] border border-[#333333] group-hover:border-[#D1FF00] group-hover:bg-[#D1FF00] group-hover:text-[#111111] text-[#CCCCCC] transition-all flex items-center justify-center shrink-0"
+                  className="p-2 bg-[#171D24] border border-[#232B35] group-hover:border-[#C6FF00] group-hover:bg-[#C6FF00] group-hover:text-[#080A0D] text-[#F4F6F8] transition-all flex items-center justify-center shrink-0"
                 >
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
               ) : (
-                <span className="font-mono text-[10px] uppercase tracking-wider text-[#777777] px-2 py-0.5 bg-[#1C1C1C] border border-[#2B2B2B] shrink-0">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-[#929BA6]/60 px-2 py-0.5 bg-[#11151A] border border-white/10 shrink-0">
                   Pending URL
                 </span>
               )}
@@ -141,7 +141,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
               rel="noopener noreferrer"
               aria-label={link.actionText}
               data-cursor-label={link.actionText.toUpperCase()}
-              className="p-2 border border-[#2B2B2B] hover:border-[#D1FF00] bg-[#161616] hover:bg-[#D1FF00] hover:text-[#111111] text-[#999999] transition-all duration-200 group"
+              className="p-2 border border-[#232B35] hover:border-[#C6FF00] bg-[#11151A] hover:bg-[#C6FF00] hover:text-[#080A0D] text-[#929BA6] transition-all duration-200 group"
             >
               <Icon className="w-4 h-4 transition-transform group-hover:scale-110" />
             </a>
@@ -152,7 +152,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
           <span
             key={link.id}
             title={`${link.label}: Set URL in src/data/socials.ts`}
-            className="p-2 border border-[#222222] bg-[#131313] text-[#555555] cursor-not-allowed opacity-60"
+            className="p-2 border border-white/5 bg-[#080A0D] text-[#929BA6]/40 cursor-not-allowed opacity-40"
             aria-label={`${link.label} (Not configured yet)`}
           >
             <Icon className="w-4 h-4" />

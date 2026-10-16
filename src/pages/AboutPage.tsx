@@ -14,7 +14,7 @@ import {
   FolderGit2,
   Mail,
 } from 'lucide-react';
-import { GithubIcon } from '../components/BrandIcons';
+import { GithubIcon, InstagramIcon } from '../components/BrandIcons';
 import { portfolioData } from '../data/portfolioData';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
@@ -305,6 +305,16 @@ export const AboutPage: React.FC = () => {
               >
                 <GithubIcon className="w-4 h-4" />
                 <span>GitHub Profile</span>
+              </a>
+
+              <a
+                href="https://instagram.com/navdeep_.07"
+                target="_blank"
+                rel="noreferrer"
+                className="px-6 py-3.5 bg-[#171D24] hover:bg-white/10 text-[#F4F6F8] font-mono text-xs uppercase font-bold tracking-widest transition-colors flex items-center gap-2 border border-white/15"
+              >
+                <InstagramIcon className="w-4 h-4" />
+                <span>@navdeep_.07</span>
               </a>
             </div>
           </div>
