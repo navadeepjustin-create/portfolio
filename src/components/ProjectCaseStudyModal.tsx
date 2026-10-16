@@ -1,0 +1,162 @@
+import React, { useEffect } from 'react';
+import { X, CheckCircle2, ShieldCheck, Layers, Cpu } from 'lucide-react';
+import type { ProjectDetail } from '../data/portfolioData';
+import { StatioMockup } from './project-mockups/StatioMockup';
+import { FastBiteMockup } from './project-mockups/FastBiteMockup';
+
+interface ProjectCaseStudyModalProps {
+  project: ProjectDetail | null;
+  onClose: () => void;
+}
+
+export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ project, onClose }) => {
+  useEffect(() => {
+    if (!project) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [project, onClose]);
+
+  if (!project) return null;
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#000000]/80 backdrop-blur-md overflow-y-auto"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-4xl bg-[#111111] text-[#F5F5F0] border border-[#333333] shadow-2xl p-6 sm:p-10 my-8 overflow-hidden transition-all duration-300"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Top Accent Line */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-[#D1FF00]" />
+
+        {/* Header bar */}
+        <div className="flex items-start justify-between pb-6 border-b border-[#262626]">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="font-mono text-xs text-[#D1FF00] bg-[#D1FF00]/10 border border-[#D1FF00]/30 px-2 py-0.5">
+                PROJECT {project.number}
+              </span>
+              <span className="font-mono text-xs text-[#888888]">{project.category}</span>
+            </div>
+            <h2 id="modal-title" className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-[#F5F5F0]">
+              {project.title}
+            </h2>
+          </div>
+
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close case study"
+            className="p-2 border border-[#333333] hover:border-[#D1FF00] hover:text-[#D1FF00] transition-colors text-[#888888]"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Content Body */}
+        <div className="py-6 space-y-8">
+          {/* Headline & Overview */}
+          <div className="space-y-3">
+            <h3 className="font-display text-lg sm:text-xl font-semibold text-[#D1FF00]">
+              {project.headline}
+            </h3>
+            <p className="text-sm sm:text-base text-[#CCCCCC] leading-relaxed">
+              {project.description}
+            </p>
+          </div>
+
+          {/* Verification Protocol Distinction Callout */}
+          {project.verificationNote && (
+            <div className="p-4 bg-[#181818] border-l-4 border-[#D1FF00] space-y-1">
+              <div className="flex items-center gap-2 text-[#D1FF00] font-mono text-xs uppercase tracking-wider">
+                <ShieldCheck className="w-4 h-4" /> Verification Architecture Note
+              </div>
+              <p className="text-xs sm:text-sm text-[#AAAAAA] leading-relaxed">
+                {project.verificationNote}
+              </p>
+            </div>
+          )}
+
+          {/* Live Interactive UI Simulation */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs uppercase tracking-widest text-[#777777] flex items-center gap-1.5">
+                <Cpu className="w-3.5 h-3.5 text-[#D1FF00]" /> Interactive Interface Simulation
+              </span>
+              <span className="font-mono text-[11px] text-[#D1FF00]">CLICKABLE CONTROLS</span>
+            </div>
+            <div className="border border-[#262626]">
+              {project.mockupType === 'statio' ? <StatioMockup /> : <FastBiteMockup />}
+            </div>
+          </div>
+
+          {/* Key Features Breakdown */}
+          <div className="space-y-3">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#777777] flex items-center gap-1.5">
+              <Layers className="w-3.5 h-3.5 text-[#D1FF00]" /> Core Platform Capabilities
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {project.features.map((feature, idx) => (
+                <div
+                  key={idx}
+                  className="p-3 bg-[#171717] border border-[#2B2B2B] flex items-start gap-2.5"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-[#D1FF00] shrink-0 mt-0.5" />
+                  <span className="text-xs text-[#CCCCCC] leading-normal">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Tech Stack */}
+          <div className="space-y-2">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#777777] block">
+              Architectural Technologies
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {project.techStack.map((tech) => (
+                <span
+                  key={tech}
+                  className="font-mono text-xs px-2.5 py-1 bg-[#1A1A1A] border border-[#333333] text-[#F5F5F0]"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="pt-6 border-t border-[#262626] flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+          <div className="flex items-center gap-2 text-[#777777]">
+            <span>STATUS:</span>
+            <span className="text-[#D1FF00] font-semibold">{project.status}</span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="text-[#777777]">CAMPUS PRODUCT CONCEPT</span>
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 bg-[#D1FF00] text-[#111111] font-bold uppercase tracking-wider hover:bg-[#bfe600] transition-colors"
+            >
+              Done Reading
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

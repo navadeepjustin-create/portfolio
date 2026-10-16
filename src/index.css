@@ -1,0 +1,186 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ */
+/* Design Tokens — Editorial Tech Visual Identity                      */
+/* Inspired by high-performance editorial design (landonorris.com)    */
+/* ------------------------------------------------------------------ */
+@theme {
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Editorial Palette */
+  --color-offwhite: #F5F5F0;
+  --color-canvas-dark: #111111;
+  --color-charcoal: #1A1A1A;
+  --color-muted: #777777;
+  --color-lime: #D1FF00;
+  --color-border-light: #DADAD3;
+  --color-border-dark: #333333;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base Layer                                                          */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+    background-color: #F5F5F0;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #F5F5F0;
+    color: #111111;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.035em;
+  }
+
+  ::selection {
+    background-color: #D1FF00;
+    color: #111111;
+  }
+
+  :focus-visible {
+    outline: 2px solid #D1FF00;
+    outline-offset: 3px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Fine Grid & Technical Aesthetics                                   */
+/* ------------------------------------------------------------------ */
+.bg-grid-light {
+  background-image: 
+    linear-gradient(to right, rgba(17, 17, 17, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 17, 17, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.bg-grid-dark {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Fine-line tech crosshairs */
+.tech-crosshair {
+  position: relative;
+}
+.tech-crosshair::before, .tech-crosshair::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+.tech-crosshair::before {
+  top: -8px;
+  left: 0;
+  width: 16px;
+  height: 1px;
+  background-color: #DADAD3;
+}
+.tech-crosshair::after {
+  top: -16px;
+  left: 8px;
+  width: 1px;
+  height: 16px;
+  background-color: #DADAD3;
+}
+
+/* Interactive card spotlight with electric lime halo */
+.lime-glow-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lime-glow-hover:hover {
+  border-color: #D1FF00;
+  box-shadow: 0 0 25px rgba(209, 255, 0, 0.15);
+}
+
+/* Marquee / Ticker */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: 200%;
+  animation: marquee 28s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Pulse / Live indicator */
+@keyframes limePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.animate-lime-pulse {
+  animation: limePulse 2s ease-in-out infinite;
+}
+
+/* Subtle line scroll */
+@keyframes scrollLine {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+.animate-scroll-line {
+  animation: scrollLine 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-lime-pulse,
+  .animate-scroll-line {
+    animation: none !important;
+  }
+  *, *::before, *::after {
+    transition-duration: 0.001s !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Premium Custom Cursor & Interactive Polish                         */
+/* ------------------------------------------------------------------ */
+@media (hover: hover) and (pointer: fine) {
+  html.custom-cursor-active,
+  html.custom-cursor-active body,
+  html.custom-cursor-active a,
+  html.custom-cursor-active button,
+  html.custom-cursor-active [role="button"],
+  html.custom-cursor-active .interactive-card {
+    cursor: none !important;
+  }
+
+  /* Restore normal cursor for text fields and user selection */
+  html.custom-cursor-active input:not([type="button"]):not([type="submit"]),
+  html.custom-cursor-active textarea,
+  html.custom-cursor-active select,
+  html.custom-cursor-active [contenteditable="true"] {
+    cursor: text !important;
+  }
+}
+
+/* Scroll progress indicator bar */
+.scroll-progress-bar {
+  transform-origin: 0% 50%;
+  will-change: transform;
+}
+
