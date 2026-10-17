@@ -1,6 +1,6 @@
 {
-  "hash": "97d620c",
-  "message": "fix(mobile): resolve vertical scrolling lock on android and ios touch devices",
-  "date": "2026-10-17T09:53:57Z",
+  "hash": "d676cdd",
+  "message": "chore: update build commit metadata in latestCommit.json",
+  "date": "2026-10-17T09:55:23Z",
   "available": true
 }
