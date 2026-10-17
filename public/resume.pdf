@@ -1,0 +1,84 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 3225 >>
+stream
+BT
+/F1 10 Tf
+40 760 Td
+14 TL
+/F2 16 Tf (NAVADEEP) Tj /F1 10 Tf T*
+(B.Tech \(AIML\) Student - Software Developer | Hyderabad, Telangana, India) Tj T*
+(navadeepjustin@gmail.com | linkedin.com/in/navadeep-justin-946366371 | github.com/navadeepjustin-create) Tj T*
+(Portfolio: https://portfolio-one-alpha-6gy1a73x99.vercel.app) Tj T*
+(--------------------------------------------------------------------------------------------------) Tj T*
+T* /F2 11 Tf (SUMMARY) Tj /F1 10 Tf T*
+(B.Tech AIML student at MLR Institute of Technology who turns practical campus problems into carefully) Tj T*
+(designed software. Front-end focused \(React, Tailwind CSS\) with a working base in Python, Java, SQL) Tj T*
+(and machine learning fundamentals. Seeking software engineering, full-stack or applied AI/ML internships.) Tj T*
+() Tj T*
+T* /F2 11 Tf (EDUCATION) Tj /F1 10 Tf T*
+(B.Tech in Computer Science & Engineering \(AI & ML\), MLRIT, Hyderabad \(2022 - 2026, in progress\)) Tj T*
+(* Coursework in Artificial Intelligence, Machine Learning and Data Structures) Tj T*
+(* Hands-on lab work in Python, Java and SQL database design) Tj T*
+(* Active in campus technical initiatives, workshops and buildathons) Tj T*
+() Tj T*
+T* /F2 11 Tf (PROJECTS) Tj /F1 10 Tf T*
+(Statio-MLR: Campus Digital Xerox & Stationery Ordering System \(React, TypeScript, Tailwind CSS\)) Tj T*
+(* Designed student workflow for document upload, print options \(B&W/color, binding\) and price calculation.) Tj T*
+(* Modeled live order status and scheduled collection slot picker to reduce photocopy queues.) Tj T*
+(* Defined counter-only QR pickup-verification flow for shop staff, kept separate from payment.) Tj T*
+(* Authored the software requirements specification \(SRS\) for the platform.) Tj T*
+() Tj T*
+(Fast Bite: Digital Campus Canteen Ordering System \(React, TypeScript, Tailwind CSS\)) Tj T*
+(* Designed mobile-first ordering interface with canteen menus, availability and customization.) Tj T*
+(* Prototyped scheduled pickup windows aligned with lecture/break timings with QR counter verification.) Tj T*
+(* Modeled live kitchen status \(Order Placed, In Prep, Ready at Counter\) and campus reward-points concept.) Tj T*
+() Tj T*
+(Personal Portfolio Website \(React 19, TypeScript, Vite, Tailwind CSS v4, Motion; source on GitHub\)) Tj T*
+(* Built responsive multi-page site with case-study routes, project simulators, and Cmd/Ctrl+K palette.) Tj T*
+(* Added accessibility basics: reduced-motion support, keyboard skip link and visible focus styles.) Tj T*
+() Tj T*
+T* /F2 11 Tf (HACKATHONS) Tj /F1 10 Tf T*
+(* Participant, Cloud technology hackathon) Tj T*
+(* Participant, Finathon) Tj T*
+() Tj T*
+T* /F2 11 Tf (TECHNICAL SKILLS) Tj /F1 10 Tf T*
+(* AI / ML: machine learning fundamentals, data preprocessing, model evaluation) Tj T*
+(* Languages: Python, Java) Tj T*
+(* Web Development: React, Tailwind CSS, HTML5/CSS3, responsive design) Tj T*
+(* DBMS: database management systems, SQL and schema design, database fundamentals, REST APIs, Supabase) Tj T*
+(* Prompting: prompt design and iteration) Tj T*
+(* Tools: Git and GitHub, VS Code, Vite, Linux and shell basics) Tj T*
+(* Core CS: data structures and algorithms, object-oriented design) Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000003527 00000 n 
+0000003597 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3672
+%%EOF

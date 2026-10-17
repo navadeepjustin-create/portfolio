@@ -150,9 +150,29 @@ export const FeaturedProjects: React.FC = () => {
                       </button>
                     </Magnetic>
 
-                    <span className="font-mono text-[11px] text-[#929BA6] border border-white/10 px-2.5 py-1.5 bg-[#11151A] hidden sm:inline-block">
-                      STATUS: <strong className="text-[#C6FF00]">{project.status}</strong>
-                    </span>
+                    {/* Render Live / Repo buttons ONLY when URLs exist */}
+                    {project.links?.repo ? (
+                      <Magnetic radius={35} strength={0.2}>
+                        <a
+                          href={project.links.repo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3.5 py-3.5 bg-[#171D24] hover:bg-[#1f2730] text-[#F4F6F8] hover:text-[#C6FF00] border border-white/15 hover:border-[#C6FF00] font-mono text-xs uppercase transition-colors flex items-center gap-1.5"
+                          title="View Repository on GitHub"
+                        >
+                          <FolderGit2 className="w-3.5 h-3.5" />
+                          <span>Repo</span>
+                        </a>
+                      </Magnetic>
+                    ) : null}
+
+                    {/* Honest "In Development" State when URLs are absent */}
+                    {!project.links?.repo && !project.links?.live && (
+                      <span className="font-mono text-[10px] text-[#929BA6] border border-white/10 px-2.5 py-2.5 bg-[#11151A] flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 bg-[#C6FF00] rounded-none animate-pulse" />
+                        <span>STATUS: IN PROTOTYPE (NO PUBLIC REPO)</span>
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -186,8 +206,34 @@ export const FeaturedProjects: React.FC = () => {
                     <div className="relative z-10">
                       {project.mockupType === 'statio' ? (
                         <StatioMockup />
-                      ) : (
+                      ) : project.mockupType === 'fastbite' ? (
                         <FastBiteMockup />
+                      ) : (
+                        <div className="p-6 bg-[#080A0D] text-[#F4F6F8] font-mono text-xs space-y-4">
+                          <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                            <span className="text-[#C6FF00] font-bold">PORTFOLIO WORKFLOW // REACT 19</span>
+                            <span className="text-[10px] px-2 py-0.5 bg-[#171D24] text-[#C6FF00] border border-white/10">
+                              ACTIVE REPO
+                            </span>
+                          </div>
+                          <div className="p-3 bg-[#11151A] border border-white/10 space-y-2">
+                            <div className="flex items-center justify-between text-[11px] text-[#929BA6]">
+                              <span>Vite 8 HMR Engine:</span>
+                              <span className="text-[#C6FF00]">ONLINE</span>
+                            </div>
+                            <div className="flex items-center justify-between text-[11px] text-[#929BA6]">
+                              <span>WCAG AA Contrast:</span>
+                              <span className="text-[#C6FF00]">VERIFIED</span>
+                            </div>
+                            <div className="flex items-center justify-between text-[11px] text-[#929BA6]">
+                              <span>Data Integrity:</span>
+                              <span className="text-[#C6FF00]">ZERO FABRICATED METRICS</span>
+                            </div>
+                          </div>
+                          <p className="text-[11px] text-[#929BA6] leading-relaxed">
+                            Single source of truth architecture with hardware-accelerated kinetic cursors and ATS resume route.
+                          </p>
+                        </div>
                       )}
                     </div>
                   </Spotlight>

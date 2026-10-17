@@ -19,6 +19,7 @@ export const Footer: React.FC = () => {
     { label: 'Statio-MLR', path: '/projects/statio-mlr' },
     { label: 'Fast Bite', path: '/projects/fast-bite' },
     { label: 'About', path: '/about' },
+    { label: 'Resume', path: '/resume' },
     { label: 'Contact', path: '/#contact' },
   ];
 

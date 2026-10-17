@@ -19,6 +19,7 @@ import { SideChapterIndicator } from './components/SideChapterIndicator';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { ProjectCaseStudyPage } from './pages/ProjectCaseStudyPage';
 import { AboutPage } from './pages/AboutPage';
+import { ResumePage } from './pages/ResumePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 /**
@@ -143,6 +144,7 @@ export default function App() {
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/projects/:projectId" element={<ProjectCaseStudyPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/resume" element={<ResumePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </PageTransition>

@@ -157,3 +157,49 @@ All notable architecture, performance, accessibility, and visual engineering cha
 - `dist/assets/HeroShader.js`: 49.26 kB (gzip: 15.12 kB) — *lazy-loaded chunk*
 - `dist/assets/index.js`: 619.88 kB (gzip: 184.03 kB)
 
+---
+
+## [Phase 5] - Proof, Projects, Scrollytelling, Resume & Authenticity
+
+### What Changed & Why
+- **Extended Project Data Model (`src/data/portfolioData.ts`, `src/data/caseStudies.ts`)**:
+  - Added required fields: `liveUrl`, `repoUrl`, `screenshots[]`, `video`, `architectureDiagram`, `role`, `timeline`, `outcomes` (real only), and `learnings`.
+  - Added the portfolio site itself as a 3rd project linking to its public repo (`github.com/navadeepjustin-create/portfolio`).
+  - Action buttons render Live/Repo links ONLY when URLs exist; otherwise display an honest, transparent "In development (Prototype)" status badge.
+- **Sleek Device Frame (`src/components/PhoneFrame.tsx`)**:
+  - Obsidian cyber-styled mobile phone frame with status bar, dynamic notch, and active step telemetry badge.
+  - Video slot targeting `/projects/<id>.webm` (and `.mp4`); automatically degrades to interactive prototype mockups (`StatioMockup` / `FastBiteMockup`) when video file is pending, with accessible TODO telemetry.
+- **Scrollytelling Case Study Redesign (`src/pages/ProjectCaseStudyPage.tsx`)**:
+  - Pinned device frame on the left, swapping narrative stages dynamically as the user scrolls (`IntersectionObserver`).
+  - Full structured flow: Problem Statement → Qualitative Research & Observations (with honest placeholder block for real evidence) → Architectural Decisions & Tradeoffs → Vector SVG Architecture Diagram → Critical Retrospective (What I Would Do Differently) → Forward Roadmap.
+  - Added accessible image `Lightbox` component with keyboard trap and scroll lock.
+- **Vector System Architecture Diagrams (`src/components/ArchitectureDiagram.tsx`)**:
+  - High-precision inline SVG diagrams illustrating system tiers (Client SPA, Validation Engine, Decoupled QR Token Generator, and Counter Operator Terminal).
+- **Verified Hackathons Block (`src/components/HackathonsBlock.tsx`)**:
+  - Added dedicated block to both home page (`About.tsx`) and `/about` page (`AboutPage.tsx`).
+  - Seeded strictly with confirmed events: *Cloud technology hackathon* and *Finathon* (participation only). Renders only existing fields without empty labels.
+- **Single Source of Truth ATS Resume (`src/data/resume.ts`, `src/pages/ResumePage.tsx`)**:
+  - Created `/resume` route with clean, single-column, ATS-friendly A4 print styling (white background, pure black text, selectable typography, standard headings, visible link URLs, zero decorative icons).
+  - Screen wrapper features a dark preview container with instant "Download PDF" and "Print" actions.
+  - Added `scripts/generate-pdf.cjs` with Playwright support (respects existing `public/resume.pdf` exports) and `"resume:pdf"` npm script.
+  - Hero action buttons link directly to `/resume.pdf` with `/resume` page secondary action and copy-email fallback.
+- **Contact Form Hardening & Verification (`src/sections/Contact.tsx`, `src/components/SocialLinks.tsx`)**:
+  - Added hidden honeypot spam protection trap (`_website_hp`).
+  - Wired endpoint submission via `VITE_CONTACT_FORM_ENDPOINT` with graceful mailto fallback.
+  - Added verified LinkedIn URL (`https://www.linkedin.com/in/navadeep-justin-946366371`) to Contact, footer, command palette, and About page.
+  - Filtered out unconfigured social links so zero dead or disabled cards appear.
+
+### Dependency Justification
+- Zero new runtime packages added in Phase 5. All diagrams built with native inline vector SVGs, and resume built with semantic HTML and print CSS.
+
+### Mobile & Accessibility Compromises
+- Scrollytelling switches from sticky pinned layout to natural fluid vertical stacking on viewports under `1024px` and under `prefers-reduced-motion: reduce`.
+- Video slot falls back to lightweight, zero-latency interactive React simulators on touch devices.
+
+### Bundle Size (Post-Phase 5)
+- `dist/index.html`: 2.68 kB (gzip: 1.03 kB)
+- `dist/assets/index.css`: 64.43 kB (gzip: 11.56 kB)
+- `dist/assets/HeroShader.js`: 49.26 kB (gzip: 15.12 kB) — *lazy-loaded chunk*
+- `dist/assets/index.js`: 676.21 kB (gzip: 198.35 kB)
+
+

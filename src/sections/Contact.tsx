@@ -30,6 +30,7 @@ export const Contact: React.FC = () => {
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [botField, setBotField] = useState('');
 
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [errors, setErrors] = useState<FormErrors>({});
@@ -89,6 +90,13 @@ export const Contact: React.FC = () => {
     setTouched({ name: true, email: true, subject: true, message: true });
 
     if (!validate()) return;
+
+    if (botField.trim()) {
+      // Honeypot tripped by spam bot: silently succeed without transmission
+      setIsSubmitting(false);
+      setSubmitSuccess(true);
+      return;
+    }
 
     setIsSubmitting(true);
     setSubmitError(null);
@@ -294,6 +302,20 @@ export const Contact: React.FC = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                {/* Honeypot field for spam prevention */}
+                <div className="hidden" aria-hidden="true">
+                  <label htmlFor="contact_hp_website">Leave empty</label>
+                  <input
+                    type="text"
+                    id="contact_hp_website"
+                    name="_website_hp"
+                    value={botField}
+                    onChange={(e) => setBotField(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
                 {/* Name & Email Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">

@@ -17,6 +17,15 @@ export interface ProjectDetail {
   status: 'CASE STUDY IN PROGRESS' | 'CONCEPT & PROTOTYPE' | 'ACTIVE DEVELOPMENT';
   features: string[];
   techStack: string[];
+  liveUrl?: string;
+  repoUrl?: string;
+  screenshots?: string[];
+  video?: string;
+  architectureDiagram?: string;
+  role: string;
+  timeline: string;
+  outcomes: string[];
+  learnings: string[];
   links?: {
     demo?: string;
     repo?: string;
@@ -121,6 +130,20 @@ export const portfolioData = {
         'Document State Management',
         'UI/UX Architecture',
       ],
+      role: 'Lead Concept Designer & Frontend Architect',
+      timeline: 'Campus Initiative · MLRIT',
+      video: '/projects/statio-mlr.webm',
+      screenshots: [],
+      architectureDiagram: 'Client SPA -> Document Estimator -> QR Token Crypto -> Counter Scanner',
+      outcomes: [
+        'Designed student document upload and print configuration workflow with live price calculation',
+        'Modeled scheduled collection time-slot picker to prevent campus counter bottlenecks',
+        'Authored the Software Requirements Specification (SRS) mapping campus physical workflows',
+      ],
+      learnings: [
+        'Decoupling physical pickup tokens from online payment eliminates counter connectivity delays',
+        'Clear paper rate transparency prevents disputes between students and store operators',
+      ],
       links: {
         caseStudy: '/projects/statio-mlr',
       },
@@ -139,6 +162,20 @@ export const portfolioData = {
         'Canteen staff scan the student’s unique order QR at the pickup counter to authenticate the food token, confirm order details in seconds, and prevent crowd congestion during peak lunch hours.',
       status: 'CONCEPT & PROTOTYPE',
       mockupType: 'fastbite',
+      role: 'Product Designer & Frontend Engineer',
+      timeline: 'Campus Initiative · MLRIT',
+      video: '/projects/fast-bite.webm',
+      screenshots: [],
+      architectureDiagram: 'Mobile Client -> Menu Engine -> Batch Scheduler -> Kitchen Terminal -> Counter Verifier',
+      outcomes: [
+        'Designed mobile-first ordering interface with canteen menus, live stock, and customization',
+        'Prototyped break-aligned pickup windows with counter QR token verification',
+        'Modeled live kitchen status transitions (Order Placed → In Prep → Ready at Counter)',
+      ],
+      learnings: [
+        'Kitchen throughput limits require slot quotas so meal prep remains hot and on schedule',
+        'Express pickup counters must have high-contrast optical tokens for rapid barcode scanning',
+      ],
       features: [
         'Student-oriented mobile food ordering interface designed for rapid navigation',
         'Cafe-specific live menus with item availability and customization',
@@ -169,6 +206,22 @@ export const portfolioData = {
         'A high-performance personal developer portfolio built with React 19, Vite 8, TypeScript, and Tailwind CSS v4. Features interactive project simulators, case-study routes, a global command palette (Cmd+K), keyboard accessibility, and prefers-reduced-motion compliance.',
       status: 'ACTIVE DEVELOPMENT',
       mockupType: 'portfolio',
+      role: 'Solo Designer & Frontend Engineer',
+      timeline: '2025 · Active Repository',
+      liveUrl: 'https://portfolio-one-alpha-6gy1a73x99.vercel.app',
+      repoUrl: 'https://github.com/navadeepjustin-create/portfolio',
+      video: '/projects/portfolio-website.webm',
+      screenshots: [],
+      architectureDiagram: 'Vite 8 + React 19 -> Tailwind CSS v4 Tokens -> Motion/React & Lenis -> Vercel Edge',
+      outcomes: [
+        'Built responsive multi-page site with case-study routes and interactive project simulators',
+        'Added accessibility basics: reduced-motion support, keyboard skip link, and visible focus styles',
+        'Engineered ATS-friendly resume route with single source of truth data architecture',
+      ],
+      learnings: [
+        'Hardware-accelerated transforms and rAF batching prevent animation frame drops',
+        'Strict honesty and zero fabricated data build higher recruiter trust than exaggerated claims',
+      ],
       features: [
         'Vite 8 + React 19 + TypeScript architecture with zero client-side routing latency',
         'Interactive case study routes and mobile-first device simulators',
@@ -185,6 +238,7 @@ export const portfolioData = {
         'Three.js',
       ],
       links: {
+        caseStudy: '/projects/portfolio-website',
         repo: 'https://github.com/navadeepjustin-create/portfolio',
         live: 'https://portfolio-one-alpha-6gy1a73x99.vercel.app',
       },

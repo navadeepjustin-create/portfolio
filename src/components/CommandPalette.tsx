@@ -12,6 +12,8 @@ import {
   X,
   CornerDownLeft,
   Terminal,
+  FileText,
+  Download,
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, InstagramIcon } from './BrandIcons';
 
@@ -98,6 +100,29 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         onClose();
       },
       shortcut: 'A',
+    },
+    {
+      id: 'resume',
+      title: 'Resume // ATS Document',
+      subtitle: 'View clean ATS-friendly print and digital resume spec',
+      category: 'Navigation',
+      icon: FileText,
+      action: () => {
+        navigate('/resume');
+        onClose();
+      },
+      shortcut: 'R',
+    },
+    {
+      id: 'resume-pdf',
+      title: 'Download Resume (PDF)',
+      subtitle: 'Direct export file /resume.pdf',
+      category: 'Navigation',
+      icon: Download,
+      action: () => {
+        window.open('/resume.pdf', '_blank', 'noopener,noreferrer');
+        onClose();
+      },
     },
     {
       id: 'github',

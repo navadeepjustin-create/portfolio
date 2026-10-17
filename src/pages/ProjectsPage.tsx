@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Eye } from 'lucide-react';
+import { ArrowUpRight, Eye, FolderGit2 } from 'lucide-react';
 import { portfolioData, type ProjectDetail } from '../data/portfolioData';
 import { StatioMockup } from '../components/project-mockups/StatioMockup';
 import { FastBiteMockup } from '../components/project-mockups/FastBiteMockup';
@@ -167,6 +167,18 @@ export const ProjectsPage: React.FC = () => {
                       <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                     </Link>
 
+                    {project.links?.repo && (
+                      <a
+                        href={project.links.repo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-3.5 bg-[#171D24] hover:bg-white/10 text-[#F4F6F8] font-mono text-xs uppercase tracking-wider font-semibold transition-colors flex items-center gap-1.5 border border-white/15"
+                      >
+                        <FolderGit2 className="w-3.5 h-3.5" />
+                        <span>Source Code</span>
+                      </a>
+                    )}
+
                     <button
                       type="button"
                       onClick={() => setSelectedProject(project)}
@@ -203,8 +215,20 @@ export const ProjectsPage: React.FC = () => {
 
                     {project.mockupType === 'statio' ? (
                       <StatioMockup />
-                    ) : (
+                    ) : project.mockupType === 'fastbite' ? (
                       <FastBiteMockup />
+                    ) : (
+                      <div className="p-6 bg-[#080A0D] text-[#F4F6F8] font-mono text-xs space-y-4">
+                        <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                          <span className="text-[#C6FF00] font-bold">PORTFOLIO RUNTIME // REACT 19</span>
+                          <span className="text-[10px] px-2 py-0.5 bg-[#171D24] text-[#C6FF00] border border-white/10">
+                            ACTIVE
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-[#929BA6] leading-relaxed">
+                          Clean architecture, dual-layer spring cursor, and ATS-friendly resume export.
+                        </p>
+                      </div>
                     )}
                   </div>
                 </div>

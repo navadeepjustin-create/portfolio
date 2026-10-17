@@ -11,7 +11,8 @@ import {
   Mail,
   Sparkles,
 } from 'lucide-react';
-import { GithubIcon, InstagramIcon } from '../components/BrandIcons';
+import { GithubIcon, LinkedinIcon, InstagramIcon } from '../components/BrandIcons';
+import { HackathonsBlock } from '../components/HackathonsBlock';
 import { portfolioData } from '../data/portfolioData';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
@@ -372,7 +373,12 @@ export const AboutPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Section 5: Contact & Inquiries */}
+        {/* Section 5: Hackathons & Buildathons */}
+        <section className="pt-8 border-t border-white/10">
+          <HackathonsBlock />
+        </section>
+
+        {/* Section 6: Contact & Inquiries */}
         <section id="contact" className="pt-8 border-t border-white/10">
           <div className="p-8 sm:p-12 bg-[#11151A] border border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div className="space-y-2 max-w-xl">
@@ -394,6 +400,16 @@ export const AboutPage: React.FC = () => {
               >
                 <Mail className="w-4 h-4" />
                 <span>navadeepjustin@gmail.com</span>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/navadeep-justin-946366371"
+                target="_blank"
+                rel="noreferrer"
+                className="px-6 py-3.5 bg-[#171D24] hover:bg-white/10 text-[#F4F6F8] font-mono text-xs uppercase font-bold tracking-widest transition-colors flex items-center gap-2 border border-white/15"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+                <span>LinkedIn</span>
               </a>
 
               <a

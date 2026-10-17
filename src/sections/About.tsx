@@ -7,6 +7,7 @@ import { SplitText } from '../components/SplitText';
 import { SectionNumber } from '../components/SectionNumber';
 import { Spotlight } from '../components/Spotlight';
 import { Magnetic } from '../components/Magnetic';
+import { HackathonsBlock } from '../components/HackathonsBlock';
 
 export const About: React.FC = () => {
   const { personal } = portfolioData;
@@ -202,6 +203,9 @@ export const About: React.FC = () => {
             })}
           </div>
         </div>
+
+        {/* Hackathons & Competitions */}
+        <HackathonsBlock className="mt-16" />
       </div>
     </section>
   );
