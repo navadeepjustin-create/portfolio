@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { ArrowDown, ArrowUpRight, Terminal, FileText, Check, Copy } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
 import { portfolioData } from '../data/portfolioData';
 import sunsetPortrait from '../assets/images/navadeep-sunset.png';
+import { EASE_PRIMARY } from '../constants/motion';
+
+const HeroShader = lazy(() =>
+  import('../components/HeroShader').then((m) => ({ default: m.HeroShader }))
+);
 
 interface HeroProps {
   onOpenCommandPalette?: () => void;
@@ -19,8 +24,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2200);
   };
-
-  const EASE = [0.22, 1, 0.36, 1] as const;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -38,7 +41,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: EASE },
+      transition: { duration: 0.6, ease: EASE_PRIMARY },
     },
   };
 
@@ -47,6 +50,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
       id="hero"
       className="relative min-h-[92vh] sm:min-h-screen pt-24 sm:pt-28 pb-12 sm:pb-20 flex flex-col justify-between bg-[#080A0D] bg-grid-cyber border-b border-white/10 overflow-hidden"
     >
+      {/* Lightweight animated gradient/noise WebGL shader with static CSS fallback */}
+      <Suspense fallback={<div className="absolute inset-0 bg-radial-ambient pointer-events-none" />}>
+        <HeroShader />
+      </Suspense>
+
       {/* Background ambient lighting */}
       <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#C6FF00]/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-[#171D24]/80 rounded-full blur-[100px] pointer-events-none" />

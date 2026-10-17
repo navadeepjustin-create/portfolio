@@ -44,3 +44,34 @@ All notable architecture, performance, accessibility, and visual engineering cha
 - `dist/index.html`: 2.68 kB (gzip: 1.03 kB)
 - `dist/assets/index.css`: 56.29 kB (gzip: 9.93 kB)
 - `dist/assets/index.js`: 572.24 kB (gzip: 169.55 kB)
+
+---
+
+## [Phase 2] - Design Tokens & Atmosphere
+
+### What Changed & Why
+- **Motion & Spacing Tokens (`src/index.css`, `src/constants/motion.ts`)**:
+  - Defined the single primary easing curve: `cubic-bezier(0.22, 1, 0.36, 1)` as `--ease-primary` / `EASE_PRIMARY`.
+  - Added duration tokens: `--duration-short` (150ms), `--duration-medium` (300ms), and `--duration-long` (600ms).
+  - Added elevation and glow tokens: `--glow-lime-sm`, `--glow-lime-md`, `--glow-lime-lg`, `--elevation-card`, and `--elevation-floating`.
+  - Standardized `.lime-glow-hover` and `.animate-fade-in` to reference the central motion and glow tokens.
+- **Cinematic Atmosphere Overlays (`.film-grain`, `.edge-vignette`)**:
+  - Implemented a zero-render-cost, static fractal SVG noise texture overlay (`opacity: 0.032`, `pointer-events: none`, `z-index: 40`) and soft radial edge vignette (`z-index: 39`) across the entire portfolio in `App.tsx`.
+- **Lightweight Hero WebGL Shader (`src/components/HeroShader.tsx`)**:
+  - Built an organic fluid gradient and simplex noise shader using `ogl`.
+  - Encapsulated within `React.lazy()` so `ogl` and GL code are deferred off the critical render path.
+  - Automatically paused via `IntersectionObserver` when scrolled offscreen to conserve GPU/CPU power.
+  - Device pixel ratio capped at 1.5 (`Math.min(window.devicePixelRatio || 1, 1.5)`).
+  - Fallback: On touch devices (`pointer: coarse`), reduced motion (`prefers-reduced-motion: reduce`), or WebGL initialization failure, automatically reverts to a static high-fidelity CSS radial ambient gradient.
+
+### Dependency Justification
+- Added `ogl` (~15 kB gzipped): Minimal, high-performance WebGL library selected over Three.js (~160 kB) for the hero canvas background, cutting shader footprint by >90%. Defer-loaded via dynamic chunk.
+
+### Mobile & Accessibility Compromises
+- Disabled WebGL canvas animation on touch devices (`pointer: coarse`) and reduced-motion environments; rendered static CSS ambient glow instead to prevent battery drain and respect user motion preferences.
+
+### Bundle Size (Post-Phase 2)
+- `dist/index.html`: 2.68 kB (gzip: 1.03 kB)
+- `dist/assets/index.css`: 57.25 kB (gzip: 10.30 kB)
+- `dist/assets/HeroShader.js`: 49.26 kB (gzip: 15.12 kB) — *lazy-loaded chunk*
+- `dist/assets/index.js`: 572.64 kB (gzip: 169.69 kB)

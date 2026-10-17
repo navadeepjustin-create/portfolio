@@ -115,6 +115,9 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      {/* Film-grain texture and soft edge vignette */}
+      <div className="film-grain" aria-hidden="true" />
+      <div className="edge-vignette" aria-hidden="true" />
       <ScrollToHashElement />
       <CommandPalette
         isOpen={commandPaletteOpen}
