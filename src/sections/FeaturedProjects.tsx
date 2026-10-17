@@ -245,10 +245,12 @@ export const FeaturedProjects: React.FC = () => {
       </div>
 
       {/* Interactive Case Study Modal */}
-      <ProjectCaseStudyModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
+      {selectedProject && (
+        <ProjectCaseStudyModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </section>
   );
 };

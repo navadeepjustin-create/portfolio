@@ -14,11 +14,14 @@ export function useDialog(
   panelRef: RefObject<HTMLElement | null>,
   onClose: () => void,
   initialFocusRef?: RefObject<HTMLElement | null>,
+  enabled: boolean = true,
 ): void {
   const closeRef = useRef(onClose);
   closeRef.current = onClose;
 
   useEffect(() => {
+    if (!enabled) return;
+
     const previouslyFocused = document.activeElement as HTMLElement | null;
 
     const { overflow, paddingRight } = document.body.style;
@@ -65,7 +68,5 @@ export function useDialog(
       document.body.style.paddingRight = paddingRight;
       previouslyFocused?.focus?.({ preventScroll: true });
     };
-    // Intentionally run once per mount: dialogs are mounted only while open.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [enabled, initialFocusRef, panelRef]);
 }

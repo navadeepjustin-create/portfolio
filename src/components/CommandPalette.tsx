@@ -283,6 +283,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         triggerElementRef.current.focus();
       }
     }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isOpen]);
 
   // Keyboard navigation inside palette

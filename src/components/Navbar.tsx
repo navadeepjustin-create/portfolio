@@ -70,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   };
 
   return (
-    <header className="fixed top-2 sm:top-4 left-0 right-0 z-40 flex justify-center px-3 sm:px-6 pointer-events-none">
+    <header className="fixed top-2 sm:top-4 left-0 right-0 z-40 flex flex-col items-center px-3 sm:px-6 pointer-events-none">
       <div
         className={`pointer-events-auto transition-all duration-300 w-full max-w-5xl rounded-none border flex items-center justify-between ${
           scrolled
@@ -192,7 +192,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="sm:hidden bg-[#080A0D] border-b border-white/10 px-5 py-6 shadow-2xl animate-in slide-in-from-top duration-200">
+        <div className="pointer-events-auto w-full max-w-5xl mt-2 sm:hidden bg-[#080A0D]/95 backdrop-blur-md border border-white/10 px-5 py-6 shadow-2xl animate-in slide-in-from-top duration-200">
           <div className="flex flex-col space-y-4">
             <div className="flex items-center justify-between border-b border-white/10 pb-2">
               <span className="font-mono text-[10px] tracking-widest text-[#929BA6] uppercase">

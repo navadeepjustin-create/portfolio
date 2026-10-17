@@ -12,10 +12,20 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
+    // Mobile & Touch Devices:
+    // Android Chrome and iOS Safari handle touch panning, fling momentum, and address-bar collapse
+    // natively at 120Hz. Lenis virtual-scroll interception on touch devices can lock or clamp scrolling.
+    // We strictly preserve 100% natural native browser scrolling on mobile/touch hardware.
+    const isTouchDevice =
+      window.matchMedia('(pointer: coarse)').matches ||
+      ('ontouchstart' in window && !window.matchMedia('(pointer: fine)').matches);
+    if (isTouchDevice) return;
+
     const lenis = new Lenis({
       duration: 1.05,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      syncTouch: false,
     });
     lenisRef.current = lenis;
 
@@ -28,6 +38,14 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
       rafId = requestAnimationFrame(raf);
     }
     rafId = requestAnimationFrame(raf);
+
+    // Dynamic resize observer for desktop: recalculate dimensions whenever route content renders
+    const resizeObserver = new ResizeObserver(() => {
+      lenis.resize();
+    });
+    if (document.body) {
+      resizeObserver.observe(document.body);
+    }
 
     // Smooth anchor link scrolling delegation
     const handleAnchorClick = (e: MouseEvent) => {
@@ -51,6 +69,7 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
     return () => {
       cancelAnimationFrame(rafId);
       document.removeEventListener('click', handleAnchorClick);
+      resizeObserver.disconnect();
       lenis.destroy();
       delete (window as any).__lenis;
     };

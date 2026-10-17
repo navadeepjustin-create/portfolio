@@ -51,4 +51,22 @@ describe('Key Components Verification', () => {
     expect(screen.getByText(/Home \/\/ System Overview/i)).toBeInTheDocument();
     expect(screen.getByText(/sudo hire navadeep/i)).toBeInTheDocument();
   });
+
+  it('preserves body scroll when ProjectCaseStudyModal is unrendered (null project)', async () => {
+    const { ProjectCaseStudyModal } = await import('../components/ProjectCaseStudyModal');
+    document.body.style.overflow = '';
+    render(<ProjectCaseStudyModal project={null} onClose={() => {}} />);
+    expect(document.body.style.overflow).not.toBe('hidden');
+  });
+
+  it('keeps document body scrollable when ProjectsPage is mounted', async () => {
+    const { ProjectsPage } = await import('../pages/ProjectsPage');
+    document.body.style.overflow = '';
+    render(
+      <BrowserRouter>
+        <ProjectsPage />
+      </BrowserRouter>
+    );
+    expect(document.body.style.overflow).not.toBe('hidden');
+  });
 });

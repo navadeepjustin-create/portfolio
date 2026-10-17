@@ -12,7 +12,7 @@ interface ProjectCaseStudyModalProps {
 
 export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ project, onClose }) => {
   const panelRef = useRef<HTMLDivElement>(null);
-  useDialog(panelRef, onClose);
+  useDialog(panelRef, onClose, undefined, Boolean(project));
 
   if (!project) return null;
 

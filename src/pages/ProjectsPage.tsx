@@ -239,10 +239,12 @@ export const ProjectsPage: React.FC = () => {
       </main>
 
       {/* Case Study Modal */}
-      <ProjectCaseStudyModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
+      {selectedProject && (
+        <ProjectCaseStudyModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
 
       <Footer />
     </div>
