@@ -1,6 +1,6 @@
 {
-  "hash": "f67dfec",
-  "message": "ci: update node version to 22 for vitest and jsdom compatibility",
-  "date": "2026-10-17T09:08:41Z",
+  "hash": "97d620c",
+  "message": "fix(mobile): resolve vertical scrolling lock on android and ios touch devices",
+  "date": "2026-10-17T09:53:57Z",
   "available": true
 }
