@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowDown, ArrowUpRight, Terminal, FileText, Mail, Check, Copy, X } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Terminal, FileText, Check, Copy } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
 import { portfolioData } from '../data/portfolioData';
@@ -11,7 +11,6 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
   const { personal, contact } = portfolioData;
-  const [showResumeModal, setShowResumeModal] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const prefersReducedMotion = useReducedMotion();
 
@@ -117,15 +116,36 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
                 <ArrowDown className="w-4 h-4 text-[#C6FF00]" />
               </Link>
 
-              <button
-                type="button"
-                onClick={() => setShowResumeModal(true)}
-                data-cursor-label="RESUME"
-                className="px-4 sm:px-5 py-3.5 bg-[#11151A] hover:bg-[#171D24] text-[#929BA6] hover:text-[#F4F6F8] font-mono text-xs uppercase tracking-wider font-semibold transition-all border border-white/10 hover:border-white/25 flex items-center gap-2"
-                title="View Resume / Credentials"
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor-label="PDF ↗"
+                className="px-4 sm:px-5 py-3.5 bg-[#11151A] hover:bg-[#171D24] text-[#F4F6F8] font-mono text-xs uppercase tracking-wider font-semibold transition-all border border-white/10 hover:border-[#C6FF00]/50 flex items-center gap-2"
+                title="Download Resume (PDF)"
               >
                 <FileText className="w-3.5 h-3.5 text-[#C6FF00]" />
-                <span>RESUME</span>
+                <span>DOWNLOAD RESUME</span>
+              </a>
+
+              <Link
+                to="/resume"
+                data-cursor-label="VIEW"
+                className="hidden sm:inline-flex px-3.5 py-3.5 bg-[#11151A] hover:bg-[#171D24] text-[#929BA6] hover:text-[#C6FF00] font-mono text-xs uppercase tracking-wider font-semibold transition-all border border-white/10 hover:border-white/25 items-center gap-1.5"
+                title="View ATS Resume Page"
+              >
+                <span>/RESUME</span>
+              </Link>
+
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                data-cursor-label={copiedEmail ? 'COPIED' : 'COPY'}
+                className="px-3.5 py-3.5 bg-[#11151A] hover:bg-[#171D24] text-[#929BA6] hover:text-[#C6FF00] font-mono text-xs uppercase tracking-wider font-semibold transition-all border border-white/10 hover:border-white/25 flex items-center gap-1.5"
+                title={`Copy email address: ${contact.email}`}
+              >
+                {copiedEmail ? <Check className="w-3.5 h-3.5 text-[#C6FF00]" /> : <Copy className="w-3.5 h-3.5 text-[#C6FF00]" />}
+                <span className="hidden sm:inline">{copiedEmail ? 'COPIED' : 'COPY EMAIL'}</span>
               </button>
 
               {onOpenCommandPalette && (
@@ -238,7 +258,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-6 pt-4 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-[#929BA6]">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 bg-[#C6FF00]" />
-          <span>AUTHENTIC ENGINEERING PORTFOLIO · ZERO FABRICATED DATA</span>
+          <span>Open to internships — Class of 2026 · AIML at MLRIT</span>
         </div>
         <a
           href="#about"
@@ -248,73 +268,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
           <ArrowDown className="w-3.5 h-3.5 text-[#C6FF00] animate-bounce" />
         </a>
       </div>
-
-      {/* Resume Status / Request Modal */}
-      {showResumeModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md bg-[#11151A] border border-white/20 p-6 sm:p-8 shadow-2xl space-y-5 text-left">
-            <button
-              type="button"
-              onClick={() => setShowResumeModal(false)}
-              className="absolute top-4 right-4 p-1.5 text-[#929BA6] hover:text-[#F4F6F8] border border-white/10 hover:border-white/30"
-              title="Close"
-            >
-              <X className="w-4 h-4" />
-            </button>
-
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-[#C6FF00]" />
-              <span className="font-mono text-xs text-[#C6FF00] uppercase tracking-widest">
-                RESUME TRANSMISSION
-              </span>
-            </div>
-
-            <div>
-              <h3 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#F4F6F8]">
-                Curriculum Vitae Access
-              </h3>
-              <p className="text-sm text-[#929BA6] font-sans mt-2 leading-relaxed">
-                Navadeep’s complete technical resume with updated course projects and academic transcripts is available on request for engineering teams, recruiters, and internship coordinators.
-              </p>
-            </div>
-
-            <div className="p-3.5 bg-[#080A0D] border border-white/10 font-mono text-xs space-y-1">
-              <span className="text-[#929BA6] block text-[10px] uppercase">Direct Inquiries</span>
-              <span className="text-[#F4F6F8] font-semibold break-all">{contact.email}</span>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <a
-                href={`mailto:${contact.email}?subject=${encodeURIComponent(
-                  'Resume Request — Navadeep (B.Tech AIML)'
-                )}`}
-                className="flex-1 py-3 bg-[#C6FF00] text-[#080A0D] font-mono text-xs uppercase font-bold tracking-wider hover:bg-[#b5e800] transition-colors flex items-center justify-center gap-1.5"
-              >
-                <Mail className="w-4 h-4" />
-                <span>REQUEST VIA EMAIL</span>
-              </a>
-
-              <button
-                type="button"
-                onClick={handleCopyEmail}
-                className="py-3 px-4 bg-[#171D24] text-[#F4F6F8] font-mono text-xs uppercase tracking-wider hover:bg-[#1f2730] border border-white/10 flex items-center justify-center gap-1.5 transition-colors"
-              >
-                {copiedEmail ? (
-                  <>
-                    <Check className="w-4 h-4 text-[#C6FF00]" />
-                    <span>COPIED</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-4 h-4" />
-                    <span>COPY EMAIL</span>
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };

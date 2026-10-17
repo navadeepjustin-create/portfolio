@@ -1,8 +1,9 @@
 /**
- * Central Portfolio Configuration & Verified Data
- * All personal information, projects, technical interests, and social links
- * are managed here in one location.
+ * Central Portfolio Configuration & Verified Data (Single Source of Truth)
+ * All verified personal details, education, projects, hackathons, and contact channels.
  */
+
+export const SITE_URL = 'https://portfolio-one-alpha-6gy1a73x99.vercel.app'; // TODO: Update to Navadeep custom domain when acquired
 
 export interface ProjectDetail {
   id: string;
@@ -19,9 +20,10 @@ export interface ProjectDetail {
   links?: {
     demo?: string;
     repo?: string;
+    live?: string;
     caseStudy?: string;
   };
-  mockupType: 'statio' | 'fastbite';
+  mockupType: 'statio' | 'fastbite' | 'portfolio';
 }
 
 export interface SkillCategory {
@@ -39,23 +41,35 @@ export interface ApproachStep {
   deliverables: string[];
 }
 
+export interface HackathonEntry {
+  name: string;
+  role: 'Participant';
+  organizer?: string; // TODO: Add organizer name
+  year?: string; // TODO: Add year
+  theme?: string; // TODO: Add hackathon theme
+  whatIBuilt?: string; // TODO: Add project description
+  stack?: string[]; // TODO: Add tech stack
+  result?: string; // TODO: Add result
+  link?: string; // TODO: Add link
+}
+
 export const portfolioData = {
   personal: {
     name: 'NAVADEEP',
     preferredName: 'Navadeep',
-    degree: 'B.Tech in Artificial Intelligence and Machine Learning (AIML)',
+    degree: 'B.Tech in Computer Science & Engineering (AI & ML)',
     institution: 'MLR Institute of Technology (MLRIT)',
     location: 'Hyderabad, Telangana, India',
     statusTag: 'AIML STUDENT · DEVELOPER · BUILDER',
     headline: 'BUILDING USEFUL PRODUCTS. ENGINEERING BETTER EXPERIENCES.',
     subHeadline: 'SOFTWARE ENGINEERING · APPLIED AI/ML · PRODUCT THINKING',
     heroBio:
-      "I'm a B.Tech AIML student and developer at MLRIT who enjoys turning practical problems into thoughtfully designed software, combining software development, product thinking, and AI/ML.",
+      "I'm a B.Tech AIML student and developer at MLRIT who turns practical problems into thoughtfully designed software, combining frontend engineering, product thinking, and applied AI/ML fundamentals.",
     aboutHeadline: 'TURNING PRACTICAL PROBLEMS INTO THOUGHTFUL SOFTWARE.',
     aboutParagraphs: [
-      "I'm Navadeep, a B.Tech student in Artificial Intelligence and Machine Learning at MLR Institute of Technology (MLRIT), Hyderabad. I build practical, reliable software and explore intelligent data-driven systems.",
-      'Rather than treating code as abstract syntax or chasing superficial AI buzzwords, I focus on solving tangible friction in everyday environments. From eliminating campus photocopy queues with Statio-MLR to streamlining cafeteria lunch rushes with Fast Bite, I design systems around real human routines and physical constraints.',
-      'My technical foundation spans full-stack engineering with modern React and TypeScript, core computer science fundamentals (Data Structures, OOP, Relational Databases), and foundational machine learning (data preprocessing, decision logic, and model evaluation).',
+      "I'm Navadeep, a B.Tech student in Computer Science & Engineering (Artificial Intelligence and Machine Learning) at MLR Institute of Technology (MLRIT), Hyderabad. I build practical, reliable software and explore intelligent data-driven systems.",
+      'Rather than treating code as abstract syntax or chasing superficial buzzwords, I focus on solving tangible friction in everyday environments. From eliminating campus photocopy queues with Statio-MLR to streamlining cafeteria lunch rushes with Fast Bite, I design systems around real human routines and physical constraints.',
+      'My technical foundation spans frontend engineering with modern React and TypeScript, core computer science fundamentals (Data Structures, OOP, Relational Databases), and foundational machine learning (data preprocessing, decision logic, and model evaluation).',
     ],
     focusAreas: [
       {
@@ -64,7 +78,7 @@ export const portfolioData = {
       },
       {
         title: 'Product & Web Engineering',
-        description: 'Crafting responsive, editorial user interfaces with modern React & TypeScript.',
+        description: 'Crafting responsive, accessible user interfaces with modern React 19 & TypeScript.',
       },
       {
         title: 'Campus Process Automation',
@@ -72,7 +86,7 @@ export const portfolioData = {
       },
       {
         title: 'Hackathons & Rapid Building',
-        description: 'Transforming napkin concepts into working prototypes under real-world constraints.',
+        description: 'Transforming real friction into working prototypes under constrained timelines.',
       },
     ],
   },
@@ -85,10 +99,10 @@ export const portfolioData = {
       category: 'College Digital Xerox & Stationery Ordering System',
       headline: 'Campus Document Printing & Stationery Workflow',
       description:
-        'Statio-MLR is a college-focused digital platform concept designed to simplify printing, photocopying, and stationery ordering. It brings document uploads, printing preferences, cost calculation, order tracking, scheduled collection, and QR-based pickup verification into a more organized workflow.',
+        'Statio-MLR is a college-focused digital platform concept and interactive prototype designed to simplify printing, photocopying, and stationery ordering. It brings document uploads, printing preferences, cost calculation, order tracking, scheduled collection, and QR-based pickup verification into a more organized workflow.',
       verificationNote:
         'The QR code is used strictly for pickup verification and identifying the correct order at the counter by shop staff, ensuring an orderly queue and secure handoff separate from payment processing.',
-      status: 'CASE STUDY IN PROGRESS',
+      status: 'CONCEPT & PROTOTYPE',
       mockupType: 'statio',
       features: [
         'Digital document submission with multi-format support (PDF, DOCX, slides)',
@@ -108,7 +122,7 @@ export const portfolioData = {
         'UI/UX Architecture',
       ],
       links: {
-        caseStudy: '#',
+        caseStudy: '/projects/statio-mlr',
       },
     },
     {
@@ -120,7 +134,7 @@ export const portfolioData = {
         'FAST BITE: A DIGITAL CAMPUS CANTEEN ORDER MANAGEMENT SYSTEM WITH SCHEDULED PICKUP, QR-BASED ORDER VERIFICATION AND CAMPUS REWARD MANAGEMENT.',
       headline: 'Queue-Free Campus Dining with Scheduled Pickup & QR Verification',
       description:
-        'Fast Bite explores how students can order food from campus canteens, select collection slots, and verify pickup using QR codes. The concept focuses on reducing queues and making campus food ordering more convenient.',
+        'Fast Bite is a concept and interactive prototype exploring how students can order food from campus canteens, select collection slots, and verify pickup using QR codes. The concept focuses on reducing queues and making campus food ordering more convenient.',
       verificationNote:
         'Canteen staff scan the student’s unique order QR at the pickup counter to authenticate the food token, confirm order details in seconds, and prevent crowd congestion during peak lunch hours.',
       status: 'CONCEPT & PROTOTYPE',
@@ -142,23 +156,63 @@ export const portfolioData = {
         'Mobile-First Layout',
       ],
       links: {
-        caseStudy: '#',
+        caseStudy: '/projects/fast-bite',
+      },
+    },
+    {
+      id: 'portfolio-website',
+      number: '03',
+      title: 'Personal Developer Portfolio',
+      category: 'Creative Developer & Engineering Portfolio',
+      headline: 'Interactive, Accessible, High-Performance Developer Portfolio',
+      description:
+        'A high-performance personal developer portfolio built with React 19, Vite 8, TypeScript, and Tailwind CSS v4. Features interactive project simulators, case-study routes, a global command palette (Cmd+K), keyboard accessibility, and prefers-reduced-motion compliance.',
+      status: 'ACTIVE DEVELOPMENT',
+      mockupType: 'portfolio',
+      features: [
+        'Vite 8 + React 19 + TypeScript architecture with zero client-side routing latency',
+        'Interactive case study routes and mobile-first device simulators',
+        'Global command palette with keyboard navigation (Cmd+K / Ctrl+K)',
+        'Full accessibility compliance (WCAG AA, skip link, prefers-reduced-motion)',
+        'Tailwind CSS v4 design token system with precision square-edge aesthetic',
+      ],
+      techStack: [
+        'React 19',
+        'TypeScript',
+        'Vite 8',
+        'Tailwind CSS v4',
+        'Motion',
+        'Three.js',
+      ],
+      links: {
+        repo: 'https://github.com/navadeepjustin-create/portfolio',
+        live: 'https://portfolio-one-alpha-6gy1a73x99.vercel.app',
       },
     },
   ] as ProjectDetail[],
 
+  hackathons: [
+    {
+      name: 'Cloud technology hackathon',
+      role: 'Participant',
+    },
+    {
+      name: 'Finathon',
+      role: 'Participant',
+    },
+  ] as HackathonEntry[],
+
   skills: [
     {
-      title: 'AI & Intelligent Systems',
+      title: 'AI & Machine Learning',
       tag: '01 // INTELLIGENCE',
       description: 'Foundations of intelligent machines, algorithmic reasoning, and data transformation.',
       skills: [
-        'Artificial Intelligence',
-        'Machine Learning',
-        'AIML Engineering Concepts',
+        'Machine Learning Fundamentals',
         'Data Preprocessing',
         'Model Evaluation',
         'Algorithmic Logic',
+        'Prompt Iteration & Design',
       ],
     },
     {
@@ -179,23 +233,22 @@ export const portfolioData = {
       description: 'Creating high-performance digital interfaces with attention to ergonomics and speed.',
       skills: [
         'Frontend Development',
-        'UI/UX Implementation',
-        'React',
+        'React 19',
         'TypeScript',
-        'Tailwind CSS',
-        'Modern HTML5 / CSS3',
+        'Tailwind CSS v4',
+        'HTML5 / CSS3',
         'Responsive Design',
       ],
     },
     {
-      title: 'Data & Backend Concepts',
+      title: 'DBMS & Backend Concepts',
       tag: '04 // ARCHITECTURE',
       description: 'Understanding relational schema, database queries, and service communication.',
       skills: [
-        'Database Fundamentals',
-        'SQL Queries & Schema Design',
-        'Supabase Architecture Concepts',
-        'RESTful API Principles',
+        'Database Management Systems',
+        'SQL & Schema Design',
+        'REST API Principles',
+        'Supabase (Concepts)',
         'Client-Server Models',
       ],
     },
@@ -261,11 +314,11 @@ export const portfolioData = {
   ] as ApproachStep[],
 
   education: {
-    degree: 'B.Tech in Artificial Intelligence and Machine Learning',
+    degree: 'B.Tech in Computer Science & Engineering (AI & ML)',
     institution: 'MLR Institute of Technology (MLRIT)',
     location: 'Hyderabad, Telangana, India',
     department: 'Department of Computer Science & Engineering (AIML)',
-    status: 'Undergraduate Degree in Progress',
+    status: '2022 – 2026 (In Progress)',
     highlights: [
       'Specialized coursework in Artificial Intelligence, Machine Learning, and Data Structures',
       'Hands-on laboratory implementation in Python, Java, and Database Systems',
@@ -277,17 +330,14 @@ export const portfolioData = {
   contact: {
     headline: "LET'S BUILD SOMETHING USEFUL.",
     subtext:
-      'Have a project idea, want to collaborate, or want to discuss technology? Get in touch.',
-    /**
-     * Social profile links. If left empty, the UI displays clear, non-clickable
-     * configuration indicators rather than fabricating URLs.
-     */
-    email: 'navadeepjustin@gmail.com', // Active contact email
-    github: 'https://github.com/navadeepjustin-create', // Active GitHub profile
-    instagram: 'https://instagram.com/navdeep_.07', // Active Instagram profile
+      'Have an internship opportunity, project collaboration, or want to discuss technology? Get in touch.',
+    email: 'navadeepjustin@gmail.com',
+    github: 'https://github.com/navadeepjustin-create',
+    linkedin: 'https://www.linkedin.com/in/navadeep-justin-946366371',
+    instagram: 'https://instagram.com/navdeep_.07',
     instagramHandle: 'navdeep_.07',
-    linkedin: '', // Add real LinkedIn profile URL
     location: 'Hyderabad, Telangana, India',
-    institution: 'MLR Institute of Technology',
+    institution: 'MLR Institute of Technology (MLRIT)',
+    siteUrl: SITE_URL,
   },
 };

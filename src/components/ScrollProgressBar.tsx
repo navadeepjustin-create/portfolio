@@ -32,7 +32,7 @@ export const ScrollProgressBar: React.FC = () => {
       aria-hidden="true"
     >
       <div
-        className="h-full bg-[#D1FF00] shadow-[0_0_8px_rgba(209,255,0,0.8)] transition-transform duration-75 ease-out origin-left"
+        className="h-full bg-[#C6FF00] shadow-[0_0_8px_rgba(198,255,0,0.8)] transition-transform duration-75 ease-out origin-left"
         style={{ transform: `scaleX(${scrollProgress / 100})` }}
       />
     </div>

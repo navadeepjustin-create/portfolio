@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
-    "push": "node scripts/push.cjs"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@types/three": "^0.186.0",

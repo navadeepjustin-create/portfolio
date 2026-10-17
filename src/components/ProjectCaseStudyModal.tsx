@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useRef } from 'react';
 import { X, CheckCircle2, ShieldCheck, Layers, Cpu } from 'lucide-react';
 import type { ProjectDetail } from '../data/portfolioData';
 import { StatioMockup } from './project-mockups/StatioMockup';
 import { FastBiteMockup } from './project-mockups/FastBiteMockup';
+import { useDialog } from '../hooks/useDialog';
 
 interface ProjectCaseStudyModalProps {
   project: ProjectDetail | null;
@@ -10,19 +11,8 @@ interface ProjectCaseStudyModalProps {
 }
 
 export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ project, onClose }) => {
-  useEffect(() => {
-    if (!project) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [project, onClose]);
+  const panelRef = useRef<HTMLDivElement>(null);
+  useDialog(panelRef, onClose);
 
   if (!project) return null;
 
@@ -31,11 +21,13 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#000000]/80 backdrop-blur-md overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md overflow-y-auto animate-fade-in"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl bg-[#111111] text-[#F5F5F0] border border-[#333333] shadow-2xl p-6 sm:p-10 my-8 overflow-hidden transition-all duration-300"
+        ref={panelRef}
+        tabIndex={-1}
+        className="relative w-full max-w-4xl bg-[#11151A] text-[#F4F6F8] border border-white/10 shadow-2xl p-6 sm:p-10 my-8 overflow-hidden transition-all duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Accent Line */}

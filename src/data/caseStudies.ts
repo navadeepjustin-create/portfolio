@@ -67,7 +67,7 @@ export const caseStudies: Record<string, CaseStudyData> = {
     location: 'Hyderabad, Telangana, India',
     mockupType: 'statio',
     overview:
-      'In collegiate environments, exam weeks and assignment deadlines trigger massive physical congestion at on-campus stationery and photocopy centers. Students wait 30-45 minutes simply to hand over a flash drive, explain paper specs, and wait for manual printing. Statio-MLR digitizes the entire pre-print phase, allowing students to submit documents from their phones, customize granular print preferences, calculate exact pricing upfront, and pick up verified printouts via a counter QR token.',
+      'In collegiate environments, exam weeks and assignment deadlines trigger severe physical congestion at on-campus stationery and photocopy centers. Students often spend significant class break intervals waiting simply to hand over a flash drive, explain paper specs, and wait for manual printing. Statio-MLR digitizes the entire pre-print phase, allowing students to submit documents from their phones, customize granular print preferences, calculate exact pricing upfront, and pick up verified printouts via a counter QR token.',
     problemStatement: {
       lead: 'Physical stationery counters suffer from severe friction points during high-stakes academic deadlines:',
       points: [

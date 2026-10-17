@@ -35,7 +35,7 @@ export const AboutPage: React.FC = () => {
       title: 'Full-Stack Architecture & Applied Model Development',
       institution: 'MLR Institute of Technology, Hyderabad',
       description:
-        'Architecting production-ready frontend workflows for Statio-MLR and Fast Bite with React 19, TypeScript, and offline token caching. Deepening knowledge in deep learning fundamentals, transformer attention concepts, and distributed client-server systems.',
+        'Engineering interactive frontend prototypes and user workflows for Statio-MLR and Fast Bite with React 19 and TypeScript. Deepening knowledge in machine learning fundamentals, data preprocessing, and full-stack software development.',
     },
     {
       period: '2024',
@@ -180,6 +180,17 @@ export const AboutPage: React.FC = () => {
                     className="text-[#C6FF00] hover:underline"
                   >
                     navadeepjustin-create
+                  </a>
+                </div>
+                <div className="flex justify-between py-1 border-b border-white/5">
+                  <span className="text-[#929BA6]/60">LINKEDIN</span>
+                  <a
+                    href="https://www.linkedin.com/in/navadeep-justin-946366371"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[#C6FF00] hover:underline"
+                  >
+                    navadeep-justin
                   </a>
                 </div>
                 <div className="flex justify-between py-1">

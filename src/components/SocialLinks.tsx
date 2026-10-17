@@ -5,7 +5,6 @@ import {
   GithubIcon,
   LinkedinIcon,
   InstagramIcon,
-  FacebookIcon,
   MailIcon,
 } from './BrandIcons';
 
@@ -19,7 +18,6 @@ const iconMap: Record<SocialLinkItem['id'], React.ComponentType<{ className?: st
   github: GithubIcon,
   linkedin: LinkedinIcon,
   instagram: InstagramIcon,
-  facebook: FacebookIcon,
   email: MailIcon,
 };
 

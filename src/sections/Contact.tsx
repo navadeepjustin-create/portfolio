@@ -253,31 +253,31 @@ export const Contact: React.FC = () => {
           </div>
 
           {/* Right Column: Clean, Validated Contact Form */}
-          <div className="lg:col-span-7 bg-[#171717] border border-[#2B2B2B] p-6 sm:p-9 shadow-2xl relative">
-            <div className="pb-4 border-b border-[#262626] mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <span className="font-mono text-xs text-[#D1FF00] uppercase tracking-wider flex items-center gap-1.5">
+          <div className="lg:col-span-7 bg-[#11151A] border border-white/10 p-6 sm:p-9 shadow-2xl relative">
+            <div className="pb-4 border-b border-white/10 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span className="font-mono text-xs text-[#C6FF00] uppercase tracking-wider flex items-center gap-1.5">
                 <Send className="w-3.5 h-3.5" /> Start A Conversation
               </span>
-              <span className="font-mono text-[10px] text-[#777777]">
+              <span className="font-mono text-[10px] text-[#929BA6]">
                 {contactEndpoint ? 'DIRECT ENDPOINT DELIVERY' : 'TRANSPARENT CLIENT SUBMISSION'}
               </span>
             </div>
 
             {submitSuccess ? (
-              <div className="p-8 bg-[#1B2612] border border-[#D1FF00]/40 text-center space-y-4 animate-in fade-in">
-                <div className="w-12 h-12 bg-[#D1FF00] text-[#111111] flex items-center justify-center mx-auto">
+              <div className="p-8 bg-[#171D24] border border-[#C6FF00]/40 text-center space-y-4 animate-fade-in">
+                <div className="w-12 h-12 bg-[#C6FF00] text-[#080A0D] flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
-                <h3 className="font-display text-2xl font-bold uppercase text-[#F5F5F0]">
+                <h3 className="font-display text-2xl font-bold uppercase text-[#F4F6F8]">
                   Message Successfully Dispatched!
                 </h3>
-                <p className="text-sm text-[#CCCCCC] font-sans max-w-md mx-auto leading-relaxed">
+                <p className="text-sm text-[#929BA6] font-sans max-w-md mx-auto leading-relaxed">
                   Thank you for reaching out. Your message has been routed to Navadeep. You should receive a response shortly.
                 </p>
                 <button
                   type="button"
                   onClick={() => setSubmitSuccess(false)}
-                  className="px-5 py-2.5 bg-[#D1FF00] text-[#111111] font-mono text-xs uppercase font-bold tracking-wider hover:bg-[#bce600] transition-colors"
+                  className="px-5 py-2.5 bg-[#C6FF00] text-[#080A0D] font-mono text-xs uppercase font-bold tracking-wider hover:bg-[#b2e600] transition-colors"
                 >
                   Send Another Message
                 </button>
@@ -485,12 +485,12 @@ export const Contact: React.FC = () => {
         </div>
 
         {/* Footer Signature */}
-        <div className="mt-24 pt-8 border-t border-[#262626] flex flex-col md:flex-row items-center justify-between gap-6 font-mono text-xs text-[#777777]">
+        <div className="mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 font-mono text-xs text-[#929BA6]">
           <div className="flex items-center gap-3">
-            <span className="font-display text-lg font-bold text-[#F5F5F0] tracking-tight">
+            <span className="font-display text-lg font-bold text-[#F4F6F8] tracking-tight">
               NAVADEEP
             </span>
-            <span className="text-[#333333]">/</span>
+            <span className="text-white/20">/</span>
             <span>AIML STUDENT & DEVELOPER</span>
           </div>
 
@@ -498,13 +498,13 @@ export const Contact: React.FC = () => {
             <a
               href="#hero"
               data-cursor-label="TOP ↑"
-              className="hover:text-[#D1FF00] transition-colors"
+              className="hover:text-[#C6FF00] transition-colors"
             >
               BACK TO TOP ↑
             </a>
-            <span className="text-[#333333]">·</span>
+            <span className="text-white/20">·</span>
             <span>HYDERABAD, INDIA</span>
-            <span className="text-[#333333]">·</span>
+            <span className="text-white/20">·</span>
             <span>© {new Date().getFullYear()}</span>
           </div>
         </div>

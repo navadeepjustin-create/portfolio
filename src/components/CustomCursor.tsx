@@ -125,7 +125,7 @@ export const CustomCursor: React.FC = () => {
       >
         {cursorLabel ? (
           // Contextual Label Pill (e.g., "VIEW PROJECT ↗")
-          <div className="relative -top-4 -left-1/2 translate-x-3 -translate-y-6 whitespace-nowrap px-2.5 py-1 bg-[#C6FF00] text-[#080A0D] font-mono text-[10px] font-bold tracking-widest uppercase border border-[#080A0D] shadow-2xl animate-in fade-in zoom-in-95 duration-150 flex items-center gap-1">
+          <div className="relative -top-4 -left-1/2 translate-x-3 -translate-y-6 whitespace-nowrap px-2.5 py-1 bg-[#C6FF00] text-[#080A0D] font-mono text-[10px] font-bold tracking-widest uppercase border border-[#080A0D] shadow-2xl animate-fade-in flex items-center gap-1">
             <span>{cursorLabel}</span>
           </div>
         ) : (
