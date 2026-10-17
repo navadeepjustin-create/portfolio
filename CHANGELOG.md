@@ -262,4 +262,57 @@ All notable architecture, performance, accessibility, and visual engineering cha
 - `dist/assets/NotesPage.js`: 9.07 kB (gzip: 3.55 kB) — *lazy chunk*
 - `dist/assets/index.js`: 682.67 kB (gzip: 199.84 kB)
 
+---
+
+## [Phase 7] - Performance, SEO & Accessibility Engineering
+
+### What Changed & Why
+- **Next-Gen Responsive Image Formats (AVIF + WebP)**:
+  - Automated image conversion pipeline using `sharp` in `scripts/optimize-images.cjs`.
+  - Converted `navadeep-sunset.png` (391 kB) to `navadeep-sunset.webp` (14.7 kB, **96.2% payload reduction**) and `navadeep-sunset.avif` (21.0 kB).
+  - Converted `navadeep-studio.png` (226 kB) to `navadeep-studio.webp` (16.3 kB, **92.8% reduction**) and `navadeep-studio.avif` (18.6 kB).
+  - Removed duplicate `navadeep-vision.png` after verifying identical binary content to sunset portrait.
+  - Implemented responsive `<picture>` markup across `Hero.tsx`, `About.tsx`, and `AboutPage.tsx` with explicit `width` and `height` attributes to eliminate Cumulative Layout Shift (CLS = 0.00).
+- **High-Resolution 1200x630 OpenGraph Card (`public/og-image.png`)**:
+  - Programmatically generated an authentic, razor-sharp 1200x630 social preview card composited via Sharp and vector SVG featuring electric lime corner crosshairs, telemetry coordinates, and verified credentials.
+- **Self-Hosted Variable Fonts (`public/fonts/`, `src/fonts.css`)**:
+  - Downloaded critical WOFF2 weights for Space Grotesk (500, 700), Inter (400, 600, 700), and JetBrains Mono (400, 600) using `scripts/fetch-fonts.cjs`.
+  - Configured `@font-face` with `font-display: swap` in `src/fonts.css`.
+  - Added preloads for critical fonts in `index.html` to eliminate external Google Fonts network hops and prevent render-blocking FOIT/FOUT.
+- **Route-Level Code Splitting**:
+  - Code-split all secondary routes (`ProjectsPage`, `ProjectCaseStudyPage`, `AboutPage`, `ResumePage`, `LabPage`, `NotesPage`, `NotFoundPage`) into separate on-demand chunks via `React.lazy()` and Suspense.
+  - Reduced main entry JavaScript bundle from 682 kB to **498 kB** (148 kB gzip).
+- **Per-Route SEO, Canonical & OpenGraph Synchronization (`src/components/SEOHead.tsx`)**:
+  - Created dynamic `SEOHead` component synchronizing page titles, descriptions, canonical URLs, and OpenGraph/Twitter card meta tags on route transitions.
+  - Added `public/robots.txt` and `public/sitemap.xml` with all 8 routes and priorities.
+  - Integrated validated Person JSON-LD schema into `index.html` with verified `sameAs` array (`[LinkedIn, GitHub, Instagram]`).
+- **Static Route Prerendering (`scripts/prerender.cjs`)**:
+  - Added build step generating prerendered `index.html` files for deep routes (`/projects`, `/projects/statio-mlr`, `/projects/fast-bite`, `/about`, `/resume`, `/lab`, `/notes`).
+  - Search crawlers receive real semantic HTML and route-specific metadata without executing JavaScript.
+- **Accessibility & Contrast Verification**:
+  - Verified WCAG AA contrast ratio of 6.92:1 for `#929BA6` and 17.5:1 for `#C6FF00` on `#080A0D` canvas.
+  - Ensured valid ARIA landmarks (`<main>`, `<nav>`, `<footer>`), semantic heading order (`h1` through `h4`), keyboard skip link, and focus rings.
+- **Privacy-Friendly Analytics Component (`src/components/Analytics.tsx`)**:
+  - Cookie-free, lightweight analytics dispatcher gated strictly behind `VITE_ANALYTICS_ENABLED` with Do Not Track (DNT) compliance.
+
+### Dependency Justification
+- Added `sharp` as devDependency for automated build-time image conversion and OG card generation. Zero client bundle impact.
+
+### Mobile & Accessibility Compromises
+- Preloads limited strictly to critical weights (700 bold and 400 normal) to minimize initial mobile data usage.
+
+### Bundle Size (Post-Phase 7)
+- `dist/index.html`: 4.76 kB (gzip: 1.67 kB)
+- `dist/assets/index.css`: 68.52 kB (gzip: 12.12 kB)
+- `dist/assets/index.js`: **498.49 kB** (gzip: 148.18 kB) — *shrunk by 184 kB from Phase 6!*
+- `dist/assets/HeroShader.js`: 49.27 kB (gzip: 15.13 kB) — *lazy chunk*
+- `dist/assets/ComputationalCore3D.js`: 541.41 kB (gzip: 135.59 kB) — *lazy chunk*
+- `dist/assets/ProjectCaseStudyPage.js`: 66.91 kB (gzip: 18.00 kB) — *lazy chunk*
+- `dist/assets/AboutPage.js`: 18.64 kB (gzip: 4.75 kB) — *lazy chunk*
+- `dist/assets/LabPage.js`: 11.55 kB (gzip: 3.48 kB) — *lazy chunk*
+- `dist/assets/ResumePage.js`: 10.08 kB (gzip: 3.37 kB) — *lazy chunk*
+- `dist/assets/NotesPage.js`: 9.22 kB (gzip: 3.62 kB) — *lazy chunk*
+- `dist/assets/ProjectsPage.js`: 8.51 kB (gzip: 2.48 kB) — *lazy chunk*
+- `dist/assets/NotFoundPage.js`: 4.92 kB (gzip: 1.83 kB) — *lazy chunk*
+
 

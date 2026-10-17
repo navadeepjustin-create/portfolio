@@ -3,6 +3,8 @@ import { ArrowDown, ArrowUpRight, Terminal, FileText, Check, Copy } from 'lucide
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
 import { portfolioData } from '../data/portfolioData';
+import sunsetPortraitAvif from '../assets/images/navadeep-sunset.avif';
+import sunsetPortraitWebp from '../assets/images/navadeep-sunset.webp';
 import sunsetPortrait from '../assets/images/navadeep-sunset.png';
 import { EASE_PRIMARY } from '../constants/motion';
 import { FlashlightGrid } from '../components/FlashlightGrid';
@@ -270,12 +272,19 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
                 {cardMode === 'photo' ? (
                   /* The Photograph Container - 446:751 intrinsic aspect ratio preserves full cloud formation and foreground */
                   <div className="relative aspect-[446/751] w-full overflow-hidden bg-[#080A0D] border border-white/10">
-                    <img
-                      src={sunsetPortrait}
-                      alt="Navadeep beneath an orange sunset sky"
-                      className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out"
-                      loading="eager"
-                    />
+                    <picture>
+                      <source srcSet={sunsetPortraitAvif} type="image/avif" />
+                      <source srcSet={sunsetPortraitWebp} type="image/webp" />
+                      <img
+                        src={sunsetPortrait}
+                        alt="Navadeep beneath an orange sunset sky"
+                        width={446}
+                        height={751}
+                        className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                        loading="eager"
+                        decoding="async"
+                      />
+                    </picture>
 
                     {/* Overlay Floating Technology Tags */}
                     <div className="absolute top-3 right-3 flex flex-col gap-1.5 items-end">

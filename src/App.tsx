@@ -17,15 +17,18 @@ import { SmoothScroll } from './components/SmoothScroll';
 import { PageTransition } from './components/PageTransition';
 import { SideChapterIndicator } from './components/SideChapterIndicator';
 import { SkippableIntro } from './components/SkippableIntro';
+import { SEOHead } from './components/SEOHead';
+import { Analytics } from './components/Analytics';
 import { useDocumentTitleVisibility } from './hooks/useDocumentTitleVisibility';
-import { ProjectsPage } from './pages/ProjectsPage';
-import { ProjectCaseStudyPage } from './pages/ProjectCaseStudyPage';
-import { AboutPage } from './pages/AboutPage';
-import { ResumePage } from './pages/ResumePage';
-import { NotFoundPage } from './pages/NotFoundPage';
 
+// Route-level code splitting: keep secondary routes off the critical entry path
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage').then((m) => ({ default: m.ProjectsPage })));
+const ProjectCaseStudyPage = lazy(() => import('./pages/ProjectCaseStudyPage').then((m) => ({ default: m.ProjectCaseStudyPage })));
+const AboutPage = lazy(() => import('./pages/AboutPage').then((m) => ({ default: m.AboutPage })));
+const ResumePage = lazy(() => import('./pages/ResumePage').then((m) => ({ default: m.ResumePage })));
 const LabPage = lazy(() => import('./pages/LabPage').then((m) => ({ default: m.LabPage })));
 const NotesPage = lazy(() => import('./pages/NotesPage').then((m) => ({ default: m.NotesPage })));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
 /**
  * Ensures cross-route and anchor navigations scroll to target smoothly
@@ -140,6 +143,10 @@ export default function App() {
   return (
     <SmoothScroll>
       <BrowserRouter>
+        {/* Dynamic Per-Route SEO Metadata & OpenGraph Sync */}
+        <SEOHead />
+        {/* Privacy-friendly analytics behind VITE_ANALYTICS_ENABLED flag */}
+        <Analytics />
         {/* Film-grain texture and soft edge vignette */}
         <div className="film-grain" aria-hidden="true" />
         <div className="edge-vignette" aria-hidden="true" />
@@ -154,10 +161,38 @@ export default function App() {
               path="/"
               element={<HomePage onOpenCommandPalette={() => setCommandPaletteOpen(true)} />}
             />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/projects/:projectId" element={<ProjectCaseStudyPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/resume" element={<ResumePage />} />
+            <Route
+              path="/projects"
+              element={
+                <Suspense fallback={<div className="min-h-screen bg-[#080A0D]" />}>
+                  <ProjectsPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/projects/:projectId"
+              element={
+                <Suspense fallback={<div className="min-h-screen bg-[#080A0D]" />}>
+                  <ProjectCaseStudyPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <Suspense fallback={<div className="min-h-screen bg-[#080A0D]" />}>
+                  <AboutPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/resume"
+              element={
+                <Suspense fallback={<div className="min-h-screen bg-[#080A0D]" />}>
+                  <ResumePage />
+                </Suspense>
+              }
+            />
             <Route
               path="/lab"
               element={
@@ -174,7 +209,14 @@ export default function App() {
                 </Suspense>
               }
             />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route
+              path="*"
+              element={
+                <Suspense fallback={<div className="min-h-screen bg-[#080A0D]" />}>
+                  <NotFoundPage />
+                </Suspense>
+              }
+            />
           </Routes>
         </PageTransition>
       </BrowserRouter>

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/fetch-commit.cjs && tsc --noEmit && vite build",
+    "build": "node scripts/fetch-commit.cjs && tsc --noEmit && vite build && node scripts/prerender.cjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "resume:pdf": "node scripts/generate-pdf.cjs"
@@ -27,6 +27,7 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
     "isomorphic-git": "^1.44.2",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.3.4"

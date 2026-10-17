@@ -19,9 +19,12 @@ import { Footer } from '../components/Footer';
 import { CustomCursor } from '../components/CustomCursor';
 import { ScrollProgressBar } from '../components/ScrollProgressBar';
 import { CommandPalette } from '../components/CommandPalette';
+import sunsetPortraitAvif from '../assets/images/navadeep-sunset.avif';
+import sunsetPortraitWebp from '../assets/images/navadeep-sunset.webp';
 import sunsetPortrait from '../assets/images/navadeep-sunset.png';
+import studioPortraitAvif from '../assets/images/navadeep-studio.avif';
+import studioPortraitWebp from '../assets/images/navadeep-studio.webp';
 import studioPortrait from '../assets/images/navadeep-studio.png';
-import visionPortrait from '../assets/images/navadeep-vision.png';
 
 export const AboutPage: React.FC = () => {
   const { skills } = portfolioData;
@@ -149,11 +152,19 @@ export const AboutPage: React.FC = () => {
 
               {/* Sunset Portrait */}
               <div className="relative aspect-[446/751] w-full overflow-hidden bg-[#080A0D] border border-white/10">
-                <img
-                  src={sunsetPortrait}
-                  alt="Navadeep beneath an orange sunset sky"
-                  className="w-full h-full object-cover object-center"
-                />
+                <picture>
+                  <source srcSet={sunsetPortraitAvif} type="image/avif" />
+                  <source srcSet={sunsetPortraitWebp} type="image/webp" />
+                  <img
+                    src={sunsetPortrait}
+                    alt="Navadeep beneath an orange sunset sky"
+                    width={446}
+                    height={751}
+                    className="w-full h-full object-cover object-center"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
               </div>
               <div className="p-2.5 bg-[#11151A] border border-white/10 font-mono text-[11px] flex items-center justify-between">
                 <div>
@@ -262,11 +273,19 @@ export const AboutPage: React.FC = () => {
             <div className="bg-[#11151A] border border-white/10 p-6 sm:p-8 flex flex-col justify-between space-y-6">
               <div className="space-y-4">
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#080A0D] border border-white/10">
-                  <img
-                    src={studioPortrait}
-                    alt="Navadeep seated in studio reflection"
-                    className="w-full h-full object-cover object-[50%_25%]"
-                  />
+                  <picture>
+                    <source srcSet={studioPortraitAvif} type="image/avif" />
+                    <source srcSet={studioPortraitWebp} type="image/webp" />
+                    <img
+                      src={studioPortrait}
+                      alt="Navadeep seated in studio reflection"
+                      width={400}
+                      height={300}
+                      className="w-full h-full object-cover object-[50%_25%]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                   <div className="absolute inset-0 bg-gradient-to-t from-[#080A0D] via-transparent to-transparent opacity-60" />
                   <span className="absolute top-2 left-2 font-mono text-[9px] uppercase px-2 py-0.5 bg-[#080A0D]/80 text-[#C6FF00] border border-[#C6FF00]/40">
                     DISCIPLINED CRAFT
@@ -291,11 +310,19 @@ export const AboutPage: React.FC = () => {
             <div className="bg-[#11151A] border border-white/10 p-6 sm:p-8 flex flex-col justify-between space-y-6">
               <div className="space-y-4">
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#080A0D] border border-white/10">
-                  <img
-                    src={visionPortrait}
-                    alt="Navadeep gazing up at illuminated clouds at night"
-                    className="w-full h-full object-cover object-[50%_75%]"
-                  />
+                  <picture>
+                    <source srcSet={sunsetPortraitAvif} type="image/avif" />
+                    <source srcSet={sunsetPortraitWebp} type="image/webp" />
+                    <img
+                      src={sunsetPortrait}
+                      alt="Navadeep beneath the open sky"
+                      width={400}
+                      height={300}
+                      className="w-full h-full object-cover object-[50%_40%]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                   <div className="absolute inset-0 bg-gradient-to-t from-[#080A0D] via-transparent to-transparent opacity-60" />
                   <span className="absolute top-2 left-2 font-mono text-[9px] uppercase px-2 py-0.5 bg-[#080A0D]/80 text-[#C6FF00] border border-[#C6FF00]/40">
                     SCALE & WONDER

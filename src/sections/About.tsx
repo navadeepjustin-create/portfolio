@@ -2,6 +2,8 @@ import React from 'react';
 import { Brain, Code2, Sparkles, Compass, CheckCircle, ArrowUpRight, GraduationCap, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { portfolioData } from '../data/portfolioData';
+import studioPortraitAvif from '../assets/images/navadeep-studio.avif';
+import studioPortraitWebp from '../assets/images/navadeep-studio.webp';
 import studioPortrait from '../assets/images/navadeep-studio.png';
 import { SplitText } from '../components/SplitText';
 import { SectionNumber } from '../components/SectionNumber';
@@ -55,12 +57,19 @@ export const About: React.FC = () => {
               </div>
 
               <div className="relative aspect-[3/4] sm:aspect-[4/5] w-full overflow-hidden bg-[#080A0D] border border-white/10">
-                <img
-                  src={studioPortrait}
-                  alt="Navadeep — systems thinker and developer"
-                  className="w-full h-full object-cover object-[50%_25%] grayscale-[15%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
-                  loading="lazy"
-                />
+                <picture>
+                  <source srcSet={studioPortraitAvif} type="image/avif" />
+                  <source srcSet={studioPortraitWebp} type="image/webp" />
+                  <img
+                    src={studioPortrait}
+                    alt="Navadeep — systems thinker and developer"
+                    width={400}
+                    height={500}
+                    className="w-full h-full object-cover object-[50%_25%] grayscale-[15%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#080A0D] via-transparent to-transparent opacity-65 pointer-events-none" />
 
                 <div className="absolute bottom-3 left-3 right-3 p-2.5 bg-[#11151A]/90 backdrop-blur-md border border-white/10 font-mono text-[10px] text-[#929BA6]">
