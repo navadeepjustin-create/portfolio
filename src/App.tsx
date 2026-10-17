@@ -10,6 +10,7 @@ import { Education } from './sections/Education';
 import { Contact } from './sections/Contact';
 import { Footer } from './components/Footer';
 import { CustomCursor } from './components/CustomCursor';
+import { CursorPreview } from './components/CursorPreview';
 import { ScrollProgressBar } from './components/ScrollProgressBar';
 import { CommandPalette } from './components/CommandPalette';
 import { ProjectsPage } from './pages/ProjectsPage';
@@ -55,6 +56,9 @@ function HomePage({ onOpenCommandPalette }: HomePageProps) {
 
       {/* High-Performance Custom Cursor */}
       <CustomCursor />
+
+      {/* Floating Project Preview on Cursor Hover */}
+      <CursorPreview />
 
       {/* Keyboard Accessibility Skip Link */}
       <a

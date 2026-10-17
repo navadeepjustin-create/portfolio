@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { Menu, X, ArrowUpRight, Terminal } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { Magnetic } from './Magnetic';
 
 interface NavbarProps {
   onOpenCommandPalette?: () => void;
@@ -67,24 +68,26 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Monogram & Name */}
-        <Link
-          to="/"
-          data-cursor-label="HOME"
-          className="group flex items-center gap-3 text-[#F4F6F8] transition-colors"
-        >
-          {/* Custom Cyber Monogram */}
-          <div className="w-8 h-8 bg-[#11151A] group-hover:bg-[#C6FF00] text-[#C6FF00] group-hover:text-[#080A0D] border border-white/15 group-hover:border-[#C6FF00] flex items-center justify-center font-mono text-xs font-black transition-all duration-200 shadow-sm">
-            ND
-          </div>
-          <div className="flex flex-col">
-            <span className="font-display font-black tracking-tight text-base sm:text-lg leading-none">
-              {portfolioData.personal.name}
-            </span>
-            <span className="font-mono text-[9px] text-[#929BA6] tracking-widest uppercase mt-0.5">
-              AIML // MLRIT
-            </span>
-          </div>
-        </Link>
+        <Magnetic radius={40} strength={0.2}>
+          <Link
+            to="/"
+            data-cursor-label="HOME"
+            className="group flex items-center gap-3 text-[#F4F6F8] transition-colors"
+          >
+            {/* Custom Cyber Monogram */}
+            <div className="w-8 h-8 bg-[#11151A] group-hover:bg-[#C6FF00] text-[#C6FF00] group-hover:text-[#080A0D] border border-white/15 group-hover:border-[#C6FF00] flex items-center justify-center font-mono text-xs font-black transition-all duration-200 shadow-sm">
+              ND
+            </div>
+            <div className="flex flex-col">
+              <span className="font-display font-black tracking-tight text-base sm:text-lg leading-none">
+                {portfolioData.personal.name}
+              </span>
+              <span className="font-mono text-[9px] text-[#929BA6] tracking-widest uppercase mt-0.5">
+                AIML // MLRIT
+              </span>
+            </div>
+          </Link>
+        </Magnetic>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-6 text-xs font-mono uppercase tracking-wider text-[#929BA6]">
@@ -99,21 +102,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                 : location.hash === '#contact';
 
             return (
-              <Link
-                key={link.label}
-                to={link.path}
-                onClick={(e) => handleLinkClick(e, link.path)}
-                className={`relative py-1 transition-colors hover:text-[#F4F6F8] group ${
-                  isActive ? 'text-[#C6FF00] font-bold' : ''
-                }`}
-              >
-                <span>{link.label}</span>
-                <span
-                  className={`absolute bottom-0 left-0 h-[2px] bg-[#C6FF00] transition-all duration-200 ${
-                    isActive ? 'w-full' : 'w-0 group-hover:w-full'
+              <Magnetic key={link.label} radius={35} strength={0.25}>
+                <Link
+                  to={link.path}
+                  onClick={(e) => handleLinkClick(e, link.path)}
+                  className={`relative py-1 transition-colors hover:text-[#F4F6F8] group ${
+                    isActive ? 'text-[#C6FF00] font-bold' : ''
                   }`}
-                />
-              </Link>
+                >
+                  <span>{link.label}</span>
+                  <span
+                    className={`absolute bottom-0 left-0 h-[2px] bg-[#C6FF00] transition-all duration-200 ${
+                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}
+                  />
+                </Link>
+              </Magnetic>
             );
           })}
         </nav>
@@ -121,30 +125,34 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
         {/* Right Actions: Command Palette Trigger & Contact Button */}
         <div className="hidden sm:flex items-center gap-3">
           {/* Command Palette Trigger */}
-          <button
-            type="button"
-            onClick={onOpenCommandPalette}
-            data-cursor-label="CMD"
-            title="Open Command Palette"
-            className="flex items-center gap-2 px-3 py-1.5 bg-[#11151A] hover:bg-[#171D24] text-[#929BA6] hover:text-[#F4F6F8] border border-white/10 hover:border-white/20 font-mono text-[11px] transition-all duration-150"
-          >
-            <Terminal className="w-3.5 h-3.5 text-[#C6FF00]" />
-            <span className="hidden lg:inline text-[10px]">COMMANDS</span>
-            <kbd className="px-1.5 py-0.5 bg-black/40 border border-white/10 text-[9px] text-[#C6FF00] font-mono">
-              {isMac ? '⌘K' : 'Ctrl+K'}
-            </kbd>
-          </button>
+          <Magnetic radius={35} strength={0.2}>
+            <button
+              type="button"
+              onClick={onOpenCommandPalette}
+              data-cursor-label="CMD"
+              title="Open Command Palette"
+              className="flex items-center gap-2 px-3 py-1.5 bg-[#11151A] hover:bg-[#171D24] text-[#929BA6] hover:text-[#F4F6F8] border border-white/10 hover:border-white/20 font-mono text-[11px] transition-all duration-150"
+            >
+              <Terminal className="w-3.5 h-3.5 text-[#C6FF00]" />
+              <span className="hidden lg:inline text-[10px]">COMMANDS</span>
+              <kbd className="px-1.5 py-0.5 bg-black/40 border border-white/10 text-[9px] text-[#C6FF00] font-mono">
+                {isMac ? '⌘K' : 'Ctrl+K'}
+              </kbd>
+            </button>
+          </Magnetic>
 
           {/* Contact Action */}
-          <a
-            href="/#contact"
-            onClick={(e) => handleLinkClick(e, '/#contact')}
-            data-cursor-label="CONNECT"
-            className="px-4 py-2 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b2e600] font-mono text-xs uppercase tracking-wider font-bold transition-all duration-200 flex items-center gap-1.5 border border-[#C6FF00] shadow-[0_0_15px_rgba(198,255,0,0.2)]"
-          >
-            <span>Let's Talk</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
+          <Magnetic radius={40} strength={0.25}>
+            <a
+              href="/#contact"
+              onClick={(e) => handleLinkClick(e, '/#contact')}
+              data-cursor-label="CONNECT"
+              className="px-4 py-2 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b2e600] font-mono text-xs uppercase tracking-wider font-bold transition-all duration-200 flex items-center gap-1.5 border border-[#C6FF00] shadow-[0_0_15px_rgba(198,255,0,0.2)]"
+            >
+              <span>Let's Talk</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+          </Magnetic>
         </div>
 
         {/* Mobile Buttons */}

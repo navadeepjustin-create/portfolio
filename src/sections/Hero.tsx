@@ -5,6 +5,9 @@ import { motion, useReducedMotion } from 'motion/react';
 import { portfolioData } from '../data/portfolioData';
 import sunsetPortrait from '../assets/images/navadeep-sunset.png';
 import { EASE_PRIMARY } from '../constants/motion';
+import { FlashlightGrid } from '../components/FlashlightGrid';
+import { ProximityText } from '../components/ProximityText';
+import { Magnetic } from '../components/Magnetic';
 
 const HeroShader = lazy(() =>
   import('../components/HeroShader').then((m) => ({ default: m.HeroShader }))
@@ -48,8 +51,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
   return (
     <section
       id="hero"
-      className="relative min-h-[92vh] sm:min-h-screen pt-24 sm:pt-28 pb-12 sm:pb-20 flex flex-col justify-between bg-[#080A0D] bg-grid-cyber border-b border-white/10 overflow-hidden"
+      className="relative min-h-[92vh] sm:min-h-screen pt-24 sm:pt-28 pb-12 sm:pb-20 flex flex-col justify-between bg-[#080A0D] border-b border-white/10 overflow-hidden"
     >
+      {/* Dynamic Flashlight Grid brightening to electric lime under cursor */}
+      <FlashlightGrid size={40} />
+
       {/* Lightweight animated gradient/noise WebGL shader with static CSS fallback */}
       <Suspense fallback={<div className="absolute inset-0 bg-radial-ambient pointer-events-none" />}>
         <HeroShader />
@@ -85,11 +91,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
                 {personal.subHeadline}
               </span>
               <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black tracking-[-0.04em] text-[#F4F6F8] leading-[0.94] uppercase">
-                BUILDING USEFUL <br />
-                <span className="text-[#F4F6F8]">PRODUCTS.</span> <br />
+                <ProximityText>BUILDING USEFUL</ProximityText> <br />
+                <ProximityText>PRODUCTS.</ProximityText> <br />
                 <span className="inline-block relative">
                   <span className="relative z-10 text-[#C6FF00]">
-                    ENGINEERING BETTER EXPERIENCES.
+                    <ProximityText accentClassName="text-[#C6FF00]">ENGINEERING BETTER EXPERIENCES.</ProximityText>
                   </span>
                   <span className="absolute bottom-1 left-0 right-0 h-3 sm:h-5 bg-[#C6FF00]/10 -z-0" />
                 </span>
@@ -106,66 +112,78 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
 
             {/* Coordinated Action Buttons */}
             <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
-              <Link
-                to="/projects"
-                data-cursor-label="EXPLORE ↗"
-                className="px-6 sm:px-7 py-3.5 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b5e800] font-mono text-xs uppercase tracking-widest font-bold transition-all duration-200 flex items-center gap-2 border border-[#C6FF00] shadow-[0_0_20px_rgba(198,255,0,0.25)] group"
-              >
-                <span>EXPLORE PROJECTS</span>
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </Link>
+              <Magnetic radius={70} strength={0.32}>
+                <Link
+                  to="/projects"
+                  data-cursor-label="EXPLORE ↗"
+                  className="px-6 sm:px-7 py-3.5 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b5e800] font-mono text-xs uppercase tracking-widest font-bold transition-all duration-200 flex items-center gap-2 border border-[#C6FF00] shadow-[0_0_20px_rgba(198,255,0,0.25)] group"
+                >
+                  <span>EXPLORE PROJECTS</span>
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </Link>
+              </Magnetic>
 
-              <Link
-                to="/about"
-                data-cursor-label="ABOUT ↓"
-                className="px-6 sm:px-7 py-3.5 bg-[#11151A] text-[#F4F6F8] hover:bg-[#171D24] font-mono text-xs uppercase tracking-widest font-bold transition-all duration-200 border border-white/15 hover:border-white/30 flex items-center gap-2"
-              >
-                <span>ABOUT & STORY</span>
-                <ArrowDown className="w-4 h-4 text-[#C6FF00]" />
-              </Link>
+              <Magnetic radius={60} strength={0.25}>
+                <Link
+                  to="/about"
+                  data-cursor-label="ABOUT ↓"
+                  className="px-6 sm:px-7 py-3.5 bg-[#11151A] text-[#F4F6F8] hover:bg-[#171D24] font-mono text-xs uppercase tracking-widest font-bold transition-all duration-200 border border-white/15 hover:border-white/30 flex items-center gap-2"
+                >
+                  <span>ABOUT & STORY</span>
+                  <ArrowDown className="w-4 h-4 text-[#C6FF00]" />
+                </Link>
+              </Magnetic>
 
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor-label="PDF ↗"
-                className="px-4 sm:px-5 py-3.5 bg-[#11151A] hover:bg-[#171D24] text-[#F4F6F8] font-mono text-xs uppercase tracking-wider font-semibold transition-all border border-white/10 hover:border-[#C6FF00]/50 flex items-center gap-2"
-                title="Download Resume (PDF)"
-              >
-                <FileText className="w-3.5 h-3.5 text-[#C6FF00]" />
-                <span>DOWNLOAD RESUME</span>
-              </a>
+              <Magnetic radius={50} strength={0.22}>
+                <a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor-label="PDF ↗"
+                  className="px-4 sm:px-5 py-3.5 bg-[#11151A] hover:bg-[#171D24] text-[#F4F6F8] font-mono text-xs uppercase tracking-wider font-semibold transition-all border border-white/10 hover:border-[#C6FF00]/50 flex items-center gap-2"
+                  title="Download Resume (PDF)"
+                >
+                  <FileText className="w-3.5 h-3.5 text-[#C6FF00]" />
+                  <span>DOWNLOAD RESUME</span>
+                </a>
+              </Magnetic>
 
-              <Link
-                to="/resume"
-                data-cursor-label="VIEW"
-                className="hidden sm:inline-flex px-3.5 py-3.5 bg-[#11151A] hover:bg-[#171D24] text-[#929BA6] hover:text-[#C6FF00] font-mono text-xs uppercase tracking-wider font-semibold transition-all border border-white/10 hover:border-white/25 items-center gap-1.5"
-                title="View ATS Resume Page"
-              >
-                <span>/RESUME</span>
-              </Link>
+              <Magnetic radius={40} strength={0.2}>
+                <Link
+                  to="/resume"
+                  data-cursor-label="VIEW"
+                  className="hidden sm:inline-flex px-3.5 py-3.5 bg-[#11151A] hover:bg-[#171D24] text-[#929BA6] hover:text-[#C6FF00] font-mono text-xs uppercase tracking-wider font-semibold transition-all border border-white/10 hover:border-white/25 items-center gap-1.5"
+                  title="View ATS Resume Page"
+                >
+                  <span>/RESUME</span>
+                </Link>
+              </Magnetic>
 
-              <button
-                type="button"
-                onClick={handleCopyEmail}
-                data-cursor-label={copiedEmail ? 'COPIED' : 'COPY'}
-                className="px-3.5 py-3.5 bg-[#11151A] hover:bg-[#171D24] text-[#929BA6] hover:text-[#C6FF00] font-mono text-xs uppercase tracking-wider font-semibold transition-all border border-white/10 hover:border-white/25 flex items-center gap-1.5"
-                title={`Copy email address: ${contact.email}`}
-              >
-                {copiedEmail ? <Check className="w-3.5 h-3.5 text-[#C6FF00]" /> : <Copy className="w-3.5 h-3.5 text-[#C6FF00]" />}
-                <span className="hidden sm:inline">{copiedEmail ? 'COPIED' : 'COPY EMAIL'}</span>
-              </button>
-
-              {onOpenCommandPalette && (
+              <Magnetic radius={40} strength={0.2}>
                 <button
                   type="button"
-                  onClick={onOpenCommandPalette}
-                  data-cursor-label="CMD"
-                  className="hidden sm:flex px-4 py-3.5 bg-black/40 text-[#929BA6] hover:text-[#F4F6F8] font-mono text-xs items-center gap-2 border border-white/10 hover:border-white/20 transition-colors"
+                  onClick={handleCopyEmail}
+                  data-cursor-label={copiedEmail ? 'COPIED' : 'COPY'}
+                  className="px-3.5 py-3.5 bg-[#11151A] hover:bg-[#171D24] text-[#929BA6] hover:text-[#C6FF00] font-mono text-xs uppercase tracking-wider font-semibold transition-all border border-white/10 hover:border-white/25 flex items-center gap-1.5"
+                  title={`Copy email address: ${contact.email}`}
                 >
-                  <Terminal className="w-4 h-4 text-[#C6FF00]" />
-                  <span>CMD / ⌘K</span>
+                  {copiedEmail ? <Check className="w-3.5 h-3.5 text-[#C6FF00]" /> : <Copy className="w-3.5 h-3.5 text-[#C6FF00]" />}
+                  <span className="hidden sm:inline">{copiedEmail ? 'COPIED' : 'COPY EMAIL'}</span>
                 </button>
+              </Magnetic>
+
+              {onOpenCommandPalette && (
+                <Magnetic radius={50} strength={0.25}>
+                  <button
+                    type="button"
+                    onClick={onOpenCommandPalette}
+                    data-cursor-label="CMD"
+                    className="hidden sm:flex px-4 py-3.5 bg-black/40 text-[#929BA6] hover:text-[#F4F6F8] font-mono text-xs items-center gap-2 border border-white/10 hover:border-white/20 transition-colors"
+                  >
+                    <Terminal className="w-4 h-4 text-[#C6FF00]" />
+                    <span>CMD / ⌘K</span>
+                  </button>
+                </Magnetic>
               )}
             </motion.div>
 

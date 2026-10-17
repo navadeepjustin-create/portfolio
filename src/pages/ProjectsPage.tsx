@@ -8,6 +8,7 @@ import { ProjectCaseStudyModal } from '../components/ProjectCaseStudyModal';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { CustomCursor } from '../components/CustomCursor';
+import { CursorPreview } from '../components/CursorPreview';
 import { ScrollProgressBar } from '../components/ScrollProgressBar';
 import { CommandPalette } from '../components/CommandPalette';
 
@@ -28,6 +29,7 @@ export const ProjectsPage: React.FC = () => {
     <div className="min-h-screen bg-[#080A0D] text-[#F4F6F8] selection:bg-[#C6FF00] selection:text-[#080A0D] relative">
       <ScrollProgressBar />
       <CustomCursor />
+      <CursorPreview />
       <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
       <CommandPalette isOpen={commandPaletteOpen} onClose={() => setCommandPaletteOpen(false)} />
 

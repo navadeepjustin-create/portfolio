@@ -12,6 +12,9 @@ import {
 import { portfolioData } from '../data/portfolioData';
 import { EMAIL_ADDRESS } from '../data/socials';
 import { SocialLinks } from '../components/SocialLinks';
+import { FlashlightGrid } from '../components/FlashlightGrid';
+import { Spotlight } from '../components/Spotlight';
+import { Magnetic } from '../components/Magnetic';
 
 interface FormErrors {
   name?: string;
@@ -154,9 +157,12 @@ export const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="py-24 sm:py-32 bg-[#080A0D] text-[#F4F6F8] bg-grid-cyber border-t border-white/10 relative overflow-hidden"
+      className="py-24 sm:py-32 bg-[#080A0D] text-[#F4F6F8] border-t border-white/10 relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Dynamic Flashlight Grid brightening to electric lime under cursor */}
+      <FlashlightGrid size={40} />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header Tag */}
         <div className="flex items-center justify-between pb-6 border-b border-white/10">
           <div className="flex items-center gap-2">
@@ -196,8 +202,8 @@ export const Contact: React.FC = () => {
               </p>
             </div>
 
-            {/* Direct Email Card */}
-            <div className="p-6 bg-[#11151A] border border-white/10 hover:border-[#C6FF00]/50 transition-colors space-y-4 shadow-xl">
+            {/* Direct Email Card with Dynamic Spotlight Glow */}
+            <Spotlight className="p-6 space-y-4 shadow-xl">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-xs text-[#929BA6] uppercase">EMAIL ADDRESS</span>
                 <span className="w-2 h-2 bg-[#C6FF00] rounded-none animate-lime-pulse" />
@@ -212,28 +218,32 @@ export const Contact: React.FC = () => {
               <div className="flex flex-wrap gap-2 pt-1">
                 {hasRealEmail ? (
                   <>
-                    <button
-                      type="button"
-                      onClick={handleCopyEmail}
-                      data-cursor-label="COPY"
-                      className="px-3.5 py-2 bg-[#171D24] border border-white/10 hover:border-[#C6FF00] hover:text-[#C6FF00] text-xs font-mono uppercase tracking-wider transition-colors flex items-center gap-1.5"
-                    >
-                      {copied ? (
-                        <Check className="w-3.5 h-3.5 text-[#C6FF00]" />
-                      ) : (
-                        <Copy className="w-3.5 h-3.5" />
-                      )}
-                      <span>{copied ? 'Copied' : 'Copy Email'}</span>
-                    </button>
+                    <Magnetic radius={40} strength={0.25}>
+                      <button
+                        type="button"
+                        onClick={handleCopyEmail}
+                        data-cursor-label="COPY"
+                        className="px-3.5 py-2 bg-[#171D24] border border-white/10 hover:border-[#C6FF00] hover:text-[#C6FF00] text-xs font-mono uppercase tracking-wider transition-colors flex items-center gap-1.5"
+                      >
+                        {copied ? (
+                          <Check className="w-3.5 h-3.5 text-[#C6FF00]" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5" />
+                        )}
+                        <span>{copied ? 'Copied' : 'Copy Email'}</span>
+                      </button>
+                    </Magnetic>
 
-                    <a
-                      href={`mailto:${activeEmail}`}
-                      data-cursor-label="EMAIL ↗"
-                      className="px-3.5 py-2 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b2e600] text-xs font-mono font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-[0_0_15px_rgba(198,255,0,0.2)]"
-                    >
-                      <Mail className="w-3.5 h-3.5" />
-                      <span>Open Mail Client</span>
-                    </a>
+                    <Magnetic radius={40} strength={0.25}>
+                      <a
+                        href={`mailto:${activeEmail}`}
+                        data-cursor-label="EMAIL ↗"
+                        className="px-3.5 py-2 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b2e600] text-xs font-mono font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-[0_0_15px_rgba(198,255,0,0.2)]"
+                      >
+                        <Mail className="w-3.5 h-3.5" />
+                        <span>Open Mail Client</span>
+                      </a>
+                    </Magnetic>
                   </>
                 ) : (
                   <span className="font-mono text-xs text-[#929BA6] px-3 py-1.5 bg-[#171D24] border border-white/10">
@@ -241,7 +251,7 @@ export const Contact: React.FC = () => {
                   </span>
                 )}
               </div>
-            </div>
+            </Spotlight>
 
             {/* Social Channels with Configuration Awareness */}
             <div className="space-y-3">
@@ -252,8 +262,8 @@ export const Contact: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Clean, Validated Contact Form */}
-          <div className="lg:col-span-7 bg-[#11151A] border border-white/10 p-6 sm:p-9 shadow-2xl relative">
+          {/* Right Column: Clean, Validated Contact Form with Dynamic Spotlight */}
+          <Spotlight className="lg:col-span-7 p-6 sm:p-9 shadow-2xl relative">
             <div className="pb-4 border-b border-white/10 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <span className="font-mono text-xs text-[#C6FF00] uppercase tracking-wider flex items-center gap-1.5">
                 <Send className="w-3.5 h-3.5" /> Start A Conversation
@@ -452,24 +462,26 @@ export const Contact: React.FC = () => {
                 )}
 
                 {/* Send Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  data-cursor-label="SEND"
-                  className="w-full py-4 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b2e600] disabled:bg-[#333333] disabled:text-[#888888] font-mono text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2 transition-colors shadow-[0_0_20px_rgba(198,255,0,0.25)] cursor-pointer"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>DISPATCHING MESSAGE...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>{contactEndpoint ? 'SEND MESSAGE' : 'SEND MESSAGE VIA EMAIL CLIENT'}</span>
-                      <Send className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
+                <Magnetic radius={45} strength={0.15}>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    data-cursor-label="SEND"
+                    className="w-full py-4 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b2e600] disabled:bg-[#333333] disabled:text-[#888888] font-mono text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2 transition-colors shadow-[0_0_20px_rgba(198,255,0,0.25)] cursor-pointer"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>DISPATCHING MESSAGE...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>{contactEndpoint ? 'SEND MESSAGE' : 'SEND MESSAGE VIA EMAIL CLIENT'}</span>
+                        <Send className="w-4 h-4" />
+                      </>
+                    )}
+                  </button>
+                </Magnetic>
 
                 {mailtoTriggered && (
                   <div className="p-3 bg-[#11151A] border border-white/15 text-center font-mono text-xs text-[#C6FF00] space-y-1">
@@ -481,7 +493,7 @@ export const Contact: React.FC = () => {
                 )}
               </form>
             )}
-          </div>
+          </Spotlight>
         </div>
 
         {/* Footer Signature */}

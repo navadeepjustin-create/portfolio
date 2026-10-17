@@ -75,3 +75,46 @@ All notable architecture, performance, accessibility, and visual engineering cha
 - `dist/assets/index.css`: 57.25 kB (gzip: 10.30 kB)
 - `dist/assets/HeroShader.js`: 49.26 kB (gzip: 15.12 kB) — *lazy-loaded chunk*
 - `dist/assets/index.js`: 572.64 kB (gzip: 169.69 kB)
+
+---
+
+## [Phase 3] - Cursor System & Kinetic Micro-Interactions
+
+### What Changed & Why
+- **Upgraded Dual-Layer Cursor (`src/components/CustomCursor.tsx`)**:
+  - Implemented an instant 0-latency electric lime dot + trailing spring-interpolated ring (`rAF`, `transforms` only).
+  - Context morphing:
+    - Scales and pulses over links and buttons (`a`, `button`, `[role="button"]`).
+    - Morphs into label pill for `data-cursor-label` elements (`EXPLORE ↗`, `ABOUT ↓`, `PDF ↗`, `VIEW`, `CMD`, `CONNECT`, etc.).
+    - Displays `"DRAG"` over draggable surfaces and `"PLAY"` over media players.
+    - Shrinks to a tight focal ring over body text (`p`, `article`).
+    - Uses `mix-blend-mode: difference` over large hero headlines for crisp typography inversion.
+  - Native cursor preservation: Active native text cursor maintained over `input`, `textarea`, and editable elements. Completely disabled on touch devices (`pointer: coarse`).
+  - Added click feedback ripple animation expanding from click coordinates.
+- **Magnetic Pull Elements (`src/hooks/useMagnetic.ts`, `src/components/Magnetic.tsx`)**:
+  - Gentle kinetic pull on primary buttons, nav links, brand monogram, and contact triggers within radius; smoothly springs back on exit.
+- **Dynamic Flashlight Grid (`src/components/FlashlightGrid.tsx`)**:
+  - Hero and Contact sections reveal electric lime grid highlights through a soft radial mask following cursor coordinates via hardware-accelerated CSS variables.
+- **Proximity Typography (`src/components/ProximityText.tsx`)**:
+  - Hero headline characters dynamically shift weight, scale, and subtle text shadow based on distance to desktop cursor.
+- **Cursor-Follow Preview Cards (`src/components/CursorPreview.tsx`)**:
+  - Floating preview card follows cursor with easing when hovering project headlines or case-study links.
+- **Spotlight with 3D Parallax Tilt & Glare (`src/components/Spotlight.tsx`)**:
+  - Dual cursor-following glow (both background and hairline border) with sharp square corners (`rounded-none`).
+  - Added 3D perspective parallax tilt (`rotateX`/`rotateY`) with specular glare reflection on project simulation cards.
+- **Accessibility & Performance**:
+  - Purely decorative (`aria-hidden="true"`).
+  - Native focus rings (`:focus-visible`) remain intact.
+  - Fallback under `prefers-reduced-motion: reduce`: static dot, magnetic pull, and 3D tilts disabled.
+
+### Dependency Justification
+- Zero new runtime packages added in Phase 3. Pure native DOM, CSS custom properties, and requestAnimationFrame transforms.
+
+### Mobile & Touch Compromises
+- Custom cursor, magnetic pull, cursor preview card, 3D tilt, and proximity typography are strictly scoped to `(hover: hover) and (pointer: fine)`. On mobile touch devices, native gestures and touch scrolls run completely untouched.
+
+### Bundle Size (Post-Phase 3)
+- `dist/index.html`: 2.68 kB (gzip: 1.03 kB)
+- `dist/assets/index.css`: 57.75 kB (gzip: 10.43 kB)
+- `dist/assets/HeroShader.js`: 49.26 kB (gzip: 15.12 kB) — *lazy-loaded chunk*
+- `dist/assets/index.js`: 584.25 kB (gzip: 173.19 kB)
