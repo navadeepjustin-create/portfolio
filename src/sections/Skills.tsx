@@ -1,19 +1,30 @@
 import React, { useState } from 'react';
-import { Cpu, Terminal, Globe, Database, Wrench } from 'lucide-react';
-import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import { Cpu, Terminal, Globe, Database, Wrench, Sparkles } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { SplitText } from '../components/SplitText';
+import { SectionNumber } from '../components/SectionNumber';
+import { SkillsMarquee } from '../components/SkillsMarquee';
+import { Spotlight } from '../components/Spotlight';
 
 export const Skills: React.FC = () => {
   const { skills } = portfolioData;
   const [selectedCategory, setSelectedCategory] = useState<number | 'all'>('all');
-  const prefersReducedMotion = useReducedMotion();
 
   const categoryIcons = [Cpu, Terminal, Globe, Database, Wrench];
 
-  const displayedCategories =
+  // Bento span mappings for the 5 disciplines
+  const bentoSpans = [
+    'lg:col-span-7', // AI / ML
+    'lg:col-span-5', // Languages
+    'lg:col-span-6', // Web Development
+    'lg:col-span-6', // Databases & Architecture
+    'lg:col-span-12', // Tools & Workflow
+  ];
+
+  const displayedIndices =
     selectedCategory === 'all'
-      ? skills
-      : [skills[selectedCategory]];
+      ? skills.map((_, i) => i)
+      : [selectedCategory];
 
   return (
     <section
@@ -21,7 +32,7 @@ export const Skills: React.FC = () => {
       className="py-20 sm:py-28 bg-[#080A0D] text-[#F4F6F8] bg-grid-cyber border-b border-white/10 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Section Header with Giant Section Number */}
         <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-white/10 gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
@@ -33,16 +44,24 @@ export const Skills: React.FC = () => {
               </span>
             </div>
             <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F4F6F8] uppercase">
-              TOOLS ARE JUST THE START.
+              <SplitText>TOOLS ARE JUST THE START.</SplitText>
             </h2>
           </div>
-          <p className="font-mono text-xs text-[#929BA6] max-w-sm leading-relaxed uppercase">
-            Working technologies and active technical interests according to verified experience. Zero artificial progress bars.
-          </p>
+          <div className="flex items-end gap-6">
+            <p className="font-mono text-xs text-[#929BA6] max-w-sm leading-relaxed uppercase pb-2">
+              Working technologies and active technical interests according to verified experience. Zero artificial progress bars.
+            </p>
+            <SectionNumber number="04" label="SKILLS" className="hidden lg:block -mb-2" />
+          </div>
+        </div>
+
+        {/* Dynamic Skills Marquee Strip */}
+        <div className="mt-8 mb-10">
+          <SkillsMarquee />
         </div>
 
         {/* Filter Pills */}
-        <div className="flex flex-wrap items-center gap-2 mt-10">
+        <div className="flex flex-wrap items-center gap-2 mb-8">
           <button
             type="button"
             onClick={() => setSelectedCategory('all')}
@@ -70,75 +89,76 @@ export const Skills: React.FC = () => {
           ))}
         </div>
 
-        {/* Skills Technical Index Matrix */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          <AnimatePresence mode="popLayout">
-            {displayedCategories.map((category, idx) => {
-              const Icon = categoryIcons[idx % categoryIcons.length];
+        {/* Skills Bento Grid with Mixed Tile Sizes */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5">
+          {displayedIndices.map((origIdx) => {
+            const category = skills[origIdx];
+            const Icon = categoryIcons[origIdx % categoryIcons.length];
+            const spanClass = bentoSpans[origIdx] || 'lg:col-span-6';
 
-              return (
-                <motion.div
-                  key={category.title}
-                  layout={!prefersReducedMotion}
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.35 }}
-                  className="p-6 bg-[#11151A] border border-white/10 hover:border-[#C6FF00]/50 transition-all duration-300 flex flex-col justify-between group shadow-lg"
-                >
-                  <div>
-                    <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
-                      <span className="font-mono text-[11px] text-[#C6FF00] font-semibold">
-                        {category.tag}
-                      </span>
-                      <div className="w-8 h-8 bg-[#171D24] border border-white/10 group-hover:border-[#C6FF00] flex items-center justify-center transition-colors">
-                        <Icon className="w-4 h-4 text-[#C6FF00]" />
-                      </div>
-                    </div>
-
-                    <h3 className="font-display text-xl font-bold text-[#F4F6F8] mb-2 group-hover:text-[#C6FF00] transition-colors">
-                      {category.title}
-                    </h3>
-                    <p className="text-xs text-[#929BA6] leading-relaxed font-sans mb-6">
-                      {category.description}
-                    </p>
-                  </div>
-
-                  {/* Tech Pills */}
-                  <div className="space-y-2 pt-4 border-t border-white/10">
-                    <span className="font-mono text-[10px] text-[#929BA6] uppercase tracking-wider block">
-                      Verified Competencies
+            return (
+              <Spotlight
+                key={category.title}
+                className={`${spanClass} p-6 sm:p-7 flex flex-col justify-between shadow-xl group`}
+              >
+                <div>
+                  <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+                    <span className="font-mono text-[11px] text-[#C6FF00] font-semibold tracking-wider">
+                      {category.tag}
                     </span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {category.skills.map((skill) => (
-                        <span
-                          key={skill}
-                          className="font-mono text-xs px-2.5 py-1 bg-[#171D24] border border-white/10 text-[#F4F6F8] group-hover:border-white/20 transition-colors"
-                        >
-                          {skill}
-                        </span>
-                      ))}
+                    <div className="w-8 h-8 bg-[#171D24] border border-white/10 group-hover:border-[#C6FF00] flex items-center justify-center transition-colors">
+                      <Icon className="w-4 h-4 text-[#C6FF00]" />
                     </div>
                   </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+
+                  <h3 className="font-display text-xl font-bold text-[#F4F6F8] mb-2 group-hover:text-[#C6FF00] transition-colors">
+                    {category.title}
+                  </h3>
+                  <p className="text-xs text-[#929BA6] leading-relaxed font-sans mb-6">
+                    {category.description}
+                  </p>
+                </div>
+
+                {/* Tech Pills */}
+                <div className="space-y-2 pt-4 border-t border-white/10">
+                  <span className="font-mono text-[10px] text-[#929BA6] uppercase tracking-wider block">
+                    Verified Competencies
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {category.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="font-mono text-xs px-2.5 py-1 bg-[#171D24] border border-white/10 text-[#F4F6F8] group-hover:border-[#C6FF00]/40 transition-colors"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Spotlight>
+            );
+          })}
+        </div>
+
+        {/* Dynamic Infinite Skills Marquee */}
+        <div className="mt-8">
+          <SkillsMarquee />
         </div>
 
         {/* Current Learning Focus Banner */}
-        <div className="mt-10 p-5 bg-[#11151A] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-mono text-xs">
+        <Spotlight className="mt-8 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-mono text-xs shadow-xl">
           <div className="flex items-center gap-3">
-            <span className="w-2 h-2 bg-[#C6FF00] animate-lime-pulse" />
-            <span className="text-[#929BA6] uppercase">CURRENT LEARNING FOCUS:</span>
+            <span className="w-2 h-2 bg-[#C6FF00] animate-lime-pulse shrink-0" />
+            <span className="text-[#929BA6] uppercase font-bold shrink-0">CURRENT LEARNING FOCUS:</span>
             <span className="text-[#F4F6F8] font-semibold">
               Deep Learning Foundations, Transformer Attention Architectures & Distributed Systems
             </span>
           </div>
-          <span className="text-[10px] text-[#C6FF00] uppercase tracking-widest shrink-0">
-            MLRIT // CSE (AIML)
+          <span className="text-[10px] text-[#C6FF00] uppercase tracking-widest shrink-0 flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>MLRIT // CSE (AIML)</span>
           </span>
-        </div>
+        </Spotlight>
       </div>
     </section>
   );

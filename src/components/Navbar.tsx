@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { Menu, X, ArrowUpRight, Terminal } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { useActiveSection } from '../hooks/useActiveSection';
 import { Magnetic } from './Magnetic';
 
 interface NavbarProps {
@@ -14,6 +15,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const activeSectionId = useActiveSection(['hero', 'about', 'projects', 'approach', 'skills', 'education', 'contact']);
   const isMac = typeof window !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform);
 
   useEffect(() => {
@@ -36,10 +38,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { label: 'Home', path: '/' },
-    { label: 'Projects', path: '/projects' },
-    { label: 'About', path: '/about' },
-    { label: 'Contact', path: '/#contact' },
+    { label: 'Home', path: '/', sectionId: 'hero' },
+    { label: 'Projects', path: '/projects', sectionId: 'projects' },
+    { label: 'About', path: '/about', sectionId: 'about' },
+    { label: 'Contact', path: '/#contact', sectionId: 'contact' },
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
@@ -49,8 +51,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
       if (location.pathname === '/') {
         e.preventDefault();
         const elem = document.querySelector(hash);
-        elem?.scrollIntoView({ behavior: 'smooth' });
-        window.history.pushState(null, '', hash);
+        if (elem) {
+          if ((window as any).__lenis) {
+            (window as any).__lenis.scrollTo(elem as HTMLElement, { offset: -60 });
+          } else {
+            elem.scrollIntoView({ behavior: 'smooth' });
+          }
+          window.history.pushState(null, '', hash);
+        }
       } else {
         e.preventDefault();
         navigate(`/${hash}`);
@@ -59,63 +67,63 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? 'bg-[#080A0D]/90 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
-          : 'bg-[#080A0D]/60 backdrop-blur-sm py-4 sm:py-5 border-b border-white/5'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+    <header className="fixed top-2 sm:top-4 left-0 right-0 z-40 flex justify-center px-3 sm:px-6 pointer-events-none">
+      <div
+        className={`pointer-events-auto transition-all duration-300 w-full max-w-5xl rounded-none border flex items-center justify-between ${
+          scrolled
+            ? 'py-2 px-3 sm:px-5 bg-[#11151A]/92 backdrop-blur-md border-white/15 shadow-[0_12px_36px_rgba(0,0,0,0.8),0_0_20px_rgba(198,255,0,0.06)]'
+            : 'py-2.5 sm:py-3 px-4 sm:px-6 bg-[#080A0D]/75 backdrop-blur-sm border-white/10'
+        }`}
+      >
         {/* Brand Monogram & Name */}
         <Magnetic radius={40} strength={0.2}>
           <Link
             to="/"
             data-cursor-label="HOME"
-            className="group flex items-center gap-3 text-[#F4F6F8] transition-colors"
+            className="group flex items-center gap-2.5 text-[#F4F6F8] transition-colors"
           >
             {/* Custom Cyber Monogram */}
-            <div className="w-8 h-8 bg-[#11151A] group-hover:bg-[#C6FF00] text-[#C6FF00] group-hover:text-[#080A0D] border border-white/15 group-hover:border-[#C6FF00] flex items-center justify-center font-mono text-xs font-black transition-all duration-200 shadow-sm">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-[#11151A] group-hover:bg-[#C6FF00] text-[#C6FF00] group-hover:text-[#080A0D] border border-white/15 group-hover:border-[#C6FF00] flex items-center justify-center font-mono text-xs font-black transition-all duration-200 shadow-sm">
               ND
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-black tracking-tight text-base sm:text-lg leading-none">
+              <span className="font-display font-black tracking-tight text-sm sm:text-base leading-none">
                 {portfolioData.personal.name}
               </span>
-              <span className="font-mono text-[9px] text-[#929BA6] tracking-widest uppercase mt-0.5">
+              <span className="font-mono text-[8px] sm:text-[9px] text-[#929BA6] tracking-widest uppercase mt-0.5">
                 AIML // MLRIT
               </span>
             </div>
           </Link>
         </Magnetic>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-6 text-xs font-mono uppercase tracking-wider text-[#929BA6]">
+        {/* Desktop Navigation Links with Active Indicator */}
+        <nav className="hidden md:flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#929BA6]">
           {navLinks.map((link) => {
             const isActive =
               link.path === '/'
-                ? location.pathname === '/' && !location.hash
-                : link.path === '/projects'
-                ? location.pathname.startsWith('/projects')
+                ? location.pathname === '/' && (!activeSectionId || activeSectionId === 'hero')
+                : link.path === '/#contact'
+                ? activeSectionId === 'contact'
                 : link.path === '/about'
-                ? location.pathname === '/about'
-                : location.hash === '#contact';
+                ? location.pathname === '/about' || activeSectionId === 'about'
+                : link.path === '/projects'
+                ? location.pathname.startsWith('/projects') || activeSectionId === 'projects'
+                : false;
 
             return (
               <Magnetic key={link.label} radius={35} strength={0.25}>
                 <Link
                   to={link.path}
                   onClick={(e) => handleLinkClick(e, link.path)}
-                  className={`relative py-1 transition-colors hover:text-[#F4F6F8] group ${
-                    isActive ? 'text-[#C6FF00] font-bold' : ''
+                  className={`px-3 py-1.5 transition-all duration-200 border flex items-center gap-1.5 ${
+                    isActive
+                      ? 'bg-[#C6FF00] text-[#080A0D] border-[#C6FF00] font-bold shadow-[0_0_12px_rgba(198,255,0,0.2)]'
+                      : 'border-transparent text-[#929BA6] hover:text-[#F4F6F8] hover:border-white/10'
                   }`}
                 >
+                  {isActive && <span className="w-1.5 h-1.5 bg-[#080A0D] rounded-none shrink-0" />}
                   <span>{link.label}</span>
-                  <span
-                    className={`absolute bottom-0 left-0 h-[2px] bg-[#C6FF00] transition-all duration-200 ${
-                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                    }`}
-                  />
                 </Link>
               </Magnetic>
             );
@@ -123,7 +131,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
         </nav>
 
         {/* Right Actions: Command Palette Trigger & Contact Button */}
-        <div className="hidden sm:flex items-center gap-3">
+        <div className="hidden sm:flex items-center gap-2.5">
           {/* Command Palette Trigger */}
           <Magnetic radius={35} strength={0.2}>
             <button
@@ -131,11 +139,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
               onClick={onOpenCommandPalette}
               data-cursor-label="CMD"
               title="Open Command Palette"
-              className="flex items-center gap-2 px-3 py-1.5 bg-[#11151A] hover:bg-[#171D24] text-[#929BA6] hover:text-[#F4F6F8] border border-white/10 hover:border-white/20 font-mono text-[11px] transition-all duration-150"
+              className="flex items-center gap-2 px-2.5 py-1.5 bg-[#080A0D] hover:bg-[#171D24] text-[#929BA6] hover:text-[#F4F6F8] border border-white/10 hover:border-white/20 font-mono text-[11px] transition-all duration-150"
             >
               <Terminal className="w-3.5 h-3.5 text-[#C6FF00]" />
-              <span className="hidden lg:inline text-[10px]">COMMANDS</span>
-              <kbd className="px-1.5 py-0.5 bg-black/40 border border-white/10 text-[9px] text-[#C6FF00] font-mono">
+              <span className="hidden lg:inline text-[10px]">CMD</span>
+              <kbd className="px-1 py-0.5 bg-[#11151A] border border-white/10 text-[9px] text-[#C6FF00] font-mono">
                 {isMac ? '⌘K' : 'Ctrl+K'}
               </kbd>
             </button>
@@ -147,7 +155,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
               href="/#contact"
               onClick={(e) => handleLinkClick(e, '/#contact')}
               data-cursor-label="CONNECT"
-              className="px-4 py-2 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b2e600] font-mono text-xs uppercase tracking-wider font-bold transition-all duration-200 flex items-center gap-1.5 border border-[#C6FF00] shadow-[0_0_15px_rgba(198,255,0,0.2)]"
+              className="px-3.5 py-1.5 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b2e600] font-mono text-xs uppercase tracking-wider font-bold transition-all duration-200 flex items-center gap-1.5 border border-[#C6FF00] shadow-[0_0_15px_rgba(198,255,0,0.2)]"
             >
               <span>Let's Talk</span>
               <ArrowUpRight className="w-3.5 h-3.5" />

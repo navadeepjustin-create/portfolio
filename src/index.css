@@ -197,6 +197,15 @@
   animation: limePulse 2.2s ease-in-out infinite;
 }
 
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
 @keyframes scanLine {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(1000%); }

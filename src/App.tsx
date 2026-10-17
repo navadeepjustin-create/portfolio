@@ -13,6 +13,9 @@ import { CustomCursor } from './components/CustomCursor';
 import { CursorPreview } from './components/CursorPreview';
 import { ScrollProgressBar } from './components/ScrollProgressBar';
 import { CommandPalette } from './components/CommandPalette';
+import { SmoothScroll } from './components/SmoothScroll';
+import { PageTransition } from './components/PageTransition';
+import { SideChapterIndicator } from './components/SideChapterIndicator';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { ProjectCaseStudyPage } from './pages/ProjectCaseStudyPage';
 import { AboutPage } from './pages/AboutPage';
@@ -59,6 +62,9 @@ function HomePage({ onOpenCommandPalette }: HomePageProps) {
 
       {/* Floating Project Preview on Cursor Hover */}
       <CursorPreview />
+
+      {/* Fixed Side Chapter Telemetry Indicator (00-06) */}
+      <SideChapterIndicator />
 
       {/* Keyboard Accessibility Skip Link */}
       <a
@@ -118,25 +124,29 @@ export default function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      {/* Film-grain texture and soft edge vignette */}
-      <div className="film-grain" aria-hidden="true" />
-      <div className="edge-vignette" aria-hidden="true" />
-      <ScrollToHashElement />
-      <CommandPalette
-        isOpen={commandPaletteOpen}
-        onClose={() => setCommandPaletteOpen(false)}
-      />
-      <Routes>
-        <Route
-          path="/"
-          element={<HomePage onOpenCommandPalette={() => setCommandPaletteOpen(true)} />}
+    <SmoothScroll>
+      <BrowserRouter>
+        {/* Film-grain texture and soft edge vignette */}
+        <div className="film-grain" aria-hidden="true" />
+        <div className="edge-vignette" aria-hidden="true" />
+        <ScrollToHashElement />
+        <CommandPalette
+          isOpen={commandPaletteOpen}
+          onClose={() => setCommandPaletteOpen(false)}
         />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/projects/:projectId" element={<ProjectCaseStudyPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+        <PageTransition>
+          <Routes>
+            <Route
+              path="/"
+              element={<HomePage onOpenCommandPalette={() => setCommandPaletteOpen(true)} />}
+            />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/projects/:projectId" element={<ProjectCaseStudyPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </PageTransition>
+      </BrowserRouter>
+    </SmoothScroll>
   );
 }

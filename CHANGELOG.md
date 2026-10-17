@@ -118,3 +118,42 @@ All notable architecture, performance, accessibility, and visual engineering cha
 - `dist/assets/index.css`: 57.75 kB (gzip: 10.43 kB)
 - `dist/assets/HeroShader.js`: 49.26 kB (gzip: 15.12 kB) — *lazy-loaded chunk*
 - `dist/assets/index.js`: 584.25 kB (gzip: 173.19 kB)
+
+---
+
+## [Phase 4] - Typography, Motion, Navigation & Bento Layouts
+
+### What Changed & Why
+- **SplitText Component (`src/components/SplitText.tsx`)**:
+  - Masked line-by-line / word-by-word slide-up reveal on scroll viewport entry using `motion/react`.
+  - Applied to Hero headline, About philosophy, Projects headline, Approach, Skills, and Education sections.
+- **Scroll-Linked Giant Section Numbers (`src/components/SectionNumber.tsx`)**:
+  - Replaced static text numbers with dynamic `00-06` indicators that dynamically shift opacity, tracking, and vertical parallax on scroll.
+- **Route Transitions (`src/components/PageTransition.tsx`)**:
+  - Built an electric lime wipe bar transition across route changes (using View Transitions API when available with a high-fidelity motion fallback).
+- **Smooth Scrolling (`src/components/SmoothScroll.tsx`)**:
+  - Integrated Lenis for momentum-based smooth inertia scrolling; hooked into animation frame loops and disabled automatically under `prefers-reduced-motion: reduce`.
+  - Preserved anchor hash links (`#projects`, `#about`, `#contact`, etc.) and top scroll progress indicator.
+- **Floating Pill Navigation (`src/components/Navbar.tsx`)**:
+  - Upgraded fixed top bar to an ergonomic floating pill nav that compacts, blurs, and raises z-elevation on scroll.
+  - Interactive active-section tracking via `useActiveSection` with electric lime pill highlight and magnetic triggers.
+- **Fixed Side Chapter Indicator (`src/components/SideChapterIndicator.tsx`)**:
+  - Fixed telemetry sidebar (`00` to `06`) on the left desktop viewport margin that tracks active section and fills with scroll progress. Cleanly hidden on mobile.
+- **Bento Grid Architecture (`src/sections/About.tsx`, `src/sections/Skills.tsx`)**:
+  - Converted About and Skills sections into modern bento layouts with variable tile proportions, hairline borders, and `Spotlight` hover glow.
+- **Infinite Skills Marquee (`src/components/SkillsMarquee.tsx`)**:
+  - Continuous animated ticker of core verified technologies; pauses on user hover and remains static under reduced motion.
+
+### Dependency Justification
+- Added `lenis` (~4 kB gzipped): Industry-standard lightweight smooth scroll library with zero overhead on main-thread layout and native fallbacks.
+
+### Mobile & Accessibility Compromises
+- The side chapter indicator (`SideChapterIndicator`) is hidden on screen widths below `1024px` to preserve screen real estate.
+- Lenis smooth scrolling and SplitText transforms are disabled under `prefers-reduced-motion: reduce`.
+
+### Bundle Size (Post-Phase 4)
+- `dist/index.html`: 2.68 kB (gzip: 1.03 kB)
+- `dist/assets/index.css`: 60.93 kB (gzip: 10.86 kB)
+- `dist/assets/HeroShader.js`: 49.26 kB (gzip: 15.12 kB) — *lazy-loaded chunk*
+- `dist/assets/index.js`: 619.88 kB (gzip: 184.03 kB)
+

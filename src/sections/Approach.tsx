@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Search, Layout, Code, CheckCircle2 } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 import { portfolioData } from '../data/portfolioData';
+import { SplitText } from '../components/SplitText';
+import { SectionNumber } from '../components/SectionNumber';
 
 export const Approach: React.FC = () => {
   const { approach } = portfolioData;
@@ -28,12 +30,15 @@ export const Approach: React.FC = () => {
               </span>
             </div>
             <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F4F6F8] uppercase">
-              HOW I APPROACH BUILDING.
+              <SplitText>HOW I APPROACH BUILDING.</SplitText>
             </h2>
           </div>
-          <p className="font-mono text-xs text-[#929BA6] max-w-sm leading-relaxed uppercase">
-            A practical four-phase engineering methodology focused on eliminating guesswork and delivering functional systems.
-          </p>
+          <div className="flex items-end gap-6">
+            <p className="font-mono text-xs text-[#929BA6] max-w-sm leading-relaxed uppercase pb-2">
+              A practical four-phase engineering methodology focused on eliminating guesswork and delivering functional systems.
+            </p>
+            <SectionNumber number="03" label="METHOD" className="hidden lg:block -mb-2" />
+          </div>
         </div>
 
         {/* Connected Step Cards Grid */}

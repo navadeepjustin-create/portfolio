@@ -2,6 +2,9 @@ import React from 'react';
 import { GraduationCap, MapPin, Building2, CheckCircle2 } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 import { portfolioData } from '../data/portfolioData';
+import { SplitText } from '../components/SplitText';
+import { SectionNumber } from '../components/SectionNumber';
+import { Spotlight } from '../components/Spotlight';
 
 export const Education: React.FC = () => {
   const { education } = portfolioData;
@@ -25,22 +28,26 @@ export const Education: React.FC = () => {
               </span>
             </div>
             <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F4F6F8] uppercase">
-              GROUNDED IN FUNDAMENTALS.
+              <SplitText>GROUNDED IN FUNDAMENTALS.</SplitText>
             </h2>
           </div>
-          <p className="font-mono text-xs text-[#929BA6] max-w-sm leading-relaxed uppercase">
-            Rigorous undergraduate studies focused on computer science and core artificial intelligence principles.
-          </p>
+          <div className="flex items-end gap-6">
+            <p className="font-mono text-xs text-[#929BA6] max-w-sm leading-relaxed uppercase pb-2">
+              Rigorous undergraduate studies focused on computer science and core artificial intelligence principles.
+            </p>
+            <SectionNumber number="05" label="ACADEMICS" className="hidden lg:block -mb-2" />
+          </div>
         </div>
 
-        {/* Academic Card */}
+        {/* Academic Card with Spotlight Glow */}
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-          className="mt-12 bg-[#11151A] border border-white/10 hover:border-[#C6FF00]/40 transition-colors p-8 sm:p-12 shadow-2xl relative overflow-hidden group"
+          className="mt-12"
         >
+          <Spotlight className="p-8 sm:p-12 shadow-2xl relative overflow-hidden group">
           {/* Subtle corner crosshairs */}
           <div className="absolute top-2 left-2 w-2 h-2 border-t-2 border-l-2 border-[#C6FF00]" />
           <div className="absolute top-2 right-2 w-2 h-2 border-t-2 border-r-2 border-[#C6FF00]" />
@@ -99,6 +106,7 @@ export const Education: React.FC = () => {
               </div>
             </div>
           </div>
+          </Spotlight>
         </motion.div>
       </div>
     </section>
