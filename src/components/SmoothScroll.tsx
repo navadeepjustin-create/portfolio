@@ -15,11 +15,14 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
     // Mobile & Touch Devices:
     // Android Chrome and iOS Safari handle touch panning, fling momentum, and address-bar collapse
     // natively at 120Hz. Lenis virtual-scroll interception on touch devices can lock or clamp scrolling.
-    // We strictly preserve 100% natural native browser scrolling on mobile/touch hardware.
-    const isTouchDevice =
-      window.matchMedia('(pointer: coarse)').matches ||
-      ('ontouchstart' in window && !window.matchMedia('(pointer: fine)').matches);
-    if (isTouchDevice) return;
+    // We strictly preserve 100% natural native browser scrolling on mobile hardware.
+    const isMobileOrTouch =
+      typeof window !== 'undefined' &&
+      (window.matchMedia('(pointer: coarse)').matches ||
+        'ontouchstart' in window ||
+        window.innerWidth < 1024 ||
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    if (isMobileOrTouch) return;
 
     const lenis = new Lenis({
       duration: 1.05,

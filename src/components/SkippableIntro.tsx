@@ -31,6 +31,14 @@ export const SkippableIntro: React.FC<SkippableIntroProps> = ({ onComplete }) =>
       // Fallback
     }
 
+    // On mobile touch devices, skip full-screen splash to allow immediate natural scrolling
+    const isTouch = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+    if (isTouch) {
+      onComplete();
+      setIsVisible(false);
+      return;
+    }
+
     // Coordinate counter animation
     const coordInterval = setInterval(() => {
       const lat = (17 + Math.random() * 0.54).toFixed(4);
