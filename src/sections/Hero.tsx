@@ -1,15 +1,47 @@
-import React from 'react';
-import { ArrowDown, ArrowUpRight, Terminal } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowDown, ArrowUpRight, Terminal, FileText, Mail, Check, Copy, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion, useReducedMotion } from 'motion/react';
 import { portfolioData } from '../data/portfolioData';
-import { ComputationalCore3D } from '../components/ComputationalCore3D';
+import sunsetPortrait from '../assets/images/navadeep-sunset.png';
 
 interface HeroProps {
   onOpenCommandPalette?: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
-  const { personal } = portfolioData;
+  const { personal, contact } = portfolioData;
+  const [showResumeModal, setShowResumeModal] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(contact.email);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2200);
+  };
+
+  const EASE = [0.22, 1, 0.36, 1] as const;
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.08,
+        delayChildren: prefersReducedMotion ? 0 : 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: EASE },
+    },
+  };
 
   return (
     <section
@@ -21,11 +53,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
       <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-[#171D24]/80 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          {/* Left Column: Typographic Manifesto & Technical Metadata */}
+        <motion.div
+          className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Left Column: Typographic Manifesto & Technical Positioning */}
           <div className="lg:col-span-7 space-y-6 sm:space-y-8">
-            {/* Index & System Status Badge */}
-            <div className="flex flex-wrap items-center gap-3">
+            {/* Status & Location Pill */}
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3">
               <span className="font-mono text-xs text-[#929BA6] uppercase tracking-widest px-2.5 py-1 bg-[#11151A] border border-white/10">
                 00 // HYDERABAD, IN [17.54°N, 78.43°E]
               </span>
@@ -33,34 +70,39 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
                 <span className="w-2 h-2 bg-[#C6FF00] rounded-none animate-lime-pulse" />
                 <span>{personal.statusTag}</span>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Oversized Cinematic Headline */}
-            <div className="space-y-3">
+            {/* Oversized Editorial Headline */}
+            <motion.div variants={itemVariants} className="space-y-2">
               <span className="font-mono text-xs sm:text-sm font-semibold tracking-widest uppercase text-[#C6FF00] block">
-                ENGINEERING MATRIX
+                {personal.subHeadline}
               </span>
               <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black tracking-[-0.04em] text-[#F4F6F8] leading-[0.94] uppercase">
-                BUILDING AT THE <br />
-                INTERSECTION OF <br />
+                BUILDING USEFUL <br />
+                <span className="text-[#F4F6F8]">PRODUCTS.</span> <br />
                 <span className="inline-block relative">
-                  <span className="relative z-10 text-[#C6FF00]">AI & SOFTWARE.</span>
+                  <span className="relative z-10 text-[#C6FF00]">
+                    ENGINEERING BETTER EXPERIENCES.
+                  </span>
                   <span className="absolute bottom-1 left-0 right-0 h-3 sm:h-5 bg-[#C6FF00]/10 -z-0" />
                 </span>
               </h1>
-            </div>
+            </motion.div>
 
-            {/* Supporting Copy */}
-            <p className="text-base sm:text-lg text-[#929BA6] max-w-xl leading-relaxed font-sans font-normal border-l-2 border-[#C6FF00] pl-4">
+            {/* Authentically Formulated Introduction */}
+            <motion.p
+              variants={itemVariants}
+              className="text-base sm:text-lg text-[#929BA6] max-w-xl leading-relaxed font-sans font-normal border-l-2 border-[#C6FF00] pl-4"
+            >
               {personal.heroBio}
-            </p>
+            </motion.p>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            {/* Coordinated Action Buttons */}
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
               <Link
                 to="/projects"
                 data-cursor-label="EXPLORE ↗"
-                className="px-6 sm:px-8 py-3.5 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b5e800] font-mono text-xs uppercase tracking-widest font-bold transition-all duration-200 flex items-center gap-2 border border-[#C6FF00] shadow-[0_0_20px_rgba(198,255,0,0.25)] group"
+                className="px-6 sm:px-7 py-3.5 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b5e800] font-mono text-xs uppercase tracking-widest font-bold transition-all duration-200 flex items-center gap-2 border border-[#C6FF00] shadow-[0_0_20px_rgba(198,255,0,0.25)] group"
               >
                 <span>EXPLORE PROJECTS</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -69,11 +111,22 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
               <Link
                 to="/about"
                 data-cursor-label="ABOUT ↓"
-                className="px-6 sm:px-8 py-3.5 bg-[#11151A] text-[#F4F6F8] hover:bg-[#171D24] font-mono text-xs uppercase tracking-widest font-bold transition-all duration-200 border border-white/15 hover:border-white/30 flex items-center gap-2"
+                className="px-6 sm:px-7 py-3.5 bg-[#11151A] text-[#F4F6F8] hover:bg-[#171D24] font-mono text-xs uppercase tracking-widest font-bold transition-all duration-200 border border-white/15 hover:border-white/30 flex items-center gap-2"
               >
-                <span>ABOUT ME</span>
+                <span>ABOUT & STORY</span>
                 <ArrowDown className="w-4 h-4 text-[#C6FF00]" />
               </Link>
+
+              <button
+                type="button"
+                onClick={() => setShowResumeModal(true)}
+                data-cursor-label="RESUME"
+                className="px-4 sm:px-5 py-3.5 bg-[#11151A] hover:bg-[#171D24] text-[#929BA6] hover:text-[#F4F6F8] font-mono text-xs uppercase tracking-wider font-semibold transition-all border border-white/10 hover:border-white/25 flex items-center gap-2"
+                title="View Resume / Credentials"
+              >
+                <FileText className="w-3.5 h-3.5 text-[#C6FF00]" />
+                <span>RESUME</span>
+              </button>
 
               {onOpenCommandPalette && (
                 <button
@@ -86,45 +139,182 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
                   <span>CMD / ⌘K</span>
                 </button>
               )}
-            </div>
+            </motion.div>
 
-            {/* Factual System Status Panel */}
-            <div className="pt-4 border-t border-white/10 flex flex-wrap items-center gap-6 font-mono text-xs text-[#929BA6]">
+            {/* Factual Academic & Engineering Telemetry Bar */}
+            <motion.div
+              variants={itemVariants}
+              className="pt-4 border-t border-white/10 grid grid-cols-2 sm:grid-cols-3 gap-4 font-mono text-xs text-[#929BA6]"
+            >
               <div>
                 <span className="text-[#929BA6]/60 block text-[10px] uppercase">Institution</span>
                 <span className="text-[#F4F6F8] font-semibold">{personal.institution}</span>
               </div>
-              <div className="hidden sm:block w-px h-6 bg-white/10" />
               <div>
-                <span className="text-[#929BA6]/60 block text-[10px] uppercase">Department</span>
-                <span className="text-[#F4F6F8] font-semibold">CSE (AI & Machine Learning)</span>
+                <span className="text-[#929BA6]/60 block text-[10px] uppercase">Program</span>
+                <span className="text-[#F4F6F8] font-semibold">B.Tech AIML (2022–2026)</span>
               </div>
-              <div className="hidden sm:block w-px h-6 bg-white/10" />
-              <div>
-                <span className="text-[#929BA6]/60 block text-[10px] uppercase">Focus Architecture</span>
-                <span className="text-[#C6FF00] font-semibold">Statio-MLR & Fast Bite</span>
+              <div className="col-span-2 sm:col-span-1">
+                <span className="text-[#929BA6]/60 block text-[10px] uppercase">Flagship Platforms</span>
+                <span className="text-[#C6FF00] font-semibold">Statio-MLR · Fast Bite</span>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Bespoke Editorial Personal Portrait Card */}
+          <motion.div
+            variants={itemVariants}
+            className="lg:col-span-5 flex justify-center w-full"
+          >
+            <div className="relative w-full max-w-[360px] sm:max-w-[380px] lg:max-w-[400px] group interactive-card">
+              {/* Subtle ambient lime glow behind card */}
+              <div className="absolute -inset-1 bg-gradient-to-tr from-[#C6FF00]/15 via-transparent to-[#171D24]/40 blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+              {/* High-End Portrait Frame */}
+              <div className="relative bg-[#11151A] border border-white/15 group-hover:border-[#C6FF00]/60 p-3 sm:p-4 shadow-2xl transition-all duration-300">
+                {/* Precision Corner Marks */}
+                <div className="absolute -top-1 -left-1 w-2.5 h-2.5 border-t-2 border-l-2 border-[#C6FF00]" />
+                <div className="absolute -top-1 -right-1 w-2.5 h-2.5 border-t-2 border-r-2 border-[#C6FF00]" />
+                <div className="absolute -bottom-1 -left-1 w-2.5 h-2.5 border-b-2 border-l-2 border-[#C6FF00]" />
+                <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 border-b-2 border-r-2 border-[#C6FF00]" />
+
+                {/* Top Telemetry Header Strip */}
+                <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-white/10 font-mono text-[10px] text-[#929BA6]">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 bg-[#C6FF00] rounded-none animate-lime-pulse" />
+                    <span className="text-[#F4F6F8] font-bold tracking-wider">NAVADEEP // PROFILE</span>
+                  </div>
+                  <span className="text-[#929BA6]">CSE (AIML) · MLRIT</span>
+                </div>
+
+                {/* The Photograph Container - 446:751 intrinsic aspect ratio preserves full cloud formation and foreground */}
+                <div className="relative aspect-[446/751] w-full overflow-hidden bg-[#080A0D] border border-white/10">
+                  <img
+                    src={sunsetPortrait}
+                    alt="Navadeep beneath an orange sunset sky"
+                    className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                    loading="eager"
+                  />
+
+                  {/* Overlay Floating Technology Tags */}
+                  <div className="absolute top-3 right-3 flex flex-col gap-1.5 items-end">
+                    <span className="font-mono text-[9px] uppercase tracking-widest px-2 py-0.5 bg-[#080A0D]/85 backdrop-blur-md text-[#C6FF00] border border-[#C6FF00]/40">
+                      React · TypeScript
+                    </span>
+                    <span className="font-mono text-[9px] uppercase tracking-widest px-2 py-0.5 bg-[#080A0D]/85 backdrop-blur-md text-[#F4F6F8] border border-white/20">
+                      Python · AI/ML
+                    </span>
+                  </div>
+                </div>
+
+                {/* Bottom Overlay Identity Bar (Positioned outside image container to prevent blocking the person in the photograph) */}
+                <div className="mt-3 p-2.5 bg-[#080A0D] border border-white/10 flex items-center justify-between font-mono text-[11px]">
+                  <div>
+                    <span className="text-[#F4F6F8] font-bold block tracking-wider">NAVADEEP</span>
+                    <p className="font-mono text-[9px] text-[#929BA6] uppercase tracking-wider mt-0.5">
+                      B.Tech AIML Student & Full-Stack Builder
+                    </p>
+                  </div>
+                  <span className="text-[#C6FF00] text-[10px] uppercase font-mono px-2 py-0.5 bg-[#C6FF00]/10 border border-[#C6FF00]/30 shrink-0">
+                    HYDERABAD, IN
+                  </span>
+                </div>
+
+                {/* Bottom Card Strip */}
+                <div className="mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between font-mono text-[10px] text-[#929BA6]">
+                  <div className="flex items-center gap-1.5 text-[#C6FF00]">
+                    <span className="w-1.5 h-1.5 bg-[#C6FF00]" />
+                    <span>OPEN FOR INTERNSHIPS</span>
+                  </div>
+                  <span className="text-[#929BA6]">EST. 2026 GRAD</span>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* Right Column: Signature 3D Computational Core */}
-          <div className="lg:col-span-5 flex justify-center">
-            <ComputationalCore3D />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
-      {/* Bottom Telemetry & Scroll Cue */}
+      {/* Bottom Telemetry & Subtle Scroll Cue */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-6 pt-4 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-[#929BA6]">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 bg-[#C6FF00]" />
-          <span>STANDALONE ARCHITECTURE · ZERO THIRD-PARTY TRACKERS</span>
+          <span>AUTHENTIC ENGINEERING PORTFOLIO · ZERO FABRICATED DATA</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="hidden sm:inline-block">SCROLL TO INSPECT ARCHITECTURE</span>
+        <a
+          href="#about"
+          className="flex items-center gap-2 hover:text-[#C6FF00] transition-colors"
+        >
+          <span className="hidden sm:inline-block">SCROLL TO INSPECT PHILOSOPHY & WORK</span>
           <ArrowDown className="w-3.5 h-3.5 text-[#C6FF00] animate-bounce" />
-        </div>
+        </a>
       </div>
+
+      {/* Resume Status / Request Modal */}
+      {showResumeModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md bg-[#11151A] border border-white/20 p-6 sm:p-8 shadow-2xl space-y-5 text-left">
+            <button
+              type="button"
+              onClick={() => setShowResumeModal(false)}
+              className="absolute top-4 right-4 p-1.5 text-[#929BA6] hover:text-[#F4F6F8] border border-white/10 hover:border-white/30"
+              title="Close"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-[#C6FF00]" />
+              <span className="font-mono text-xs text-[#C6FF00] uppercase tracking-widest">
+                RESUME TRANSMISSION
+              </span>
+            </div>
+
+            <div>
+              <h3 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#F4F6F8]">
+                Curriculum Vitae Access
+              </h3>
+              <p className="text-sm text-[#929BA6] font-sans mt-2 leading-relaxed">
+                Navadeep’s complete technical resume with updated course projects and academic transcripts is available on request for engineering teams, recruiters, and internship coordinators.
+              </p>
+            </div>
+
+            <div className="p-3.5 bg-[#080A0D] border border-white/10 font-mono text-xs space-y-1">
+              <span className="text-[#929BA6] block text-[10px] uppercase">Direct Inquiries</span>
+              <span className="text-[#F4F6F8] font-semibold break-all">{contact.email}</span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <a
+                href={`mailto:${contact.email}?subject=${encodeURIComponent(
+                  'Resume Request — Navadeep (B.Tech AIML)'
+                )}`}
+                className="flex-1 py-3 bg-[#C6FF00] text-[#080A0D] font-mono text-xs uppercase font-bold tracking-wider hover:bg-[#b5e800] transition-colors flex items-center justify-center gap-1.5"
+              >
+                <Mail className="w-4 h-4" />
+                <span>REQUEST VIA EMAIL</span>
+              </a>
+
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="py-3 px-4 bg-[#171D24] text-[#F4F6F8] font-mono text-xs uppercase tracking-wider hover:bg-[#1f2730] border border-white/10 flex items-center justify-center gap-1.5 transition-colors"
+              >
+                {copiedEmail ? (
+                  <>
+                    <Check className="w-4 h-4 text-[#C6FF00]" />
+                    <span>COPIED</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4" />
+                    <span>COPY EMAIL</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

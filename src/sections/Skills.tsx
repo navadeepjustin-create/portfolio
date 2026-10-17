@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Cpu, Terminal, Globe, Database, Wrench } from 'lucide-react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { portfolioData } from '../data/portfolioData';
 
 export const Skills: React.FC = () => {
   const { skills } = portfolioData;
   const [selectedCategory, setSelectedCategory] = useState<number | 'all'>('all');
+  const prefersReducedMotion = useReducedMotion();
 
   const categoryIcons = [Cpu, Terminal, Globe, Database, Wrench];
 
@@ -70,51 +72,58 @@ export const Skills: React.FC = () => {
 
         {/* Skills Technical Index Matrix */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          {displayedCategories.map((category, idx) => {
-            const Icon = categoryIcons[idx % categoryIcons.length];
+          <AnimatePresence mode="popLayout">
+            {displayedCategories.map((category, idx) => {
+              const Icon = categoryIcons[idx % categoryIcons.length];
 
-            return (
-              <div
-                key={category.title}
-                className="p-6 bg-[#11151A] border border-white/10 hover:border-[#C6FF00]/50 transition-all duration-300 flex flex-col justify-between group shadow-lg"
-              >
-                <div>
-                  <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
-                    <span className="font-mono text-[11px] text-[#C6FF00] font-semibold">
-                      {category.tag}
+              return (
+                <motion.div
+                  key={category.title}
+                  layout={!prefersReducedMotion}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.35 }}
+                  className="p-6 bg-[#11151A] border border-white/10 hover:border-[#C6FF00]/50 transition-all duration-300 flex flex-col justify-between group shadow-lg"
+                >
+                  <div>
+                    <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+                      <span className="font-mono text-[11px] text-[#C6FF00] font-semibold">
+                        {category.tag}
+                      </span>
+                      <div className="w-8 h-8 bg-[#171D24] border border-white/10 group-hover:border-[#C6FF00] flex items-center justify-center transition-colors">
+                        <Icon className="w-4 h-4 text-[#C6FF00]" />
+                      </div>
+                    </div>
+
+                    <h3 className="font-display text-xl font-bold text-[#F4F6F8] mb-2 group-hover:text-[#C6FF00] transition-colors">
+                      {category.title}
+                    </h3>
+                    <p className="text-xs text-[#929BA6] leading-relaxed font-sans mb-6">
+                      {category.description}
+                    </p>
+                  </div>
+
+                  {/* Tech Pills */}
+                  <div className="space-y-2 pt-4 border-t border-white/10">
+                    <span className="font-mono text-[10px] text-[#929BA6] uppercase tracking-wider block">
+                      Verified Competencies
                     </span>
-                    <div className="w-8 h-8 bg-[#171D24] border border-white/10 group-hover:border-[#C6FF00] flex items-center justify-center transition-colors">
-                      <Icon className="w-4 h-4 text-[#C6FF00]" />
+                    <div className="flex flex-wrap gap-1.5">
+                      {category.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="font-mono text-xs px-2.5 py-1 bg-[#171D24] border border-white/10 text-[#F4F6F8] group-hover:border-white/20 transition-colors"
+                        >
+                          {skill}
+                        </span>
+                      ))}
                     </div>
                   </div>
-
-                  <h3 className="font-display text-xl font-bold text-[#F4F6F8] mb-2 group-hover:text-[#C6FF00] transition-colors">
-                    {category.title}
-                  </h3>
-                  <p className="text-xs text-[#929BA6] leading-relaxed font-sans mb-6">
-                    {category.description}
-                  </p>
-                </div>
-
-                {/* Tech Pills */}
-                <div className="space-y-2 pt-4 border-t border-white/10">
-                  <span className="font-mono text-[10px] text-[#929BA6] uppercase tracking-wider block">
-                    Verified Competencies
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {category.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="font-mono text-xs px-2.5 py-1 bg-[#171D24] border border-white/10 text-[#F4F6F8] group-hover:border-white/20 transition-colors"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </div>
 
         {/* Current Learning Focus Banner */}

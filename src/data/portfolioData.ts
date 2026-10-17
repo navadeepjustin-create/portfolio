@@ -47,15 +47,15 @@ export const portfolioData = {
     institution: 'MLR Institute of Technology (MLRIT)',
     location: 'Hyderabad, Telangana, India',
     statusTag: 'AIML STUDENT · DEVELOPER · BUILDER',
-    headline: 'BUILDING AT THE INTERSECTION OF AI & SOFTWARE.',
-    subHeadline: 'AI MINDED. PRODUCT FOCUSED. ALWAYS BUILDING.',
+    headline: 'BUILDING USEFUL PRODUCTS. ENGINEERING BETTER EXPERIENCES.',
+    subHeadline: 'SOFTWARE ENGINEERING · APPLIED AI/ML · PRODUCT THINKING',
     heroBio:
-      'B.Tech AIML student at MLRIT, exploring intelligent systems and building practical software projects.',
-    aboutHeadline: 'BUILDING PRACTICAL SYSTEMS AT MLRIT.',
+      "I'm a B.Tech AIML student and developer at MLRIT who enjoys turning practical problems into thoughtfully designed software, combining software development, product thinking, and AI/ML.",
+    aboutHeadline: 'TURNING PRACTICAL PROBLEMS INTO THOUGHTFUL SOFTWARE.',
     aboutParagraphs: [
-      "I'm Navadeep, a B.Tech student studying Artificial Intelligence and Machine Learning at MLRIT, interested in building practical software projects and exploring intelligent systems.",
-      'Rather than treating code as abstract syntax, I focus on how technology solves tangible friction around campus life. My work centers on creating efficient digital platforms, understanding intelligent algorithms, and applying engineering fundamentals to real problems.',
-      'Whether optimizing user interactions or architecting scalable workflows, I build software that is fast, resilient, and purposeful.',
+      "I'm Navadeep, a B.Tech student in Artificial Intelligence and Machine Learning at MLR Institute of Technology (MLRIT), Hyderabad. I build practical, reliable software and explore intelligent data-driven systems.",
+      'Rather than treating code as abstract syntax or chasing superficial AI buzzwords, I focus on solving tangible friction in everyday environments. From eliminating campus photocopy queues with Statio-MLR to streamlining cafeteria lunch rushes with Fast Bite, I design systems around real human routines and physical constraints.',
+      'My technical foundation spans full-stack engineering with modern React and TypeScript, core computer science fundamentals (Data Structures, OOP, Relational Databases), and foundational machine learning (data preprocessing, decision logic, and model evaluation).',
     ],
     focusAreas: [
       {

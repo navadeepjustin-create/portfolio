@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Search, Layout, Code, CheckCircle2 } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
 import { portfolioData } from '../data/portfolioData';
 
 export const Approach: React.FC = () => {
   const { approach } = portfolioData;
   const [activeStep, setActiveStep] = useState<number>(0);
+  const prefersReducedMotion = useReducedMotion();
 
   const stepIcons = [Search, Layout, Code, CheckCircle2];
 
@@ -41,8 +43,12 @@ export const Approach: React.FC = () => {
             const isActive = activeStep === idx;
 
             return (
-              <div
+              <motion.div
                 key={step.number}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : idx * 0.1, ease: [0.22, 1, 0.36, 1] as const }}
                 onClick={() => setActiveStep(idx)}
                 data-cursor-label="PHASE"
                 className={`cursor-pointer p-6 sm:p-7 border transition-all duration-300 relative flex flex-col justify-between ${
@@ -107,7 +113,7 @@ export const Approach: React.FC = () => {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

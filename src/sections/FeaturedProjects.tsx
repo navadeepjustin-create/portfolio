@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Eye, FolderGit2 } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
 import { portfolioData, type ProjectDetail } from '../data/portfolioData';
 import { StatioMockup } from '../components/project-mockups/StatioMockup';
 import { FastBiteMockup } from '../components/project-mockups/FastBiteMockup';
@@ -9,6 +10,7 @@ import { ProjectCaseStudyModal } from '../components/ProjectCaseStudyModal';
 export const FeaturedProjects: React.FC = () => {
   const { projects } = portfolioData;
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <section
@@ -53,8 +55,12 @@ export const FeaturedProjects: React.FC = () => {
             const isEven = index % 2 === 0;
 
             return (
-              <article
+              <motion.article
                 key={project.id}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
                 className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center group interactive-card"
                 data-cursor-label="VIEW CASE STUDY ↗"
               >
@@ -173,7 +179,7 @@ export const FeaturedProjects: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </article>
+              </motion.article>
             );
           })}
         </div>

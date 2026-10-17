@@ -1,9 +1,11 @@
 import React from 'react';
 import { GraduationCap, MapPin, Building2, CheckCircle2 } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
 import { portfolioData } from '../data/portfolioData';
 
 export const Education: React.FC = () => {
   const { education } = portfolioData;
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <section
@@ -32,7 +34,18 @@ export const Education: React.FC = () => {
         </div>
 
         {/* Academic Card */}
-        <div className="mt-12 bg-[#11151A] border border-white/10 p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
+          className="mt-12 bg-[#11151A] border border-white/10 hover:border-[#C6FF00]/40 transition-colors p-8 sm:p-12 shadow-2xl relative overflow-hidden group"
+        >
+          {/* Subtle corner crosshairs */}
+          <div className="absolute top-2 left-2 w-2 h-2 border-t-2 border-l-2 border-[#C6FF00]" />
+          <div className="absolute top-2 right-2 w-2 h-2 border-t-2 border-r-2 border-[#C6FF00]" />
+          <div className="absolute bottom-2 left-2 w-2 h-2 border-b-2 border-l-2 border-[#C6FF00]" />
+          <div className="absolute bottom-2 right-2 w-2 h-2 border-b-2 border-r-2 border-[#C6FF00]" />
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Degree & College Info */}
             <div className="lg:col-span-5 space-y-4">
@@ -86,7 +99,7 @@ export const Education: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
