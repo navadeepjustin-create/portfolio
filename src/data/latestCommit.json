@@ -1,6 +1,6 @@
 {
-  "hash": "29934a1",
-  "message": "fix(scroll): remove viewport overflow traps, bypass splash on mobile, and strengthen touch scrolling",
-  "date": "2026-10-17T10:18:05Z",
+  "hash": "21c4ff2",
+  "message": "fix(mobile): smooth scrolling for project index, node navigation, and touch diagrams",
+  "date": "2026-10-17T10:52:09Z",
   "available": true
 }
