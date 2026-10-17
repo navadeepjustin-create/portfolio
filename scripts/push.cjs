@@ -22,11 +22,12 @@ async function doPush(token) {
     process.exit(1);
   }
   console.log('Connecting to https://github.com/navadeepjustin-create/portfolio.git ...');
+  const repoDir = require('path').resolve(__dirname, '..');
   try {
     const pushResult = await git.push({
       fs,
       http,
-      dir: process.cwd(),
+      dir: repoDir,
       remote: 'origin',
       ref: 'main',
       onAuth: () => ({ username: token })
