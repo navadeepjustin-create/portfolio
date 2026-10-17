@@ -202,4 +202,64 @@ All notable architecture, performance, accessibility, and visual engineering cha
 - `dist/assets/HeroShader.js`: 49.26 kB (gzip: 15.12 kB) — *lazy-loaded chunk*
 - `dist/assets/index.js`: 676.21 kB (gzip: 198.35 kB)
 
+---
+
+## [Phase 6] - Signature Moments & Technical Personality
+
+### What Changed & Why
+- **In-Browser Client-Side ML Playground (`/lab`, `src/pages/LabPage.tsx`)**:
+  - Implemented an interactive feedforward neural regression model computing cafeteria queue wait times in real-time.
+  - Features 4 inputs: lunch rush time window, physical queue length, basket size, and active kitchen staff.
+  - Implemented client-side mathematical pipeline: z-score feature normalization, 3-unit hidden layer with ReLU activations ($\max(0, z)$), and linear wait-time projection.
+  - Inference executes in under $1\text{ ms}$ (typically $\approx 300\text{--}600\text{ }\mu\text{s}$) with 0 outbound API calls.
+  - Transparency & Rigor: Prominently marked with an unmissable alert declaring that the model is trained on a *synthetic campus simulation dataset* and not physical clock logs.
+  - Lazy-loaded via dynamic `React.lazy()` to ensure zero impact on the initial home bundle.
+- **Home Page ML Lab Teaser (`src/sections/Skills.tsx`)**:
+  - Added an interactive spotlight teaser card linking directly to `/lab`.
+- **Hero Computational Core 3D Accent (`src/components/ComputationalCore3D.tsx`, `src/sections/Hero.tsx`)**:
+  - Reintegrated `ComputationalCore3D` as a lazy-loaded companion mode on the Hero portrait card.
+  - Users can seamlessly switch between `[PORTRAIT]` (preserving the verified sunset photograph of Navadeep standing in foreground) and `[3D CORE]`.
+  - Capped WebGL DPR at $1.5$ to protect low-power GPUs; pauses animation when out of viewport via `IntersectionObserver`; degrades to 2D SVG fallback under WebGL failure or `prefers-reduced-motion`.
+- **Skippable Monogram Intro (`src/components/SkippableIntro.tsx`)**:
+  - Designed an authentic 1.8-second monogram draw-in with animated SVG path stroke, real-time coordinate telemetry counter (`17.5449° N, 78.4326° E`), and MLRIT campus identifier.
+  - Skippable on click, `Escape`, `Space`, or `Enter`.
+  - Persisted in `sessionStorage` (with try/catch error boundary) so it plays once per browser session.
+- **Live Status & Telemetry Widget (`src/components/LiveStatusWidget.tsx`)**:
+  - Displays live Hyderabad (`Asia/Kolkata`) IST digital clock with 1-second update interval.
+  - Displays dynamic "Currently Building" status from `portfolioData.personal.currentlyBuilding`.
+  - Displays the latest public GitHub commit hash and commit message, fetched at build-time.
+- **Build-Time Git Telemetry Hook (`scripts/fetch-commit.cjs`)**:
+  - Automatically queries GitHub API at build time to fetch the latest commit hash from `navadeepjustin-create/portfolio` and writes to `src/data/latestCommit.json`. Gracefully falls back to local git hash if offline.
+  - Hooked into `"build"` script in `package.json`.
+- **Terminal-Style NotFound Route (`src/pages/NotFoundPage.tsx`)**:
+  - Re-architected 404 page into an authentic interactive Linux shell terminal emulator (`NAVADEEP OS v8.3.4`).
+  - Supports interactive command input: `help`, `cd /`, `cd /projects`, `cd /about`, `cd /resume`, `cd /lab`, and `clear`.
+- **Terminal Commands in Command Palette (`src/components/CommandPalette.tsx`)**:
+  - Added terminal-style commands: `help`, `theme` (cycles accent colors), `notes`, and playful root command `sudo hire navadeep` (navigates directly to `#contact`).
+- **Tab Visibility Title Cue (`src/hooks/useDocumentTitleVisibility.ts`)**:
+  - Dynamically updates `document.title` to `⚡ (1) Signal received // Navadeep` when user tabs away, restoring original title on re-focus.
+- **Dynamic Accent Color Switcher (`src/components/AccentSwitcher.tsx`)**:
+  - Allows instant switching between Electric Lime (`#C6FF00`), Cyber Cyan (`#00F0FF`), and Solar Orange (`#FF8800`).
+  - Updates `--accent-primary` and `--accent-glow` CSS variables, maintaining WCAG AA contrast against dark obsidian `#080A0D` canvas.
+  - Persisted in `localStorage` with try/catch. Placed in Hero status bar and Footer.
+- **Engineering Notes Logbook (`src/pages/NotesPage.tsx`, `src/data/notes.ts`)**:
+  - Created `/notes` route with technical architectural field notes on QR decoupling in campus environments and client-side ML trade-offs.
+  - Features tag filtering, reading time indicators, expandable reading view, and discussion prompts.
+
+### Dependency Justification
+- Zero new external runtime dependencies added. The ML model inference was authored as high-performance, zero-overhead pure TypeScript vector math without importing bulky 30MB ONNX/TF.js runtimes.
+
+### Mobile & Accessibility Compromises
+- 3D Computational Core and Hero WebGL shader automatically pause when scrolled out of view and cap DPR at 1.5.
+- Touch devices continue using standard, uncluttered native touch interactions while retaining interactive access to the ML playground sliders.
+
+### Bundle Size (Post-Phase 6)
+- `dist/index.html`: 2.76 kB (gzip: 1.06 kB)
+- `dist/assets/index.css`: 66.27 kB (gzip: 11.82 kB)
+- `dist/assets/HeroShader.js`: 49.27 kB (gzip: 15.13 kB) — *lazy chunk*
+- `dist/assets/ComputationalCore3D.js`: 541.37 kB (gzip: 135.56 kB) — *lazy chunk*
+- `dist/assets/LabPage.js`: 11.44 kB (gzip: 3.44 kB) — *lazy chunk*
+- `dist/assets/NotesPage.js`: 9.07 kB (gzip: 3.55 kB) — *lazy chunk*
+- `dist/assets/index.js`: 682.67 kB (gzip: 199.84 kB)
+
 

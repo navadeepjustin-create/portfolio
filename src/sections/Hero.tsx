@@ -8,9 +8,15 @@ import { EASE_PRIMARY } from '../constants/motion';
 import { FlashlightGrid } from '../components/FlashlightGrid';
 import { ProximityText } from '../components/ProximityText';
 import { Magnetic } from '../components/Magnetic';
+import { AccentSwitcher } from '../components/AccentSwitcher';
+import { LiveStatusWidget } from '../components/LiveStatusWidget';
 
 const HeroShader = lazy(() =>
   import('../components/HeroShader').then((m) => ({ default: m.HeroShader }))
+);
+
+const ComputationalCore3D = lazy(() =>
+  import('../components/ComputationalCore3D').then((m) => ({ default: m.ComputationalCore3D }))
 );
 
 interface HeroProps {
@@ -20,6 +26,7 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
   const { personal, contact } = portfolioData;
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [cardMode, setCardMode] = useState<'photo' | 'core'>('photo');
   const prefersReducedMotion = useReducedMotion();
 
   const handleCopyEmail = () => {
@@ -83,6 +90,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
                 <span className="w-2 h-2 bg-[#C6FF00] rounded-none animate-lime-pulse" />
                 <span>{personal.statusTag}</span>
               </div>
+              <AccentSwitcher className="ml-auto" />
             </motion.div>
 
             {/* Oversized Editorial Headline */}
@@ -207,7 +215,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
             </motion.div>
           </div>
 
-          {/* Right Column: Bespoke Editorial Personal Portrait Card */}
+          {/* Right Column: Bespoke Editorial Personal Portrait Card / 3D Core View */}
           <motion.div
             variants={itemVariants}
             className="lg:col-span-5 flex justify-center w-full"
@@ -216,7 +224,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
               {/* Subtle ambient lime glow behind card */}
               <div className="absolute -inset-1 bg-gradient-to-tr from-[#C6FF00]/15 via-transparent to-[#171D24]/40 blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-              {/* High-End Portrait Frame */}
+              {/* High-End Portrait / Core Frame */}
               <div className="relative bg-[#11151A] border border-white/15 group-hover:border-[#C6FF00]/60 p-3 sm:p-4 shadow-2xl transition-all duration-300">
                 {/* Precision Corner Marks */}
                 <div className="absolute -top-1 -left-1 w-2.5 h-2.5 border-t-2 border-l-2 border-[#C6FF00]" />
@@ -224,36 +232,77 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
                 <div className="absolute -bottom-1 -left-1 w-2.5 h-2.5 border-b-2 border-l-2 border-[#C6FF00]" />
                 <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 border-b-2 border-r-2 border-[#C6FF00]" />
 
-                {/* Top Telemetry Header Strip */}
+                {/* Top Telemetry Header Strip with View Switcher */}
                 <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-white/10 font-mono text-[10px] text-[#929BA6]">
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 bg-[#C6FF00] rounded-none animate-lime-pulse" />
                     <span className="text-[#F4F6F8] font-bold tracking-wider">NAVADEEP // PROFILE</span>
                   </div>
-                  <span className="text-[#929BA6]">CSE (AIML) · MLRIT</span>
-                </div>
-
-                {/* The Photograph Container - 446:751 intrinsic aspect ratio preserves full cloud formation and foreground */}
-                <div className="relative aspect-[446/751] w-full overflow-hidden bg-[#080A0D] border border-white/10">
-                  <img
-                    src={sunsetPortrait}
-                    alt="Navadeep beneath an orange sunset sky"
-                    className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out"
-                    loading="eager"
-                  />
-
-                  {/* Overlay Floating Technology Tags */}
-                  <div className="absolute top-3 right-3 flex flex-col gap-1.5 items-end">
-                    <span className="font-mono text-[9px] uppercase tracking-widest px-2 py-0.5 bg-[#080A0D]/85 backdrop-blur-md text-[#C6FF00] border border-[#C6FF00]/40">
-                      React · TypeScript
-                    </span>
-                    <span className="font-mono text-[9px] uppercase tracking-widest px-2 py-0.5 bg-[#080A0D]/85 backdrop-blur-md text-[#F4F6F8] border border-white/20">
-                      Python · AI/ML
-                    </span>
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={() => setCardMode('photo')}
+                      data-cursor-label="PHOTO"
+                      className={`px-2 py-0.5 font-mono text-[9px] uppercase border transition-colors ${
+                        cardMode === 'photo'
+                          ? 'bg-[#C6FF00] text-[#080A0D] border-[#C6FF00] font-bold'
+                          : 'bg-[#080A0D] text-[#929BA6] border-white/10 hover:text-white'
+                      }`}
+                    >
+                      PORTRAIT
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCardMode('core')}
+                      data-cursor-label="3D CORE"
+                      className={`px-2 py-0.5 font-mono text-[9px] uppercase border transition-colors ${
+                        cardMode === 'core'
+                          ? 'bg-[#C6FF00] text-[#080A0D] border-[#C6FF00] font-bold'
+                          : 'bg-[#080A0D] text-[#929BA6] border-white/10 hover:text-white'
+                      }`}
+                    >
+                      3D CORE
+                    </button>
                   </div>
                 </div>
 
-                {/* Bottom Overlay Identity Bar (Positioned outside image container to prevent blocking the person in the photograph) */}
+                {/* Body: Photograph or 3D Computational Core */}
+                {cardMode === 'photo' ? (
+                  /* The Photograph Container - 446:751 intrinsic aspect ratio preserves full cloud formation and foreground */
+                  <div className="relative aspect-[446/751] w-full overflow-hidden bg-[#080A0D] border border-white/10">
+                    <img
+                      src={sunsetPortrait}
+                      alt="Navadeep beneath an orange sunset sky"
+                      className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                      loading="eager"
+                    />
+
+                    {/* Overlay Floating Technology Tags */}
+                    <div className="absolute top-3 right-3 flex flex-col gap-1.5 items-end">
+                      <span className="font-mono text-[9px] uppercase tracking-widest px-2 py-0.5 bg-[#080A0D]/85 backdrop-blur-md text-[#C6FF00] border border-[#C6FF00]/40">
+                        React · TypeScript
+                      </span>
+                      <span className="font-mono text-[9px] uppercase tracking-widest px-2 py-0.5 bg-[#080A0D]/85 backdrop-blur-md text-[#F4F6F8] border border-white/20">
+                        Python · AI/ML
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative aspect-[446/751] w-full overflow-hidden bg-[#080A0D] border border-white/10 flex items-center justify-center">
+                    <Suspense
+                      fallback={
+                        <div className="p-6 text-center font-mono text-xs text-[#929BA6] flex flex-col items-center justify-center gap-3">
+                          <span className="w-6 h-6 border-2 border-[#C6FF00] border-t-transparent animate-spin" />
+                          <span>INITIALIZING 3D CORE...</span>
+                        </div>
+                      }
+                    >
+                      <ComputationalCore3D />
+                    </Suspense>
+                  </div>
+                )}
+
+                {/* Bottom Overlay Identity Bar */}
                 <div className="mt-3 p-2.5 bg-[#080A0D] border border-white/10 flex items-center justify-between font-mono text-[11px]">
                   <div>
                     <span className="text-[#F4F6F8] font-bold block tracking-wider">NAVADEEP</span>
@@ -278,6 +327,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette }) => {
             </div>
           </motion.div>
         </motion.div>
+
+        {/* Live Status Widget: Local Time, Currently Building & Latest Commit */}
+        <div className="mt-10">
+          <LiveStatusWidget />
+        </div>
       </div>
 
       {/* Bottom Telemetry & Subtle Scroll Cue */}

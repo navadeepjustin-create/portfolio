@@ -38,7 +38,7 @@ export const ComputationalCore3D: React.FC = () => {
         powerPreference: 'high-performance',
       });
       renderer.setSize(container.clientWidth, container.clientHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
 
       // 1. Central Core Geometric Polyhedron
       const coreGroup = new THREE.Group();

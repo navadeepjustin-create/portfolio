@@ -14,6 +14,7 @@ import {
   Terminal,
   FileText,
   Download,
+  Sparkles,
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, InstagramIcon } from './BrandIcons';
 
@@ -21,7 +22,7 @@ interface CommandItem {
   id: string;
   title: string;
   subtitle: string;
-  category: 'Navigation' | 'Projects' | 'Social & Direct';
+  category: 'Navigation' | 'Projects' | 'Social & Direct' | 'Terminal Commands';
   icon: React.ComponentType<{ className?: string }>;
   action: () => void;
   shortcut?: string;
@@ -185,6 +186,77 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         }, 1200);
       },
       shortcut: 'C',
+    },
+    {
+      id: 'lab',
+      title: 'Lab // In-Browser ML Playground',
+      subtitle: 'Client-side canteen wait-time predictor with synthetic model',
+      category: 'Navigation',
+      icon: Terminal,
+      action: () => {
+        navigate('/lab');
+        onClose();
+      },
+      shortcut: 'M',
+    },
+    {
+      id: 'theme',
+      title: 'Theme // Switch Accent Palette',
+      subtitle: 'Cycle through Electric Lime, Cyber Cyan, and Solar Orange',
+      category: 'Terminal Commands',
+      icon: Sparkles,
+      action: () => {
+        try {
+          const accents: ('lime' | 'cyan' | 'orange')[] = ['lime', 'cyan', 'orange'];
+          const current = (localStorage.getItem('nd_portfolio_accent') as 'lime' | 'cyan' | 'orange') || 'lime';
+          const next = accents[(accents.indexOf(current) + 1) % accents.length];
+          localStorage.setItem('nd_portfolio_accent', next);
+          const colorMap = { lime: '#C6FF00', cyan: '#00F0FF', orange: '#FF8800' };
+          document.documentElement.style.setProperty('--accent-primary', colorMap[next]);
+          document.documentElement.setAttribute('data-accent', next);
+        } catch {}
+        onClose();
+      },
+      shortcut: 'T',
+    },
+    {
+      id: 'notes',
+      title: 'Notes // Engineering Logbook',
+      subtitle: 'Technical reflections, architectural trade-offs, and field dispatches',
+      category: 'Navigation',
+      icon: FileText,
+      action: () => {
+        navigate('/notes');
+        onClose();
+      },
+      shortcut: 'N',
+    },
+    {
+      id: 'help',
+      title: 'help // List Available Subsystems',
+      subtitle: 'Filter and display executable system commands and protocols',
+      category: 'Terminal Commands',
+      icon: Terminal,
+      action: () => {
+        setQuery('//');
+      },
+      shortcut: '?',
+    },
+    {
+      id: 'sudo-hire',
+      title: 'sudo hire navadeep',
+      subtitle: 'Root privilege command: Jump to contact transmission with prioritized access',
+      category: 'Terminal Commands',
+      icon: Terminal,
+      action: () => {
+        navigate('/#contact');
+        onClose();
+        setTimeout(() => {
+          const elem = document.querySelector('#contact');
+          elem?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      },
+      shortcut: '!',
     },
   ];
 

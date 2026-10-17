@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Cpu, Terminal, Globe, Database, Wrench, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Cpu, Terminal, Globe, Database, Wrench, Sparkles, ArrowUpRight } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import { SplitText } from '../components/SplitText';
 import { SectionNumber } from '../components/SectionNumber';
@@ -158,6 +159,34 @@ export const Skills: React.FC = () => {
             <Sparkles className="w-3.5 h-3.5" />
             <span>MLRIT // CSE (AIML)</span>
           </span>
+        </Spotlight>
+
+        {/* ML Playground / Lab Teaser */}
+        <Spotlight className="mt-6 p-6 sm:p-7 border border-[#C6FF00]/30 shadow-2xl relative overflow-hidden group">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-[10px] text-[#C6FF00] bg-[#171D24] border border-[#C6FF00]/40 px-2 py-0.5 uppercase tracking-wider">
+                  EXPERIMENT 01 // IN-BROWSER ML
+                </span>
+                <span className="font-mono text-xs text-[#929BA6] uppercase">Client-Side Neural Inference</span>
+              </div>
+              <h3 className="font-display text-2xl font-bold uppercase text-[#F4F6F8]">
+                Interactive Canteen Queue Predictor
+              </h3>
+              <p className="font-sans text-xs sm:text-sm text-[#929BA6] max-w-2xl leading-relaxed">
+                Test client-side feedforward neural inference directly in your browser thread. Modulate lunch rush arrival rates, queue depths, and staff allocations to evaluate physical wait-time projections with zero API latency.
+              </p>
+            </div>
+            <Link
+              to="/lab"
+              data-cursor-label="LAUNCH LAB"
+              className="px-6 py-3.5 bg-[#C6FF00] text-[#080A0D] hover:bg-[#b5e800] font-mono text-xs uppercase tracking-wider font-bold transition-all flex items-center justify-center gap-2 shrink-0 border border-[#C6FF00] shadow-[0_0_15px_rgba(198,255,0,0.2)]"
+            >
+              <span>LAUNCH LAB EXPERIMENT</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
         </Spotlight>
       </div>
     </section>

@@ -70,6 +70,7 @@ export const portfolioData = {
     institution: 'MLR Institute of Technology (MLRIT)',
     location: 'Hyderabad, Telangana, India',
     statusTag: 'AIML STUDENT · DEVELOPER · BUILDER',
+    currentlyBuilding: 'Exploring in-browser ML inference & edge token verification',
     headline: 'BUILDING USEFUL PRODUCTS. ENGINEERING BETTER EXPERIENCES.',
     subHeadline: 'SOFTWARE ENGINEERING · APPLIED AI/ML · PRODUCT THINKING',
     heroBio:

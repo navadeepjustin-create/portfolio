@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Hero } from './sections/Hero';
@@ -16,11 +16,16 @@ import { CommandPalette } from './components/CommandPalette';
 import { SmoothScroll } from './components/SmoothScroll';
 import { PageTransition } from './components/PageTransition';
 import { SideChapterIndicator } from './components/SideChapterIndicator';
+import { SkippableIntro } from './components/SkippableIntro';
+import { useDocumentTitleVisibility } from './hooks/useDocumentTitleVisibility';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { ProjectCaseStudyPage } from './pages/ProjectCaseStudyPage';
 import { AboutPage } from './pages/AboutPage';
 import { ResumePage } from './pages/ResumePage';
 import { NotFoundPage } from './pages/NotFoundPage';
+
+const LabPage = lazy(() => import('./pages/LabPage').then((m) => ({ default: m.LabPage })));
+const NotesPage = lazy(() => import('./pages/NotesPage').then((m) => ({ default: m.NotesPage })));
 
 /**
  * Ensures cross-route and anchor navigations scroll to target smoothly
@@ -53,8 +58,13 @@ interface HomePageProps {
 }
 
 function HomePage({ onOpenCommandPalette }: HomePageProps) {
+  const [introFinished, setIntroFinished] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#080A0D] text-[#F4F6F8] selection:bg-[#C6FF00] selection:text-[#080A0D] relative">
+      {/* 1.8s Skippable ND Monogram Intro with Coordinate Telemetry */}
+      {!introFinished && <SkippableIntro onComplete={() => setIntroFinished(true)} />}
+
       {/* Top Thin Scroll Progress Bar */}
       <ScrollProgressBar />
 
@@ -111,6 +121,9 @@ function HomePage({ onOpenCommandPalette }: HomePageProps) {
 export default function App() {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
 
+  // Updates tab title when inactive to keep connection warm
+  useDocumentTitleVisibility();
+
   // Global keyboard shortcut: Cmd+K (Mac) or Ctrl+K (Windows/Linux)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -145,6 +158,22 @@ export default function App() {
             <Route path="/projects/:projectId" element={<ProjectCaseStudyPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/resume" element={<ResumePage />} />
+            <Route
+              path="/lab"
+              element={
+                <Suspense fallback={<div className="min-h-screen bg-[#080A0D]" />}>
+                  <LabPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/notes"
+              element={
+                <Suspense fallback={<div className="min-h-screen bg-[#080A0D]" />}>
+                  <NotesPage />
+                </Suspense>
+              }
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </PageTransition>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { portfolioData } from '../data/portfolioData';
 import { EMAIL_ADDRESS } from '../data/socials';
 import { SocialLinks } from './SocialLinks';
+import { AccentSwitcher } from './AccentSwitcher';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -19,6 +20,8 @@ export const Footer: React.FC = () => {
     { label: 'Statio-MLR', path: '/projects/statio-mlr' },
     { label: 'Fast Bite', path: '/projects/fast-bite' },
     { label: 'About', path: '/about' },
+    { label: 'Lab Experiment', path: '/lab' },
+    { label: 'Notes', path: '/notes' },
     { label: 'Resume', path: '/resume' },
     { label: 'Contact', path: '/#contact' },
   ];
@@ -99,21 +102,25 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Back To Top */}
+        {/* Bottom Bar: Copyright, Palette Switcher & Back To Top */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[#929BA6]">
           <p>© {currentYear} Navadeep. Built with React 19, TypeScript & Three.js.</p>
 
-          <button
-            type="button"
-            onClick={scrollToTop}
-            data-cursor-label="TOP ↑"
-            className="group flex items-center gap-2 hover:text-[#C6FF00] transition-colors py-1 cursor-pointer"
-          >
-            <span>BACK TO TOP</span>
-            <div className="p-1 border border-white/10 group-hover:border-[#C6FF00] transition-colors">
-              <ArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform text-[#C6FF00]" />
-            </div>
-          </button>
+          <div className="flex items-center gap-6">
+            <AccentSwitcher />
+
+            <button
+              type="button"
+              onClick={scrollToTop}
+              data-cursor-label="TOP ↑"
+              className="group flex items-center gap-2 hover:text-[#C6FF00] transition-colors py-1 cursor-pointer"
+            >
+              <span>BACK TO TOP</span>
+              <div className="p-1 border border-white/10 group-hover:border-[#C6FF00] transition-colors">
+                <ArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform text-[#C6FF00]" />
+              </div>
+            </button>
+          </div>
         </div>
       </div>
     </footer>
