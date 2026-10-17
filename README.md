@@ -75,11 +75,17 @@ npm run dev
 # Run TypeScript typechecker with zero emission
 npm run typecheck
 
-# Build optimized production bundle
+# Run Vitest test suite (data integrity & component tests)
+npm run test
+
+# Build optimized production bundle with route prerendering & git telemetry
 npm run build
 
-# Preview production build locally
+# Preview production build locally (runs at http://localhost:4173/)
 npm run preview
+
+# Generate updated ATS resume PDF with Playwright
+npm run resume:pdf
 ```
 
 ---
