@@ -37,6 +37,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [mobileMenuOpen]);
 
+  // Lock body scroll while mobile drawer is open to prevent touch-drag background conflict
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { label: 'Home', path: '/', sectionId: 'hero' },
     { label: 'Projects', path: '/projects', sectionId: 'projects' },
@@ -192,28 +203,55 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="pointer-events-auto w-full max-w-5xl mt-2 sm:hidden bg-[#080A0D]/95 backdrop-blur-md border border-white/10 px-5 py-6 shadow-2xl animate-in slide-in-from-top duration-200">
-          <div className="flex flex-col space-y-4">
+        <div
+          role="dialog"
+          aria-label="Mobile Navigation Menu"
+          aria-modal="true"
+          className="pointer-events-auto w-full max-w-5xl mt-2 sm:hidden bg-[#080A0D]/98 backdrop-blur-md border border-white/10 px-5 py-5 shadow-2xl animate-in slide-in-from-top duration-200 max-h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain touch-pan-y"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+        >
+          <div className="flex flex-col space-y-3 pb-2">
             <div className="flex items-center justify-between border-b border-white/10 pb-2">
               <span className="font-mono text-[10px] tracking-widest text-[#929BA6] uppercase">
                 SYSTEM // NAVIGATION
               </span>
-              <span className="font-mono text-[10px] text-[#C6FF00]">
+              <span className="font-mono text-[10px] text-[#C6FF00] flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 bg-[#C6FF00] animate-pulse" />
                 ACTIVE NODE
               </span>
             </div>
 
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                to={link.path}
-                onClick={(e) => handleLinkClick(e, link.path)}
-                className="font-display text-xl font-bold text-[#F4F6F8] hover:text-[#C6FF00] flex items-center justify-between py-1.5 border-b border-white/5 transition-colors"
-              >
-                <span>{link.label}</span>
-                <span className="font-mono text-xs text-[#929BA6]">→</span>
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive =
+                link.path === '/'
+                  ? location.pathname === '/' && (!activeSectionId || activeSectionId === 'hero')
+                  : link.path === '/#contact'
+                  ? activeSectionId === 'contact'
+                  : link.path === '/about'
+                  ? location.pathname === '/about' || activeSectionId === 'about'
+                  : link.path === '/projects'
+                  ? location.pathname.startsWith('/projects') || activeSectionId === 'projects'
+                  : false;
+
+              return (
+                <Link
+                  key={link.label}
+                  to={link.path}
+                  onClick={(e) => handleLinkClick(e, link.path)}
+                  className={`font-display text-lg sm:text-xl font-bold flex items-center justify-between py-2.5 px-3 min-h-[44px] border-b border-white/5 transition-all ${
+                    isActive
+                      ? 'text-[#C6FF00] bg-[#11151A] border-l-2 border-l-[#C6FF00] shadow-[inset_0_0_12px_rgba(198,255,0,0.06)]'
+                      : 'text-[#F4F6F8] hover:text-[#C6FF00] hover:bg-white/[0.02]'
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    {isActive && <span className="w-1.5 h-1.5 bg-[#C6FF00] shrink-0" />}
+                    <span>{link.label}</span>
+                  </div>
+                  <span className="font-mono text-xs text-[#929BA6]">{isActive ? '[ACTIVE]' : '→'}</span>
+                </Link>
+              );
+            })}
 
             <div className="pt-2">
               <button
@@ -222,18 +260,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                   setMobileMenuOpen(false);
                   onOpenCommandPalette?.();
                 }}
-                className="w-full py-2.5 bg-[#11151A] text-[#F4F6F8] border border-white/10 font-mono text-xs uppercase tracking-wider flex items-center justify-center gap-2"
+                className="w-full py-3 min-h-[44px] bg-[#11151A] text-[#F4F6F8] border border-white/10 font-mono text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:border-[#C6FF00] transition-colors"
               >
                 <Terminal className="w-4 h-4 text-[#C6FF00]" />
                 <span>Open Command Palette ({isMac ? '⌘K' : 'Ctrl+K'})</span>
               </button>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-1 pb-1">
               <a
                 href="/#contact"
                 onClick={(e) => handleLinkClick(e, '/#contact')}
-                className="w-full py-3 bg-[#C6FF00] text-[#080A0D] font-mono text-xs uppercase tracking-wider font-bold flex items-center justify-center gap-2 transition-colors"
+                className="w-full py-3 min-h-[44px] bg-[#C6FF00] text-[#080A0D] font-mono text-xs uppercase tracking-wider font-bold flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(198,255,0,0.2)]"
               >
                 <span>LET'S BUILD SOMETHING</span>
                 <ArrowUpRight className="w-4 h-4" />

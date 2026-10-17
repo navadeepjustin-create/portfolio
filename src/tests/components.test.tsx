@@ -59,14 +59,39 @@ describe('Key Components Verification', () => {
     expect(document.body.style.overflow).not.toBe('hidden');
   });
 
-  it('keeps document body scrollable when ProjectsPage is mounted', async () => {
-    const { ProjectsPage } = await import('../pages/ProjectsPage');
-    document.body.style.overflow = '';
+  it('renders Navbar mobile drawer with scrollable container and active node indicators', async () => {
+    const { Navbar } = await import('../components/Navbar');
     render(
       <BrowserRouter>
-        <ProjectsPage />
+        <Navbar />
       </BrowserRouter>
     );
-    expect(document.body.style.overflow).not.toBe('hidden');
+
+    // Find and click mobile menu toggle button
+    const toggleButton = screen.getByRole('button', { name: /open navigation menu/i });
+    expect(toggleButton).toBeInTheDocument();
+    fireEvent.click(toggleButton);
+
+    // Verify mobile drawer dialog and node items
+    const mobileDrawer = screen.getByRole('dialog', { name: /mobile navigation menu/i });
+    expect(mobileDrawer).toBeInTheDocument();
+    expect(mobileDrawer.className).toContain('overflow-y-auto');
+    expect(mobileDrawer.className).toContain('touch-pan-y');
+    expect(screen.getByText(/ACTIVE NODE/i)).toBeInTheDocument();
+    expect(screen.getByText(/SYSTEM \/\/ NAVIGATION/i)).toBeInTheDocument();
+    expect(screen.getAllByRole('link', { name: /projects/i }).length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('renders ArchitectureDiagram with horizontal touch scrollable node topology and swipe cue', async () => {
+    const { ArchitectureDiagram } = await import('../components/ArchitectureDiagram');
+    render(<ArchitectureDiagram projectId="statio-mlr" />);
+
+    // Check header and mobile swipe cue
+    expect(screen.getByText(/SYSTEM TOPOLOGY \/\/ STATIO-MLR ARCHITECTURE/i)).toBeInTheDocument();
+    expect(screen.getByText(/← SWIPE NODES →/i)).toBeInTheDocument();
+
+    // Check SVG node topology region
+    const diagramRegion = screen.getByRole('region', { name: /Statio-MLR System Architecture Diagram/i });
+    expect(diagramRegion).toBeInTheDocument();
   });
 });

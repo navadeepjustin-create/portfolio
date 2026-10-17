@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Eye, FolderGit2 } from 'lucide-react';
 import { portfolioData, type ProjectDetail } from '../data/portfolioData';
@@ -18,6 +18,10 @@ export const ProjectsPage: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const filteredProjects = projects.filter((p) => {
     if (selectedFilter === 'ALL') return true;
     if (selectedFilter === 'STUDENT_WORKFLOW') return p.id === 'statio-mlr';
@@ -26,7 +30,7 @@ export const ProjectsPage: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#080A0D] text-[#F4F6F8] selection:bg-[#C6FF00] selection:text-[#080A0D] relative">
+    <div className="min-h-screen bg-[#080A0D] text-[#F4F6F8] selection:bg-[#C6FF00] selection:text-[#080A0D] relative touch-pan-y">
       <ScrollProgressBar />
       <CustomCursor />
       <CursorPreview />
@@ -63,7 +67,7 @@ export const ProjectsPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedFilter('ALL')}
-              className={`font-mono text-xs uppercase px-3.5 py-1.5 border transition-all ${
+              className={`font-mono text-xs uppercase px-3.5 py-2 min-h-[40px] sm:min-h-[36px] border transition-all flex items-center justify-center ${
                 selectedFilter === 'ALL'
                   ? 'bg-[#C6FF00] text-[#080A0D] border-[#C6FF00] font-bold shadow-[0_0_15px_rgba(198,255,0,0.2)]'
                   : 'bg-[#11151A] text-[#929BA6] border-white/10 hover:text-[#F4F6F8]'
@@ -74,7 +78,7 @@ export const ProjectsPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedFilter('STUDENT_WORKFLOW')}
-              className={`font-mono text-xs uppercase px-3.5 py-1.5 border transition-all ${
+              className={`font-mono text-xs uppercase px-3.5 py-2 min-h-[40px] sm:min-h-[36px] border transition-all flex items-center justify-center ${
                 selectedFilter === 'STUDENT_WORKFLOW'
                   ? 'bg-[#C6FF00] text-[#080A0D] border-[#C6FF00] font-bold shadow-[0_0_15px_rgba(198,255,0,0.2)]'
                   : 'bg-[#11151A] text-[#929BA6] border-white/10 hover:text-[#F4F6F8]'
@@ -85,7 +89,7 @@ export const ProjectsPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedFilter('LOGISTICS')}
-              className={`font-mono text-xs uppercase px-3.5 py-1.5 border transition-all ${
+              className={`font-mono text-xs uppercase px-3.5 py-2 min-h-[40px] sm:min-h-[36px] border transition-all flex items-center justify-center ${
                 selectedFilter === 'LOGISTICS'
                   ? 'bg-[#C6FF00] text-[#080A0D] border-[#C6FF00] font-bold shadow-[0_0_15px_rgba(198,255,0,0.2)]'
                   : 'bg-[#11151A] text-[#929BA6] border-white/10 hover:text-[#F4F6F8]'
@@ -104,7 +108,7 @@ export const ProjectsPage: React.FC = () => {
             return (
               <article
                 key={project.id}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center bg-[#11151A] border border-white/10 p-6 sm:p-10 shadow-2xl relative group interactive-card hover:border-[#C6FF00]/40 transition-colors"
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center bg-[#11151A] border border-white/10 p-6 sm:p-10 shadow-2xl relative group interactive-card hover:border-[#C6FF00]/40 transition-colors touch-pan-y"
                 data-cursor-label="VIEW CASE STUDY ↗"
               >
                 {/* Information Column */}
@@ -197,7 +201,7 @@ export const ProjectsPage: React.FC = () => {
 
                 {/* Simulation / Mockup Visual Column */}
                 <div className={`lg:col-span-6 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
-                  <div className="relative border border-white/15 shadow-2xl overflow-hidden">
+                  <div className="relative border border-white/15 shadow-2xl overflow-hidden touch-pan-y">
                     <div className="bg-[#171D24] text-[#F4F6F8] px-4 py-2 border-b border-white/10 flex items-center justify-between text-xs font-mono">
                       <span className="text-[#929BA6] flex items-center gap-1.5">
                         <span className="w-2 h-2 bg-[#C6FF00] animate-lime-pulse" />

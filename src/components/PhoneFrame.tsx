@@ -19,7 +19,7 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({
 
   return (
     <div
-      className={`relative mx-auto w-full max-w-[390px] bg-[#0D1117] border-2 border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] p-2 rounded-none transition-all duration-300 ${className}`}
+      className={`relative mx-auto w-full max-w-[390px] bg-[#0D1117] border-2 border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] p-2 rounded-none transition-all duration-300 touch-pan-y ${className}`}
     >
       {/* Corner crosshair accents for cyber aesthetic */}
       <div className="absolute -top-1 -left-1 w-2.5 h-2.5 border-t-2 border-l-2 border-[#C6FF00] z-20 pointer-events-none" />
@@ -55,7 +55,7 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({
         )}
 
         {/* Device Screen Content Area */}
-        <div className="flex-1 overflow-y-auto overflow-x-hidden relative">
+        <div className="flex-1 overflow-y-auto overflow-x-hidden relative touch-pan-y overscroll-contain">
           {hasVideo && !videoError ? (
             <video
               src={`/projects/${projectId}.webm`}

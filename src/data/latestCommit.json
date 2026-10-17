@@ -1,6 +1,6 @@
 {
-  "hash": "375fbe0",
-  "message": "chore: sync latestCommit.json",
-  "date": "2026-10-17T10:08:57Z",
+  "hash": "29934a1",
+  "message": "fix(scroll): remove viewport overflow traps, bypass splash on mobile, and strengthen touch scrolling",
+  "date": "2026-10-17T10:18:05Z",
   "available": true
 }

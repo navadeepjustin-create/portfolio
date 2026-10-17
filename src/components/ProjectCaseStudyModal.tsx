@@ -21,13 +21,14 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md overflow-y-auto animate-fade-in"
+      className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md overflow-y-auto overscroll-contain animate-fade-in touch-pan-y"
+      style={{ WebkitOverflowScrolling: 'touch' }}
       onClick={onClose}
     >
       <div
         ref={panelRef}
         tabIndex={-1}
-        className="relative w-full max-w-4xl bg-[#11151A] text-[#F4F6F8] border border-white/10 shadow-2xl p-6 sm:p-10 my-8 overflow-hidden transition-all duration-300"
+        className="relative w-full max-w-4xl bg-[#11151A] text-[#F4F6F8] border border-white/10 shadow-2xl p-6 sm:p-10 my-4 sm:my-8 overflow-hidden transition-all duration-300 touch-pan-y"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Accent Line */}

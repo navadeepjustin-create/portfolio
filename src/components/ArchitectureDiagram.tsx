@@ -15,15 +15,25 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({ projec
             <span className="w-2 h-2 bg-[#C6FF00] animate-pulse" />
             <span>SYSTEM TOPOLOGY // STATIO-MLR ARCHITECTURE</span>
           </span>
-          <span className="text-[#929BA6] text-[10px]">DECOUPLED VERIFICATION PROTOCOL</span>
+          <div className="flex items-center gap-2">
+            <span className="sm:hidden text-[#C6FF00] text-[10px] font-mono px-1.5 py-0.5 bg-[#171D24] border border-[#C6FF00]/30 animate-pulse">
+              ← SWIPE NODES →
+            </span>
+            <span className="hidden sm:inline text-[#929BA6] text-[10px]">DECOUPLED VERIFICATION PROTOCOL</span>
+          </div>
         </div>
 
         {/* Vector SVG Diagram */}
-        <div className="overflow-x-auto py-2">
+        <div
+          className="overflow-x-auto py-2 touch-pan-x touch-pan-y overscroll-x-contain"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+        >
           <svg
             viewBox="0 0 800 360"
-            className="w-full min-w-[700px] h-auto font-mono text-[11px] select-none"
-            aria-label="Statio-MLR System Architecture Diagram"
+            role="region"
+            aria-label="Statio-MLR System Architecture Diagram (swipe to view all 5 nodes)"
+            tabIndex={0}
+            className="w-full min-w-[700px] h-auto font-mono text-[11px] select-none focus:outline-none"
           >
             <defs>
               <linearGradient id="limeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -162,15 +172,25 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({ projec
             <span className="w-2 h-2 bg-[#C6FF00] animate-pulse" />
             <span>SYSTEM TOPOLOGY // FAST BITE CANTEEN DISPATCH</span>
           </span>
-          <span className="text-[#929BA6] text-[10px]">TIME-WINDOW BATCH SCHEDULER</span>
+          <div className="flex items-center gap-2">
+            <span className="sm:hidden text-[#C6FF00] text-[10px] font-mono px-1.5 py-0.5 bg-[#171D24] border border-[#C6FF00]/30 animate-pulse">
+              ← SWIPE NODES →
+            </span>
+            <span className="hidden sm:inline text-[#929BA6] text-[10px]">TIME-WINDOW BATCH SCHEDULER</span>
+          </div>
         </div>
 
         {/* Vector SVG Diagram */}
-        <div className="overflow-x-auto py-2">
+        <div
+          className="overflow-x-auto py-2 touch-pan-x touch-pan-y overscroll-x-contain"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+        >
           <svg
             viewBox="0 0 800 360"
-            className="w-full min-w-[700px] h-auto font-mono text-[11px] select-none"
-            aria-label="Fast Bite Architecture Diagram"
+            role="region"
+            aria-label="Fast Bite Architecture Diagram (swipe to view all 5 nodes)"
+            tabIndex={0}
+            className="w-full min-w-[700px] h-auto font-mono text-[11px] select-none focus:outline-none"
           >
             <defs>
               <marker
@@ -265,14 +285,24 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({ projec
           <span className="w-2 h-2 bg-[#C6FF00] animate-pulse" />
           <span>SYSTEM TOPOLOGY // CREATIVE PORTFOLIO ENGINE</span>
         </span>
-        <span className="text-[#929BA6] text-[10px]">VITE 8 + REACT 19 + MOTION + LENIS</span>
+        <div className="flex items-center gap-2">
+          <span className="sm:hidden text-[#C6FF00] text-[10px] font-mono px-1.5 py-0.5 bg-[#171D24] border border-[#C6FF00]/30 animate-pulse">
+            ← SWIPE NODES →
+          </span>
+          <span className="hidden sm:inline text-[#929BA6] text-[10px]">VITE 8 + REACT 19 + MOTION + LENIS</span>
+        </div>
       </div>
 
-      <div className="overflow-x-auto py-2">
+      <div
+        className="overflow-x-auto py-2 touch-pan-x touch-pan-y overscroll-x-contain"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+      >
         <svg
           viewBox="0 0 800 240"
-          className="w-full min-w-[700px] h-auto font-mono text-[11px] select-none"
-          aria-label="Portfolio Architecture Diagram"
+          role="region"
+          aria-label="Portfolio Architecture Diagram (swipe to view all nodes)"
+          tabIndex={0}
+          className="w-full min-w-[700px] h-auto font-mono text-[11px] select-none focus:outline-none"
         >
           <defs>
             <marker id="arrow-pf" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
